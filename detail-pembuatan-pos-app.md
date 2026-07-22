@@ -29,7 +29,7 @@ Berikut gambaran antarmuka MVP yang disarankan untuk aplikasi Kasirin:
   Contoh visual mockup:
   - HTML tag (dengan ukuran tetap):
 
-    <img src="./assets/login-screen.svg" alt="Halaman Login Kasirin" width="480" />
+    <img src="./assets/Login-Screen.PNG" alt="Halaman Login Kasirin" width="480" />
 
 - Halaman Dashboard Kasir
   - Bagian pencarian produk
@@ -37,99 +37,33 @@ Berikut gambaran antarmuka MVP yang disarankan untuk aplikasi Kasirin:
   - Ringkasan belanja di sisi kanan
   - Tombol diskon, bayar, batalkan transaksi
 
-  Contoh visual mockup:
+    <img src="./assets/DASHBO~1.PNG" alt="Halaman Dashboard Kasir" width="1080" />
 
-  ```text
-  ┌──────────────────────────────────────────┐
-  │ KASIRIN          [Produk] [Laporan]      │
-  │ Search: kopi, mie, snack                │
-  │                                          │
-  │ ┌──────────────┐  Rp 18.000  Stok 10    │
-  │ │ Kopi Latte   │                       │
-  │ └──────────────┘                       │
-  │ ┌──────────────┐  Rp 12.000  Stok 8     │
-  │ │ Mie Goreng   │                       │
-  │ └──────────────┘                       │
-  │ ┌──────────────┐  Rp  8.000  Stok 15    │
-  │ │ Snack        │                       │
-  │ └──────────────┘                       │
-  │                                          │
-  │      🛒 Cart                            │
-  │  1x Kopi Latte      Rp 18.000           │
-  │  1x Mie Goreng     Rp 12.000           │
-  │  Total             Rp 30.000           │
-  │  Bayar             Rp 50.000           │
-  │  Kembalian         Rp 20.000           │
-  │                                          │
-  │   [Diskon]   [Bayar]   [Batal]         │
-  └──────────────────────────────────────────┘
-  ```
+
 
 - Halaman Manajemen Produk
   - Daftar produk dengan foto, nama, harga, stok
   - Tombol tambah, edit, hapus produk
   - Filter berdasarkan kategori
 
-  Contoh visual mockup:
-
-  ```text
-  ┌──────────────────────────────────────────┐
-  │ Manajemen Produk                 + Tambah │
-  │                                          │
-  │ ┌─────┐ Kopi Latte      Rp 18.000  10   │
-  │ │img │ Mie Goreng      Rp 12.000   8   │
-  │ └─────┘ Snack           Rp  8.000  15   │
-  │                                          │
-  │ Filter: [Semua] [Minuman] [Makanan]    │
-  │                                          │
-  │ [Edit]   [Hapus]   [Edit]   [Hapus]   │
-  └──────────────────────────────────────────┘
-  ```
+    <img src="./assets/PRODUK~3.PNG" alt="Halaman Manajemen Produk" width="1080" />
 
 - Halaman Transaksi & Struk
   - Daftar item yang dibeli
   - Total belanja, diskon, uang bayar, kembalian
   - Tombol cetak / tampilkan struk
 
-  Contoh visual mockup:
+    <img src="./assets/TRANSA~2.PNG" alt="Halaman Manajemen Produk" width="1080" />
 
-  ```text
-  ┌──────────────────────────────────────────┐
-  │            STRUK PEMBELIAN             │
-  │ Kasirin POS                            │
-  │ 22/07/2026 14:30                       │
-  │----------------------------------------│
-  │ ☕ Kopi Latte      1 x 18.000 18.000   │
-  │ 🍜 Mie Goreng     1 x 12.000 12.000   │
-  │----------------------------------------│
-  │ Total            Rp 30.000            │
-  │ Bayar            Rp 50.000            │
-  │ Kembalian        Rp 20.000            │
-  │----------------------------------------│
-  │      [Cetak Struk]   [Selesai]        │
-  └──────────────────────────────────────────┘
-  ```
+
 
 - Halaman Laporan Harian
   - Total penjualan hari ini
   - Jumlah transaksi
   - Daftar transaksi terbaru
 
-  Contoh visual mockup:
+    <img src="./assets/laporan_B_chart.png" alt="Halaman Manajemen Produk" width="1080" />
 
-  ```text
-  ┌──────────────────────────────────────────┐
-  │ Laporan Penjualan Hari Ini             │
-  │ Total Penjualan: Rp 1.250.000         │
-  │ Jumlah Transaksi: 24                  │
-  │                                          │
-  │ 14:30  ☕ Kopi Latte      Rp 18.000     │
-  │ 14:45  🍜 Mie Goreng     Rp 12.000     │
-  │ 15:10  🍿 Snack          Rp  8.000     │
-  │                                          │
-  │ [Export PDF]   [Filter Hari]          │
-  └──────────────────────────────────────────┘
-  ```
 
 ### Lanjutan (setelah MVP jalan)
 - Multi-user dengan role (admin, kasir)
