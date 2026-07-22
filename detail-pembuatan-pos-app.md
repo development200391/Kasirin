@@ -1,5 +1,7 @@
 # Detail Pembuatan Aplikasi POS (Point of Sale) - Kasirin
 
+<img src="./assets/logo.png" alt="Halaman Login Kasirin" width="80" />
+
 Target: Aplikasi POS Android Kasirin, database lokal, rilis ke Google Play Store.
 
 **Asumsi stack:** Flutter + SQLite (package `sqflite` atau `drift`). Kalau nanti mau ganti ke Kotlin native, struktur database & fitur di bawah tetap berlaku, hanya implementasi kode yang beda.
@@ -25,29 +27,9 @@ Berikut gambaran antarmuka MVP yang disarankan untuk aplikasi Kasirin:
   - Opsi ingat saya / lupa password (opsional)
 
   Contoh visual mockup:
+  - HTML tag (dengan ukuran tetap):
 
-  ```text
-  ┌─────────────────────────────────────┐
-  │           ╔══════════════╗         │
-  │           ║   KASIRIN     ║         │
-  │           ║  Point of Sale║         │
-  │           ╚══════════════╝         │
-  │                                     │
-  │  Username  ───────────────────────  │
-  │  admin                              │
-  │                                     │
-  │  Password  ───────────────────────  │
-  │  ***********                        │
-  │                                     │
-  │      ┌───────────────┐             │
-  │      │    Masuk       │             │
-  │      └───────────────┘             │
-  │                                     │
-  │  □ Ingat saya      Lupa password?   │
-  └─────────────────────────────────────┘
-  ```
-
-  Kalau mau, saya juga bisa lanjutkan membuat mockup gambar untuk halaman dashboard, produk, dan struk agar terlihat seperti desain aplikasi yang lebih lengkap.
+    <img src="./assets/login-screen.svg" alt="Halaman Login Kasirin" width="480" />
 
 - Halaman Dashboard Kasir
   - Bagian pencarian produk
@@ -59,18 +41,23 @@ Berikut gambaran antarmuka MVP yang disarankan untuk aplikasi Kasirin:
 
   ```text
   ┌──────────────────────────────────────────┐
-  │ KASIRIN                [Produk] [Laporan] │
-  │ Search: kopi, mie, snack                 │
+  │ KASIRIN          [Produk] [Laporan]      │
+  │ Search: kopi, mie, snack                │
   │                                          │
-  │ [Kopi Latte]  Rp 18.000  Stok 10        │
-  │ [Mie Goreng]  Rp 12.000  Stok 8         │
-  │ [Snack]       Rp  8.000  Stok 15        │
+  │ ┌──────────────┐  Rp 18.000  Stok 10    │
+  │ │ Kopi Latte   │                       │
+  │ └──────────────┘                       │
+  │ ┌──────────────┐  Rp 12.000  Stok 8     │
+  │ │ Mie Goreng   │                       │
+  │ └──────────────┘                       │
+  │ ┌──────────────┐  Rp  8.000  Stok 15    │
+  │ │ Snack        │                       │
+  │ └──────────────┘                       │
   │                                          │
-  │                Cart                      │
+  │      🛒 Cart                            │
   │  1x Kopi Latte      Rp 18.000           │
   │  1x Mie Goreng     Rp 12.000           │
   │  Total             Rp 30.000           │
-  │  Discount          Rp  0               │
   │  Bayar             Rp 50.000           │
   │  Kembalian         Rp 20.000           │
   │                                          │
@@ -87,16 +74,15 @@ Berikut gambaran antarmuka MVP yang disarankan untuk aplikasi Kasirin:
 
   ```text
   ┌──────────────────────────────────────────┐
-  │ Manajemen Produk                        │
-  │ + Tambah Produk                         │
+  │ Manajemen Produk                 + Tambah │
   │                                          │
-  │ [Foto] Kopi Latte      Rp 18.000  10   │
-  │ [Foto] Mie Goreng      Rp 12.000   8   │
-  │ [Foto] Snack           Rp  8.000  15   │
+  │ ┌─────┐ Kopi Latte      Rp 18.000  10   │
+  │ │img │ Mie Goreng      Rp 12.000   8   │
+  │ └─────┘ Snack           Rp  8.000  15   │
   │                                          │
   │ Filter: [Semua] [Minuman] [Makanan]    │
   │                                          │
-  │ [Edit] [Hapus]   [Edit] [Hapus]       │
+  │ [Edit]   [Hapus]   [Edit]   [Hapus]   │
   └──────────────────────────────────────────┘
   ```
 
@@ -113,14 +99,14 @@ Berikut gambaran antarmuka MVP yang disarankan untuk aplikasi Kasirin:
   │ Kasirin POS                            │
   │ 22/07/2026 14:30                       │
   │----------------------------------------│
-  │ Kopi Latte        1 x 18.000 18.000    │
-  │ Mie Goreng       1 x 12.000 12.000    │
+  │ ☕ Kopi Latte      1 x 18.000 18.000   │
+  │ 🍜 Mie Goreng     1 x 12.000 12.000   │
   │----------------------------------------│
   │ Total            Rp 30.000            │
   │ Bayar            Rp 50.000            │
   │ Kembalian        Rp 20.000            │
   │----------------------------------------│
-  │        [Cetak Struk] [Selesai]        │
+  │      [Cetak Struk]   [Selesai]        │
   └──────────────────────────────────────────┘
   ```
 
@@ -137,11 +123,11 @@ Berikut gambaran antarmuka MVP yang disarankan untuk aplikasi Kasirin:
   │ Total Penjualan: Rp 1.250.000         │
   │ Jumlah Transaksi: 24                  │
   │                                          │
-  │ 14:30 - Kopi Latte     Rp 18.000      │
-  │ 14:45 - Mie Goreng     Rp 12.000      │
-  │ 15:10 - Snack          Rp  8.000      │
+  │ 14:30  ☕ Kopi Latte      Rp 18.000     │
+  │ 14:45  🍜 Mie Goreng     Rp 12.000     │
+  │ 15:10  🍿 Snack          Rp  8.000     │
   │                                          │
-  │ [Export PDF] [Filter Hari]            │
+  │ [Export PDF]   [Filter Hari]          │
   └──────────────────────────────────────────┘
   ```
 

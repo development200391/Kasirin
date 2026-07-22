@@ -1,0 +1,26 @@
+<svg width="800" height="1200" viewBox="0 0 800 1200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7fbff" />
+      <stop offset="100%" stop-color="#e8f2ff" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1200" fill="url(#bg)"/>
+  <circle cx="650" cy="220" r="220" fill="#dceeff" />
+  <circle cx="180" cy="980" r="260" fill="#e9f3ff" />
+  <rect x="150" y="180" width="500" height="760" rx="36" fill="#ffffff" stroke="#dfe8f5" stroke-width="2"/>
+  <rect x="180" y="240" width="440" height="140" rx="24" fill="#f3f7ff"/>
+  <text x="400" y="300" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="54" font-weight="700" fill="#1f4b8f">KASIRIN</text>
+  <text x="400" y="345" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#5a6b85">Point of Sale</text>
+  <rect x="200" y="430" width="400" height="58" rx="16" fill="#f8fafc" stroke="#c9d7e8" stroke-width="2"/>
+  <text x="220" y="465" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#6b7a91">Username</text>
+  <text x="220" y="490" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#23374d">admin</text>
+  <rect x="200" y="520" width="400" height="58" rx="16" fill="#f8fafc" stroke="#c9d7e8" stroke-width="2"/>
+  <text x="220" y="555" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#6b7a91">Password</text>
+  <text x="220" y="580" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#23374d">••••••••</text>
+  <rect x="200" y="640" width="400" height="64" rx="18" fill="#2f80ed"/>
+  <text x="400" y="680" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff">MASUK</text>
+  <rect x="220" y="735" width="24" height="24" rx="6" fill="#ffffff" stroke="#2f80ed" stroke-width="2"/>
+  <text x="252" y="752" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#4f6178">Ingat saya</text>
+  <text x="470" y="752" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#2f80ed">Lupa password?</text>
+</svg>
