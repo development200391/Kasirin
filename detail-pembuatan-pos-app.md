@@ -4,8 +4,7 @@
 
 Target: Aplikasi POS Android Kasirin, database lokal, rilis ke Google Play Store.
 
-**Asumsi stack:** Flutter + SQLite (package `sqflite` atau `drift`). Kalau nanti mau ganti ke Kotlin native, struktur database & fitur di bawah tetap berlaku, hanya implementasi kode yang beda.
-
+**Asumsi stack:** Flutter + SQLite (package `sqflite` atau `drift`).
 ---
 
 ## 1. Cakupan Fitur
@@ -216,10 +215,3 @@ lib/
 - [ ] Kategori aplikasi: Business / Productivity
 
 ---
-
-## 6. Hal yang Perlu Diputuskan Sebelum Mulai Coding
-
-1. Final tech stack (Flutter vs Kotlin native)
-2. Apakah butuh multi-user/role dari awal atau cukup single user dulu
-3. Apakah butuh cetak struk fisik (printer bluetooth) di MVP atau nanti
-4. Model bisnis: dijual ke banyak toko (butuh lisensi/aktivasi) atau untuk 1 toko sendiri
