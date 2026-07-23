@@ -4,6 +4,19 @@ Aplikasi POS (Point of Sale) Android untuk toko/kasir kecil-menengah, database l
 
 Detail fitur, skema database, dan tahapan pengembangan ada di [detail-pembuatan-pos-app.md](./detail-pembuatan-pos-app.md). Progres pengerjaan per fase dicatat di [Todo.md](./Todo.md).
 
+## Status Saat Ini
+
+- [x] Fase 0 — Setup project, tema, routing dasar
+- [x] Fase 1 — Database lokal (SQLite) + Login
+- [ ] Fase 2 — Manajemen Produk & Kategori (belum dikerjakan)
+
+Login pakai akun admin default (di-seed otomatis saat database dibuat pertama kali):
+
+```
+Username: admin
+Password: admin123
+```
+
 ## Stack
 
 - Flutter (Android only)

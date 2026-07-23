@@ -61,7 +61,7 @@ Berikut gambaran antarmuka MVP yang disarankan untuk aplikasi Kasirin:
   - Jumlah transaksi
   - Daftar transaksi terbaru
 
-    <img src="./assets/laporan_B_chart.png" alt="Halaman Manajemen Produk" width="1080" />
+    <img src="./assets/laporan_B_chart.svg" alt="Halaman Manajemen Produk" width="1080" />
 
 
 ### Lanjutan (setelah MVP jalan)

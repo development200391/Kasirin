@@ -12,10 +12,10 @@ Urutan pengerjaan per layar/fitur, dicek satu per satu. Referensi detail: [detai
 
 ## Fase 1 — Login & Database
 
-- [ ] Buat schema database (`database_helper.dart`) — tabel `users`, `categories`, `products`, `stock_movements`, `transactions`, `transaction_items`
-- [ ] Seed 1 user admin default (biar bisa login pertama kali)
-- [ ] Halaman Login (UI) — sesuai `Login-Screen.svg`: logo, field username/password, tombol masuk
-- [ ] Wire logika login (cek ke tabel `users`, hash password) + redirect ke Dashboard
+- [x] Buat schema database (`database_helper.dart`) — tabel `users`, `categories`, `products`, `stock_movements`, `transactions`, `transaction_items`
+- [x] Seed 1 user admin default (biar bisa login pertama kali) — username `admin` / password `admin123`
+- [x] Halaman Login (UI) — sesuai `Login-Screen.svg`: logo, field username/password, tombol masuk
+- [x] Wire logika login (cek ke tabel `users`, hash password) + redirect ke Dashboard
 
 ## Fase 2 — Produk & Kategori
 
