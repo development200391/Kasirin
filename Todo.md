@@ -6,9 +6,9 @@ Urutan pengerjaan per layar/fitur, dicek satu per satu. Referensi detail: [detai
 
 ## Fase 0 — Setup Project
 
-- [ ] `flutter create` project + susun folder sesuai struktur (`core/`, `data/`, `features/`, `widgets/`)
-- [ ] Install dependency inti: `sqflite`, state management (Provider/Riverpod), `path_provider`, `intl`
-- [ ] Setup tema (warna/font sesuai mockup) + routing dasar
+- [x] `flutter create` project + susun folder sesuai struktur (`core/`, `data/`, `features/`, `widgets/`)
+- [x] Install dependency inti: `sqflite`, state management (Provider), `path_provider`, `intl`
+- [x] Setup tema (warna/font sesuai mockup) + routing dasar
 
 ## Fase 1 — Login & Database
 
