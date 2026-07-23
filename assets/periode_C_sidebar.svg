@@ -1,0 +1,77 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+<defs><linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366F1"/><stop offset="1" stop-color="#1D4ED8"/></linearGradient><linearGradient id="sbGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366F1"/><stop offset="1" stop-color="#4338CA"/></linearGradient></defs>
+<rect width="1200" height="800" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1200" height="84" fill="#FFFFFF"/>
+<line x1="0" y1="84" x2="1200" y2="84" stroke="#E2E8F0" stroke-width="2"/>
+
+  <g transform="translate(20,17) scale(0.048828)">
+    <rect width="1024" height="1024" rx="230" fill="url(#logoGrad)"/>
+    <rect x="360" y="300" width="80" height="424" rx="16" fill="#FFFFFF"/>
+    <path d="M440,512 L660,300 L560,300 L440,430 Z" fill="#FFFFFF"/>
+    <path d="M440,512 L660,724 L560,724 L440,590 Z" fill="#FFFFFF"/>
+    <circle cx="700" cy="512" r="34" fill="#FBBF24"/>
+  </g>
+<text x="82" y="48" fill="#0F172A" font-size="24" font-weight="bold">Kasirin</text>
+<text x="1176" y="36" text-anchor="end" fill="#0F172A" font-size="16" font-weight="bold">Admin: Sarah</text>
+<text x="1176" y="58" text-anchor="end" fill="#94A3B8" font-size="14">22 Jul 2026, 14:35</text>
+<rect x="0" y="84" width="320" height="716" fill="url(#sbGrad)"/>
+<rect x="28" y="116" width="264" height="44" rx="22" fill="#FFFFFF" fill-opacity="0.15"/>
+<rect x="28" y="116" width="132.0" height="44" rx="22" fill="#FFFFFF"/>
+<text x="94.0" y="144" text-anchor="middle" fill="#4338CA" font-size="14" font-weight="bold">Mingguan</text>
+<text x="226.0" y="144" text-anchor="middle" fill="#E0E7FF" font-size="14" font-weight="bold">Bulanan</text>
+<text x="28" y="196" fill="#E0E7FF" font-size="13" font-weight="bold">PERIODE</text>
+<text x="28" y="222" fill="#FFFFFF" font-size="17" font-weight="bold">16 - 22 Juli 2026</text>
+<line x1="28" y1="252" x2="292" y2="252" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="2"/>
+<text x="28" y="292" fill="#E0E7FF" font-size="14" font-weight="bold">TOTAL PENJUALAN</text>
+<text x="28" y="332" fill="#FFFFFF" font-size="28" font-weight="bold">Rp 23.840.000</text>
+<path d="M28,356 L33,348 L38,356" fill="none" stroke="#BBF7D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="33" y1="348" x2="33" y2="358" stroke="#BBF7D0" stroke-width="2" stroke-linecap="round"/>
+<text x="44" y="360" fill="#BBF7D0" font-size="13" font-weight="bold">+8% dari periode lalu</text>
+<line x1="28" y1="392" x2="292" y2="392" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="2"/>
+<text x="28" y="424" fill="#E0E7FF" font-size="14" font-weight="bold">JUMLAH TRANSAKSI</text>
+<text x="28" y="458" fill="#FFFFFF" font-size="26" font-weight="bold">349</text>
+<line x1="28" y1="486" x2="292" y2="486" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="2"/>
+<text x="28" y="518" fill="#E0E7FF" font-size="14" font-weight="bold">HARI TERBAIK</text>
+<text x="28" y="546" fill="#FFFFFF" font-size="16" font-weight="bold">Sabtu, 21 Jul &#183; Rp 4.560.000</text>
+<text x="28" y="650" fill="#E0E7FF" font-size="13" font-weight="bold">EXPORT LAPORAN</text>
+<rect x="28" y="668" width="264" height="46" rx="12" fill="#FFFFFF"/>
+<text x="160.0" y="698" text-anchor="middle" fill="#4338CA" font-size="14" font-weight="bold">Export ke Excel</text>
+<rect x="28" y="722" width="264" height="46" rx="12" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+<text x="160.0" y="752" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="bold">Export ke PDF</text>
+<text x="344" y="132" fill="#0F172A" font-size="24" font-weight="bold">Rincian per Hari</text>
+<text x="344" y="156" fill="#94A3B8" font-size="14">Senin - Minggu, 16 - 22 Juli 2026</text>
+<rect x="344" y="182" width="832" height="40" rx="10" fill="#F8FAFC"/>
+<text x="360" y="208" fill="#64748B" font-size="12" font-weight="bold">HARI / TANGGAL</text>
+<text x="664" y="208" fill="#64748B" font-size="12" font-weight="bold">TRANSAKSI</text>
+<text x="1176" y="208" text-anchor="end" fill="#64748B" font-size="12" font-weight="bold">PENJUALAN</text>
+<text x="360" y="256" fill="#0F172A" font-size="15" font-weight="bold">Senin, 16 Jul</text>
+<text x="664" y="256" fill="#334155" font-size="14">42 transaksi</text>
+<text x="1176" y="256" text-anchor="end" fill="#0F172A" font-size="15" font-weight="bold">Rp 2.850.000</text>
+<line x1="344" y1="278" x2="1176" y2="278" stroke="#F1F5F9" stroke-width="2"/>
+<rect x="344" y="278" width="832" height="56" fill="#FAFAFB"/>
+<text x="360" y="312" fill="#0F172A" font-size="15" font-weight="bold">Selasa, 17 Jul</text>
+<text x="664" y="312" fill="#334155" font-size="14">45 transaksi</text>
+<text x="1176" y="312" text-anchor="end" fill="#0F172A" font-size="15" font-weight="bold">Rp 3.120.000</text>
+<line x1="344" y1="334" x2="1176" y2="334" stroke="#F1F5F9" stroke-width="2"/>
+<text x="360" y="368" fill="#0F172A" font-size="15" font-weight="bold">Rabu, 18 Jul</text>
+<text x="664" y="368" fill="#334155" font-size="14">38 transaksi</text>
+<text x="1176" y="368" text-anchor="end" fill="#0F172A" font-size="15" font-weight="bold">Rp 2.640.000</text>
+<line x1="344" y1="390" x2="1176" y2="390" stroke="#F1F5F9" stroke-width="2"/>
+<rect x="344" y="390" width="832" height="56" fill="#FAFAFB"/>
+<text x="360" y="424" fill="#0F172A" font-size="15" font-weight="bold">Kamis, 19 Jul</text>
+<text x="664" y="424" fill="#334155" font-size="14">51 transaksi</text>
+<text x="1176" y="424" text-anchor="end" fill="#0F172A" font-size="15" font-weight="bold">Rp 3.450.000</text>
+<line x1="344" y1="446" x2="1176" y2="446" stroke="#F1F5F9" stroke-width="2"/>
+<text x="360" y="480" fill="#0F172A" font-size="15" font-weight="bold">Jumat, 20 Jul</text>
+<text x="664" y="480" fill="#334155" font-size="14">58 transaksi</text>
+<text x="1176" y="480" text-anchor="end" fill="#0F172A" font-size="15" font-weight="bold">Rp 3.980.000</text>
+<line x1="344" y1="502" x2="1176" y2="502" stroke="#F1F5F9" stroke-width="2"/>
+<rect x="344" y="502" width="832" height="56" fill="#FAFAFB"/>
+<text x="360" y="536" fill="#0F172A" font-size="15" font-weight="bold">Sabtu, 21 Jul</text>
+<text x="664" y="536" fill="#334155" font-size="14">67 transaksi</text>
+<text x="1176" y="536" text-anchor="end" fill="#0F172A" font-size="15" font-weight="bold">Rp 4.560.000</text>
+<line x1="344" y1="558" x2="1176" y2="558" stroke="#F1F5F9" stroke-width="2"/>
+<text x="360" y="592" fill="#0F172A" font-size="15" font-weight="bold">Minggu, 22 Jul</text>
+<text x="664" y="592" fill="#334155" font-size="14">48 transaksi</text>
+<text x="1176" y="592" text-anchor="end" fill="#0F172A" font-size="15" font-weight="bold">Rp 3.240.000</text>
+<line x1="344" y1="614" x2="1176" y2="614" stroke="#F1F5F9" stroke-width="2"/>
+</svg>

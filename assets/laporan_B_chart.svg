@@ -1,0 +1,84 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+<defs><linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366F1"/><stop offset="1" stop-color="#1D4ED8"/></linearGradient><linearGradient id="barGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#818CF8"/><stop offset="1" stop-color="#4F46E5"/></linearGradient></defs>
+<rect width="1200" height="800" fill="#F8FAFC"/>
+<rect x="0" y="0" width="1200" height="84" fill="#FFFFFF"/>
+<line x1="0" y1="84" x2="1200" y2="84" stroke="#E2E8F0" stroke-width="2"/>
+
+  <g transform="translate(20,17) scale(0.048828)">
+    <rect width="1024" height="1024" rx="230" fill="url(#logoGrad)"/>
+    <rect x="360" y="300" width="80" height="424" rx="16" fill="#FFFFFF"/>
+    <path d="M440,512 L660,300 L560,300 L440,430 Z" fill="#FFFFFF"/>
+    <path d="M440,512 L660,724 L560,724 L440,590 Z" fill="#FFFFFF"/>
+    <circle cx="700" cy="512" r="34" fill="#FBBF24"/>
+  </g>
+<text x="82" y="48" fill="#0F172A" font-size="24" font-weight="bold">Kasirin</text>
+<text x="1176" y="36" text-anchor="end" fill="#0F172A" font-size="16" font-weight="bold">Admin: Sarah</text>
+<text x="1176" y="58" text-anchor="end" fill="#94A3B8" font-size="14">22 Jul 2026, 14:35</text>
+<text x="24" y="132" fill="#0F172A" font-size="28" font-weight="bold">Laporan Harian</text>
+<text x="24" y="156" fill="#94A3B8" font-size="15">Rabu, 22 Juli 2026</text>
+<rect x="1024" y="106" width="152" height="44" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+<text x="1100" y="134" text-anchor="middle" fill="#334155" font-size="15" font-weight="bold">Hari Ini &#9662;</text>
+<rect x="24" y="182" width="700" height="594" rx="20" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+<text x="52" y="222" fill="#94A3B8" font-size="14">Total Penjualan Hari Ini</text>
+<text x="52" y="264" fill="#0F172A" font-size="34" font-weight="bold">Rp 3.240.000</text>
+<path d="M52,290 L57,282 L62,290" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="57" y1="282" x2="57" y2="292" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+<text x="68" y="294" fill="#16A34A" font-size="13" font-weight="bold">+12% dari kemarin</text>
+<line x1="52" y1="322" x2="696" y2="322" stroke="#F1F5F9" stroke-width="2"/>
+<text x="52" y="356" fill="#334155" font-size="15" font-weight="bold">Penjualan per Jam</text>
+<line x1="52" y1="540" x2="696" y2="540" stroke="#E2E8F0" stroke-width="2"/>
+<rect x="59.0" y="470.0" width="39.7" height="70.0" rx="6" fill="url(#barGrad)"/>
+<text x="78.8" y="562" text-anchor="middle" fill="#94A3B8" font-size="12">09</text>
+<rect x="112.7" y="407.0" width="39.7" height="133.0" rx="6" fill="url(#barGrad)"/>
+<text x="132.5" y="562" text-anchor="middle" fill="#94A3B8" font-size="12">10</text>
+<rect x="166.3" y="415.4" width="39.7" height="124.6" rx="6" fill="url(#barGrad)"/>
+<text x="186.2" y="562" text-anchor="middle" fill="#94A3B8" font-size="12">11</text>
+<rect x="220.0" y="489.6" width="39.7" height="50.4" rx="6" fill="url(#barGrad)"/>
+<text x="239.8" y="562" text-anchor="middle" fill="#94A3B8" font-size="12">12</text>
+<rect x="273.7" y="416.8" width="39.7" height="123.2" rx="6" fill="url(#barGrad)"/>
+<text x="293.5" y="562" text-anchor="middle" fill="#94A3B8" font-size="12">13</text>
+<rect x="327.3" y="407.0" width="39.7" height="133.0" rx="6" fill="url(#barGrad)"/>
+<text x="347.2" y="562" text-anchor="middle" fill="#94A3B8" font-size="12">14</text>
+<rect x="381.0" y="428.0" width="39.7" height="112.0" rx="6" fill="url(#barGrad)"/>
+<text x="400.8" y="562" text-anchor="middle" fill="#94A3B8" font-size="12">15</text>
+<rect x="434.7" y="400.0" width="39.7" height="140.0" rx="6" fill="url(#barGrad)"/>
+<text x="454.5" y="562" text-anchor="middle" fill="#94A3B8" font-size="12">16</text>
+<rect x="488.3" y="408.4" width="39.7" height="131.6" rx="6" fill="url(#barGrad)"/>
+<text x="508.2" y="562" text-anchor="middle" fill="#94A3B8" font-size="12">17</text>
+<rect x="542.0" y="500.8" width="39.7" height="39.2" rx="6" fill="url(#barGrad)"/>
+<text x="561.8" y="562" text-anchor="middle" fill="#94A3B8" font-size="12">18</text>
+<rect x="595.7" y="404.2" width="39.7" height="135.8" rx="6" fill="url(#barGrad)"/>
+<text x="615.5" y="562" text-anchor="middle" fill="#94A3B8" font-size="12">19</text>
+<rect x="649.3" y="510.6" width="39.7" height="29.4" rx="6" fill="url(#barGrad)"/>
+<text x="669.2" y="562" text-anchor="middle" fill="#94A3B8" font-size="12">20</text>
+<rect x="748" y="182" width="428" height="150" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+<circle cx="788" cy="222" r="24" fill="#FEF3C7"/>
+<text x="788" y="230" text-anchor="middle" fill="#B45309" font-size="18" font-weight="bold">#</text>
+<text x="772" y="272" fill="#94A3B8" font-size="14">Jumlah Transaksi</text>
+<text x="772" y="308" fill="#0F172A" font-size="30" font-weight="bold">48</text>
+<text x="1152" y="308" text-anchor="end" fill="#16A34A" font-size="13" font-weight="bold">+5 transaksi</text>
+<text x="748" y="350" fill="#0F172A" font-size="18" font-weight="bold">Transaksi Terbaru</text>
+<rect x="748" y="380" width="428" height="60" rx="14" fill="#FAFAFB"/>
+<text x="764" y="406" fill="#0F172A" font-size="14" font-weight="bold">TRX-0231</text>
+<text x="764" y="425" fill="#94A3B8" font-size="12">14:35 &#183; 3 item &#183; Tunai</text>
+<text x="1160" y="417" text-anchor="end" fill="#0F172A" font-size="15" font-weight="bold">Rp 70.000</text>
+<rect x="748" y="448" width="428" height="60" rx="14" fill="#FAFAFB"/>
+<text x="764" y="474" fill="#0F172A" font-size="14" font-weight="bold">TRX-0230</text>
+<text x="764" y="493" fill="#94A3B8" font-size="12">14:12 &#183; 1 item &#183; QRIS</text>
+<text x="1160" y="485" text-anchor="end" fill="#0F172A" font-size="15" font-weight="bold">Rp 22.000</text>
+<rect x="748" y="516" width="428" height="60" rx="14" fill="#FAFAFB"/>
+<text x="764" y="542" fill="#0F172A" font-size="14" font-weight="bold">TRX-0229</text>
+<text x="764" y="561" fill="#94A3B8" font-size="12">13:58 &#183; 5 item &#183; Tunai</text>
+<text x="1160" y="553" text-anchor="end" fill="#0F172A" font-size="15" font-weight="bold">Rp 145.000</text>
+<rect x="748" y="584" width="428" height="60" rx="14" fill="#FAFAFB"/>
+<text x="764" y="610" fill="#0F172A" font-size="14" font-weight="bold">TRX-0228</text>
+<text x="764" y="629" fill="#94A3B8" font-size="12">13:40 &#183; 2 item &#183; Kartu Debit</text>
+<text x="1160" y="621" text-anchor="end" fill="#0F172A" font-size="15" font-weight="bold">Rp 36.000</text>
+<rect x="748" y="652" width="428" height="60" rx="14" fill="#FAFAFB"/>
+<text x="764" y="678" fill="#0F172A" font-size="14" font-weight="bold">TRX-0227</text>
+<text x="764" y="697" fill="#94A3B8" font-size="12">13:15 &#183; 4 item &#183; Tunai</text>
+<text x="1160" y="689" text-anchor="end" fill="#0F172A" font-size="15" font-weight="bold">Rp 88.000</text>
+<rect x="748" y="720" width="428" height="60" rx="14" fill="#FAFAFB"/>
+<text x="764" y="746" fill="#0F172A" font-size="14" font-weight="bold">TRX-0226</text>
+<text x="764" y="765" fill="#94A3B8" font-size="12">12:52 &#183; 1 item &#183; QRIS</text>
+<text x="1160" y="757" text-anchor="end" fill="#0F172A" font-size="15" font-weight="bold">Rp 8.000</text>
+</svg>

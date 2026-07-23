@@ -1,6 +1,6 @@
 # Detail Pembuatan Aplikasi POS (Point of Sale) - Kasirin
 
-<img src="./assets/logo.png" alt="Halaman Login Kasirin" width="80" />
+<img src="./assets/logo.svg" alt="Halaman Login Kasirin" width="80" />
 
 Target: Aplikasi POS Android Kasirin, database lokal, rilis ke Google Play Store.
 
@@ -29,7 +29,7 @@ Berikut gambaran antarmuka MVP yang disarankan untuk aplikasi Kasirin:
   Contoh visual mockup:
   - HTML tag (dengan ukuran tetap):
 
-    <img src="./assets/Login-Screen.PNG" alt="Halaman Login Kasirin" width="480" />
+    <img src="./assets/Login-Screen.svg" alt="Halaman Login Kasirin" width="480" />
 
 - Halaman Dashboard Kasir
   - Bagian pencarian produk
@@ -37,7 +37,7 @@ Berikut gambaran antarmuka MVP yang disarankan untuk aplikasi Kasirin:
   - Ringkasan belanja di sisi kanan
   - Tombol diskon, bayar, batalkan transaksi
 
-    <img src="./assets/DASHBO~1.PNG" alt="Halaman Dashboard Kasir" width="1080" />
+    <img src="./assets/DASHBO~1.svg" alt="Halaman Dashboard Kasir" width="1080" />
 
 
 
@@ -46,14 +46,14 @@ Berikut gambaran antarmuka MVP yang disarankan untuk aplikasi Kasirin:
   - Tombol tambah, edit, hapus produk
   - Filter berdasarkan kategori
 
-    <img src="./assets/PRODUK~3.PNG" alt="Halaman Manajemen Produk" width="1080" />
+    <img src="./assets/PRODUK~3.svg" alt="Halaman Manajemen Produk" width="1080" />
 
 - Halaman Transaksi & Struk
   - Daftar item yang dibeli
   - Total belanja, diskon, uang bayar, kembalian
   - Tombol cetak / tampilkan struk
 
-    <img src="./assets/TRANSA~2.PNG" alt="Halaman Manajemen Produk" width="1080" />
+    <img src="./assets/TRANSA~2.svg" alt="Halaman Manajemen Produk" width="1080" />
 
 
 
@@ -67,14 +67,21 @@ Berikut gambaran antarmuka MVP yang disarankan untuk aplikasi Kasirin:
 
 ### Lanjutan (setelah MVP jalan)
 - Multi-user dengan role (admin, kasir)
+    <img src="./assets/US7910~1.SVG" alt="Mockup Fitur Lanjutan Kasirin" width="1080" />
 - Cetak struk via printer bluetooth
+    <img src="./assets/bt_A_scan_list.svg" alt="Mockup Fitur Lanjutan Kasirin" width="1080" />
+
 - Laporan per periode (mingguan, bulanan) + export
+    <img src="./assets/periode_C_sidebar.svg" alt="Mockup Fitur Lanjutan Kasirin" width="1080" />
+
 - Backup/restore database lokal
-- Multi-outlet / sinkronisasi cloud (kalau nanti butuh online)
+    <img src="./assets/backup_A_two_panel.svg" alt="Mockup Fitur Lanjutan Kasirin" width="1080" />
 
 ---
 
 ## 2. Skema Database
+
+Skema berikut sudah disesuaikan dengan mockup MVP saat ini: login/admin, manajemen produk/kategori, stok, kasir/transaksi, dan laporan.
 
 ```mermaid
 erDiagram
