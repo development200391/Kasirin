@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import 'core/constants.dart';
@@ -10,8 +12,12 @@ import 'features/pos/dashboard_screen.dart';
 import 'features/pos/pos_screen.dart';
 import 'features/products/products_provider.dart';
 import 'features/products/products_screen.dart';
+import 'features/reports/reports_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('id_ID');
+  Intl.defaultLocale = 'id_ID';
   runApp(const KasirinApp());
 }
 
@@ -31,16 +37,17 @@ class KasirinApp extends StatelessWidget {
           AppRoutes.login: (context) => const LoginScreen(),
           AppRoutes.dashboard: (context) => const DashboardScreen(),
           AppRoutes.products: (context) => ChangeNotifierProvider(
-                create: (_) => ProductsProvider(),
-                child: const ProductsScreen(),
-              ),
+            create: (_) => ProductsProvider(),
+            child: const ProductsScreen(),
+          ),
           AppRoutes.pos: (context) => MultiProvider(
-                providers: [
-                  ChangeNotifierProvider(create: (_) => ProductsProvider()),
-                  ChangeNotifierProvider(create: (_) => CartProvider()),
-                ],
-                child: const PosScreen(),
-              ),
+            providers: [
+              ChangeNotifierProvider(create: (_) => ProductsProvider()),
+              ChangeNotifierProvider(create: (_) => CartProvider()),
+            ],
+            child: const PosScreen(),
+          ),
+          AppRoutes.reports: (context) => const ReportsScreen(),
         },
       ),
     );

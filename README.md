@@ -10,7 +10,10 @@ Detail fitur, skema database, dan tahapan pengembangan ada di [detail-pembuatan-
 - [x] Fase 1 — Database lokal (SQLite) + Login + Dashboard/Home
 - [x] Fase 2 — Manajemen Produk & Kategori
 - [x] Fase 3 — Modul Kasir/Transaksi (keranjang, bayar, struk)
-- [ ] Fase 4 — Manajemen Stok (belum dikerjakan)
+- [x] Fase 4 — Manajemen Stok (restock manual + riwayat pergerakan)
+- [x] Fase 5 — Laporan Harian (penjualan, grafik per jam, transaksi terbaru)
+- [x] Fase 6 — Polish ringan (pull-to-refresh, locale tanggal `id_ID`)
+- [ ] Fase 7-8 — Testing & Publish (belum dikerjakan)
 
 Login pakai akun admin default (di-seed otomatis saat database dibuat pertama kali):
 

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../core/theme.dart';
 import '../../core/utils/formatters.dart';
 import '../../data/models/product.dart';
+import '../stock/stock_screen.dart';
 import 'categories_screen.dart';
 import 'product_form_screen.dart';
 import 'products_provider.dart';
@@ -19,6 +20,18 @@ class ProductsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Manajemen Produk'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.inventory_2_outlined),
+            tooltip: 'Manajemen Stok',
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => ChangeNotifierProvider.value(
+                  value: context.read<ProductsProvider>(),
+                  child: const StockScreen(),
+                ),
+              ),
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.category_outlined),
             tooltip: 'Kelola Kategori',
@@ -112,7 +125,11 @@ class _CategoryFilterChips extends StatelessWidget {
 }
 
 class _CategoryChip extends StatelessWidget {
-  const _CategoryChip({required this.label, required this.selected, required this.onTap});
+  const _CategoryChip({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
 
   final String label;
   final bool selected;
@@ -127,7 +144,9 @@ class _CategoryChip extends StatelessWidget {
         selected: selected,
         onSelected: (_) => onTap(),
         selectedColor: AppColors.primary,
-        labelStyle: TextStyle(color: selected ? Colors.white : AppColors.textPrimary),
+        labelStyle: TextStyle(
+          color: selected ? Colors.white : AppColors.textPrimary,
+        ),
         backgroundColor: AppColors.background,
       ),
     );
@@ -142,9 +161,14 @@ class _ProductList extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Hapus Produk'),
-        content: Text('Hapus "${product.name}"? Tindakan ini tidak bisa dibatalkan.'),
+        content: Text(
+          'Hapus "${product.name}"? Tindakan ini tidak bisa dibatalkan.',
+        ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Batal')),
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Batal'),
+          ),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: AppColors.danger),
             onPressed: () => Navigator.pop(context, true),
@@ -167,37 +191,54 @@ class _ProductList extends StatelessWidget {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (provider.products.isEmpty) {
-      return const Center(
-        child: Text('Belum ada produk', style: TextStyle(color: AppColors.textSecondary)),
-      );
-    }
-
-    return ListView.separated(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
-      itemCount: provider.products.length,
-      separatorBuilder: (_, _) => const SizedBox(height: 10),
-      itemBuilder: (context, index) {
-        final product = provider.products[index];
-        return _ProductTile(
-          product: product,
-          onEdit: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (_) => ChangeNotifierProvider.value(
-                value: context.read<ProductsProvider>(),
-                child: ProductFormScreen(product: product),
-              ),
+    return RefreshIndicator(
+      onRefresh: provider.load,
+      child: provider.products.isEmpty
+          ? ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              children: const [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 80),
+                  child: Center(
+                    child: Text(
+                      'Belum ada produk',
+                      style: TextStyle(color: AppColors.textSecondary),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          : ListView.separated(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
+              itemCount: provider.products.length,
+              separatorBuilder: (_, _) => const SizedBox(height: 10),
+              itemBuilder: (context, index) {
+                final product = provider.products[index];
+                return _ProductTile(
+                  product: product,
+                  onEdit: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => ChangeNotifierProvider.value(
+                        value: context.read<ProductsProvider>(),
+                        child: ProductFormScreen(product: product),
+                      ),
+                    ),
+                  ),
+                  onDelete: () => _confirmDelete(context, product),
+                );
+              },
             ),
-          ),
-          onDelete: () => _confirmDelete(context, product),
-        );
-      },
     );
   }
 }
 
 class _ProductTile extends StatelessWidget {
-  const _ProductTile({required this.product, required this.onEdit, required this.onDelete});
+  const _ProductTile({
+    required this.product,
+    required this.onEdit,
+    required this.onDelete,
+  });
 
   final Product product;
   final VoidCallback onEdit;
@@ -222,15 +263,31 @@ class _ProductTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(product.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                Text(
+                  product.name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
                 if (product.sku != null)
-                  Text(product.sku!, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                  Text(
+                    product.sku!,
+                    style: const TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 12,
+                    ),
+                  ),
                 const SizedBox(height: 6),
                 Wrap(
                   spacing: 8,
                   runSpacing: 4,
                   children: [
-                    if (product.categoryName != null) _Badge(text: product.categoryName!, color: AppColors.primary),
+                    if (product.categoryName != null)
+                      _Badge(
+                        text: product.categoryName!,
+                        color: AppColors.primary,
+                      ),
                     _Badge(
                       text: '${product.stockQty} ${product.unit ?? 'pcs'}',
                       color: isLowStock ? AppColors.danger : AppColors.success,
@@ -243,7 +300,10 @@ class _ProductTile extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(formatCurrency(product.price), style: const TextStyle(fontWeight: FontWeight.bold)),
+              Text(
+                formatCurrency(product.price),
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
               Row(
                 children: [
                   IconButton(
@@ -253,7 +313,11 @@ class _ProductTile extends StatelessWidget {
                   ),
                   IconButton(
                     visualDensity: VisualDensity.compact,
-                    icon: const Icon(Icons.delete_outline, size: 20, color: AppColors.danger),
+                    icon: const Icon(
+                      Icons.delete_outline,
+                      size: 20,
+                      color: AppColors.danger,
+                    ),
                     onPressed: onDelete,
                   ),
                 ],
@@ -304,7 +368,10 @@ class _InitialAvatar extends StatelessWidget {
     return Center(
       child: Text(
         name.isNotEmpty ? name[0].toUpperCase() : '?',
-        style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold),
+        style: const TextStyle(
+          color: AppColors.primary,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
@@ -324,7 +391,14 @@ class _Badge extends StatelessWidget {
         color: color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Text(text, style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.bold)),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: color,
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }

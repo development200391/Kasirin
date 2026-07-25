@@ -34,17 +34,18 @@ Urutan pengerjaan per layar/fitur, dicek satu per satu. Referensi detail: [detai
 
 ## Fase 4 — Stok
 
-- [ ] Halaman restock manual + catat ke `stock_movements`
-- [ ] Riwayat pergerakan stok per produk
+- [x] Halaman restock manual (Tambah Stok / Kurangi Stok) + catat ke `stock_movements` — akses dari ikon "Manajemen Stok" di AppBar halaman Produk
+- [x] Riwayat pergerakan stok per produk
 
 ## Fase 5 — Laporan
 
-- [ ] Halaman Laporan Harian (total penjualan, jumlah transaksi, list transaksi terbaru)
+- [x] Halaman Laporan Harian (total penjualan + % vs kemarin, grafik penjualan per jam, jumlah transaksi, list transaksi terbaru)
 
 ## Fase 6 — Polish
 
-- [ ] Rapikan UI semua halaman, cek responsif
-- [ ] (Opsional) cetak struk via printer bluetooth
+- [x] Rapikan UI: pull-to-refresh konsisten di halaman Produk & Stok, locale tanggal Indonesia (`id_ID`) untuk semua `DateFormat`
+- [ ] Cek responsif — perlu ditest langsung di device (belum diverifikasi live)
+- [ ] (Opsional) cetak struk via printer bluetooth — lihat Fase 10
 
 ## Fase 7-8 — Testing & Publish
 

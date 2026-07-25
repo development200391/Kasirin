@@ -88,7 +88,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     iconBg: const Color(0xFFFCE7F3),
                     iconColor: const Color(0xFFBE185D),
                     label: 'Laporan Penjualan',
-                    onTap: () => _showComingSoon('Laporan Penjualan'),
+                    onTap: () => Navigator.of(context).pushNamed(AppRoutes.reports),
                   ),
                   _MenuTile(
                     icon: Icons.people_outline,
