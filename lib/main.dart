@@ -6,6 +6,8 @@ import 'core/theme.dart';
 import 'features/auth/auth_provider.dart';
 import 'features/auth/login_screen.dart';
 import 'features/pos/dashboard_screen.dart';
+import 'features/products/products_provider.dart';
+import 'features/products/products_screen.dart';
 
 void main() {
   runApp(const KasirinApp());
@@ -26,6 +28,10 @@ class KasirinApp extends StatelessWidget {
         routes: {
           AppRoutes.login: (context) => const LoginScreen(),
           AppRoutes.dashboard: (context) => const DashboardScreen(),
+          AppRoutes.products: (context) => ChangeNotifierProvider(
+                create: (_) => ProductsProvider(),
+                child: const ProductsScreen(),
+              ),
         },
       ),
     );

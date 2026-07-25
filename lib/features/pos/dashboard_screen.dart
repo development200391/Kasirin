@@ -20,6 +20,11 @@ class DashboardScreen extends StatelessWidget {
           children: [
             Text('Selamat datang, ${user?.name ?? ''}'),
             const SizedBox(height: 16),
+            FilledButton(
+              onPressed: () => Navigator.of(context).pushNamed(AppRoutes.products),
+              child: const Text('Kelola Produk'),
+            ),
+            const SizedBox(height: 12),
             OutlinedButton(
               onPressed: () {
                 context.read<AuthProvider>().logout();
