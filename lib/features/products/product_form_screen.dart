@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -62,13 +63,28 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
     final picked = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 80);
     if (picked == null) return;
 
+    final cropped = await ImageCropper().cropImage(
+      sourcePath: picked.path,
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: 'Sesuaikan Foto',
+          toolbarColor: AppColors.primary,
+          toolbarWidgetColor: Colors.white,
+          activeControlsWidgetColor: AppColors.primary,
+          initAspectRatio: CropAspectRatioPreset.square,
+          lockAspectRatio: false,
+        ),
+      ],
+    );
+    if (cropped == null) return;
+
     final productsDir = Directory('${(await getApplicationDocumentsDirectory()).path}/product_images');
     if (!await productsDir.exists()) {
       await productsDir.create(recursive: true);
     }
 
     final fileName = '${DateTime.now().millisecondsSinceEpoch}_${picked.name}';
-    final savedFile = await File(picked.path).copy('${productsDir.path}/$fileName');
+    final savedFile = await File(cropped.path).copy('${productsDir.path}/$fileName');
 
     setState(() => _imagePath = savedFile.path);
   }

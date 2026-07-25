@@ -43,3 +43,8 @@ kotlin {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    // Required by image_cropper's UCropActivity
+    implementation("androidx.appcompat:appcompat:1.7.0")
+}
