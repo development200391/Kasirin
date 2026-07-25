@@ -67,7 +67,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     iconBg: const Color(0xFFEEF2FF),
                     iconColor: AppColors.primary,
                     label: 'Mulai Transaksi',
-                    onTap: () => _showComingSoon('Mulai Transaksi'),
+                    onTap: () => Navigator.of(context).pushNamed(AppRoutes.pos).then((_) => _loadSummary()),
                   ),
                   _MenuTile(
                     icon: Icons.inventory_2_outlined,

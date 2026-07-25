@@ -26,11 +26,11 @@ Urutan pengerjaan per layar/fitur, dicek satu per satu. Referensi detail: [detai
 
 ## Fase 3 — Modul Kasir (inti aplikasi)
 
-- [ ] Halaman Transaksi Kasir (UI, dibuka dari menu "Mulai Transaksi") — search produk, kartu produk, ringkasan belanja
-- [ ] Logika keranjang: tambah item, hitung subtotal/total, diskon
-- [ ] Proses bayar (input uang bayar → hitung kembalian) + simpan ke `transactions` & `transaction_items`
-- [ ] Kurangi stok otomatis saat transaksi berhasil
-- [ ] Halaman/tampilan struk (sesuai `TRANSA~2.svg`)
+- [x] Halaman Transaksi Kasir (UI, dibuka dari menu "Mulai Transaksi") — search produk, kartu produk, ringkasan belanja
+- [x] Logika keranjang: tambah item, hitung subtotal/total, diskon
+- [x] Proses bayar (input uang bayar → hitung kembalian) + simpan ke `transactions` & `transaction_items`
+- [x] Kurangi stok otomatis saat transaksi berhasil (+ catat `stock_movements`)
+- [x] Halaman/tampilan struk (sesuai `TRANSA~2.svg`) — cetak bluetooth masih placeholder (Fase 10), struk digital sudah bisa ditampilkan
 
 ## Fase 4 — Stok
 

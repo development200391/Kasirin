@@ -5,7 +5,9 @@ import 'core/constants.dart';
 import 'core/theme.dart';
 import 'features/auth/auth_provider.dart';
 import 'features/auth/login_screen.dart';
+import 'features/pos/cart_provider.dart';
 import 'features/pos/dashboard_screen.dart';
+import 'features/pos/pos_screen.dart';
 import 'features/products/products_provider.dart';
 import 'features/products/products_screen.dart';
 
@@ -31,6 +33,13 @@ class KasirinApp extends StatelessWidget {
           AppRoutes.products: (context) => ChangeNotifierProvider(
                 create: (_) => ProductsProvider(),
                 child: const ProductsScreen(),
+              ),
+          AppRoutes.pos: (context) => MultiProvider(
+                providers: [
+                  ChangeNotifierProvider(create: (_) => ProductsProvider()),
+                  ChangeNotifierProvider(create: (_) => CartProvider()),
+                ],
+                child: const PosScreen(),
               ),
         },
       ),
