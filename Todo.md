@@ -16,16 +16,17 @@ Urutan pengerjaan per layar/fitur, dicek satu per satu. Referensi detail: [detai
 - [x] Seed 1 user admin default (biar bisa login pertama kali) — username `admin` / password `admin123`
 - [x] Halaman Login (UI) — sesuai `Login-Screen.svg`: logo, field username/password, tombol masuk
 - [x] Wire logika login (cek ke tabel `users`, hash password) + redirect ke Dashboard
+- [x] Halaman Dashboard/Home (UI) — sesuai `MOBILE~1.SVG`: header gradient + ringkasan penjualan hari ini, menu utama (Mulai Transaksi, Kelola Produk, Transaksi & Struk, Laporan Penjualan, Pengguna, Pengaturan)
 
 ## Fase 2 — Produk & Kategori
 
-- [ ] Halaman Manajemen Produk (UI) — list, tombol tambah/edit/hapus, filter kategori
-- [ ] CRUD kategori
-- [ ] CRUD produk (termasuk upload foto)
+- [x] Halaman Manajemen Produk (UI) — list, tombol tambah/edit/hapus, filter kategori
+- [x] CRUD kategori
+- [x] CRUD produk (termasuk upload foto)
 
 ## Fase 3 — Modul Kasir (inti aplikasi)
 
-- [ ] Halaman Dashboard Kasir (UI) — search produk, kartu produk, ringkasan belanja
+- [ ] Halaman Transaksi Kasir (UI, dibuka dari menu "Mulai Transaksi") — search produk, kartu produk, ringkasan belanja
 - [ ] Logika keranjang: tambah item, hitung subtotal/total, diskon
 - [ ] Proses bayar (input uang bayar → hitung kembalian) + simpan ke `transactions` & `transaction_items`
 - [ ] Kurangi stok otomatis saat transaksi berhasil

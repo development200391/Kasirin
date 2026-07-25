@@ -1,0 +1,50 @@
+<svg width="750" height="1624" viewBox="0 0 750 1624" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+<defs><linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient><linearGradient id="hdrGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366F1"/><stop offset="1" stop-color="#1D4ED8"/></linearGradient></defs>
+<rect width="750" height="1624" fill="#F8FAFC"/>
+<path d="M0,0 L750,0 L750,420 Q375.0,480 0,420 Z" fill="url(#hdrGrad)"/>
+<circle cx="52" cy="56" r="24" fill="#FFFFFF"/>
+<g transform="translate(38,42) scale(0.02734)"><rect width="1024" height="1024" rx="230" fill="#4F46E5"/><rect x="360" y="300" width="80" height="424" rx="16" fill="#FFFFFF"/><path d="M440,512 L660,300 L560,300 L440,430 Z" fill="#FFFFFF"/><path d="M440,512 L660,724 L560,724 L440,590 Z" fill="#FFFFFF"/><circle cx="700" cy="512" r="34" fill="#FBBF24"/></g>
+<text x="88" y="63" fill="#FFFFFF" font-size="20" font-weight="bold">Kasirin</text>
+<circle cx="698" cy="56" r="24" fill="#FFFFFF" fill-opacity="0.2"/>
+<rect x="688.2" y="42" width="12.6" height="28" rx="4" fill="none" stroke="#FFFFFF" stroke-width="2.2"/><line x1="691.0" y1="56" x2="710.6" y2="56" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/><path d="M705.0,51.1 L710.6,56 L705.0,60.9" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="40" y="130" fill="#E0E7FF" font-size="16">Selamat datang,</text>
+<text x="40" y="164" fill="#FFFFFF" font-size="28" font-weight="bold">Admin</text>
+<rect x="40" y="200" width="327.0" height="90" rx="16" fill="#FFFFFF" fill-opacity="0.15"/>
+<text x="56" y="228" fill="#E0E7FF" font-size="13">Penjualan Hari Ini</text>
+<text x="56" y="260" fill="#FFFFFF" font-size="20" font-weight="bold">Rp 3.240.000</text>
+<rect x="383.0" y="200" width="327.0" height="90" rx="16" fill="#FFFFFF" fill-opacity="0.15"/>
+<text x="399.0" y="228" fill="#E0E7FF" font-size="13">Transaksi</text>
+<text x="399.0" y="260" fill="#FFFFFF" font-size="20" font-weight="bold">48</text>
+<text x="40" y="340" fill="#0F172A" font-size="18" font-weight="bold">Menu Utama</text>
+<rect x="40" y="364" width="670" height="88" rx="18" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="2"/>
+<circle cx="90" cy="408" r="26" fill="#EEF2FF"/>
+<path d="M75,397.5 L81.0,397.5 L85.5,412.5 L100.5,412.5 L105,402.0 L82.5,402.0" fill="none" stroke="#4F46E5" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="87.75" cy="417.75" r="2.1" fill="#4F46E5"/><circle cx="98.25" cy="417.75" r="2.1" fill="#4F46E5"/>
+<text x="136" y="416" fill="#0F172A" font-size="17" font-weight="bold">Mulai Transaksi</text>
+<path d="M674.0,398.0 L686.0,408 L674.0,418.0" fill="none" stroke="#CBD5E1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="40" y="464" width="670" height="88" rx="18" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="2"/>
+<circle cx="90" cy="508" r="26" fill="#FEF3C7"/>
+<rect x="75" y="500.5" width="30" height="21.0" rx="4" fill="none" stroke="#B45309" stroke-width="2.4"/><line x1="75" y1="507.25" x2="105" y2="507.25" stroke="#B45309" stroke-width="2.4"/><line x1="87.75" y1="507.25" x2="87.75" y2="521.5" stroke="#B45309" stroke-width="2"/>
+<text x="136" y="516" fill="#0F172A" font-size="17" font-weight="bold">Kelola Produk</text>
+<path d="M674.0,498.0 L686.0,508 L674.0,518.0" fill="none" stroke="#CBD5E1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="40" y="564" width="670" height="88" rx="18" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="2"/>
+<circle cx="90" cy="608" r="26" fill="#DCFCE7"/>
+<rect x="79.5" y="593" width="21.0" height="30" rx="4" fill="none" stroke="#16A34A" stroke-width="2.2"/><line x1="84.0" y1="600.5" x2="96.0" y2="600.5" stroke="#16A34A" stroke-width="2"/><line x1="84.0" y1="606.5" x2="96.0" y2="606.5" stroke="#16A34A" stroke-width="2"/><line x1="84.0" y1="612.5" x2="91.5" y2="612.5" stroke="#16A34A" stroke-width="2"/>
+<text x="136" y="616" fill="#0F172A" font-size="17" font-weight="bold">Transaksi &amp; Struk</text>
+<path d="M674.0,598.0 L686.0,608 L674.0,618.0" fill="none" stroke="#CBD5E1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="40" y="664" width="670" height="88" rx="18" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="2"/>
+<circle cx="90" cy="708" r="26" fill="#FCE7F3"/>
+<rect x="75.0" y="708.0" width="7.5" height="12.0" rx="3" fill="#BE185D"/><rect x="87.0" y="698.4" width="7.5" height="21.6" rx="3" fill="#BE185D"/><rect x="99.0" y="703.2" width="7.5" height="16.799999999999997" rx="3" fill="#BE185D"/>
+<text x="136" y="716" fill="#0F172A" font-size="17" font-weight="bold">Laporan Penjualan</text>
+<path d="M674.0,698.0 L686.0,708 L674.0,718.0" fill="none" stroke="#CBD5E1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="40" y="764" width="670" height="88" rx="18" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="2"/>
+<circle cx="90" cy="808" r="26" fill="#DBEAFE"/>
+<circle cx="84.75" cy="804.25" r="5.25" fill="none" stroke="#1D4ED8" stroke-width="2.2"/><path d="M76.5,818.5 Q76.5,809.5 84.75,809.5 Q93.0,809.5 93.0,818.5" fill="none" stroke="#1D4ED8" stroke-width="2.2"/><circle cx="96.0" cy="805.0" r="4.5" fill="none" stroke="#1D4ED8" stroke-width="2.2"/><path d="M90,820.0 Q90,811.75 96.0,811.75 Q104.25,811.75 104.25,820.0" fill="none" stroke="#1D4ED8" stroke-width="2.2"/>
+<text x="136" y="816" fill="#0F172A" font-size="17" font-weight="bold">Pengguna</text>
+<path d="M674.0,798.0 L686.0,808 L674.0,818.0" fill="none" stroke="#CBD5E1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="40" y="864" width="670" height="88" rx="18" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="2"/>
+<circle cx="90" cy="908" r="26" fill="#F3E8FF"/>
+<circle cx="90" cy="908" r="6.0" fill="none" stroke="#7E22CE" stroke-width="2.2"/><line x1="98.2" y1="908.0" x2="102.8" y2="908.0" stroke="#7E22CE" stroke-width="2.4" stroke-linecap="round"/><line x1="95.8" y1="913.8" x2="99.0" y2="917.0" stroke="#7E22CE" stroke-width="2.4" stroke-linecap="round"/><line x1="90.0" y1="916.2" x2="90.0" y2="920.8" stroke="#7E22CE" stroke-width="2.4" stroke-linecap="round"/><line x1="84.2" y1="913.8" x2="81.0" y2="917.0" stroke="#7E22CE" stroke-width="2.4" stroke-linecap="round"/><line x1="81.8" y1="908.0" x2="77.2" y2="908.0" stroke="#7E22CE" stroke-width="2.4" stroke-linecap="round"/><line x1="84.2" y1="902.2" x2="81.0" y2="899.0" stroke="#7E22CE" stroke-width="2.4" stroke-linecap="round"/><line x1="90.0" y1="899.8" x2="90.0" y2="895.2" stroke="#7E22CE" stroke-width="2.4" stroke-linecap="round"/><line x1="95.8" y1="902.2" x2="99.0" y2="899.0" stroke="#7E22CE" stroke-width="2.4" stroke-linecap="round"/>
+<text x="136" y="916" fill="#0F172A" font-size="17" font-weight="bold">Pengaturan</text>
+<path d="M674.0,898.0 L686.0,908 L674.0,918.0" fill="none" stroke="#CBD5E1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="300.0" y="1600" width="150" height="8" rx="4" fill="#CBD5E1"/>
+</svg>

@@ -30,6 +30,17 @@ Berikut gambaran antarmuka MVP yang disarankan untuk aplikasi Kasirin:
 
     <img src="./assets/Login-Screen.svg" alt="Halaman Login Kasirin" width="480" />
 
+
+
+- Dasboard
+  - Semua menu
+
+
+    <img src="./assets/MOBILE~1.SVG" alt="Halaman Login Kasirin" width="480" />
+
+
+
+
 - Halaman Dashboard Kasir
   - Bagian pencarian produk
   - Kartu produk dengan nama, harga, stok
