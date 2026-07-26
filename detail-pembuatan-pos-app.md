@@ -77,14 +77,18 @@ Berikut gambaran antarmuka MVP yang disarankan untuk aplikasi Kasirin:
 
 ### Lanjutan (setelah MVP jalan)
 - Multi-user dengan role (admin, kasir)
+
     <img src="./assets/US7910~1.SVG" alt="Mockup Fitur Lanjutan Kasirin" width="1080" />
 - Cetak struk via printer bluetooth
+
     <img src="./assets/bt_A_scan_list.svg" alt="Mockup Fitur Lanjutan Kasirin" width="1080" />
 
 - Laporan per periode (mingguan, bulanan) + export
+
     <img src="./assets/periode_C_sidebar.svg" alt="Mockup Fitur Lanjutan Kasirin" width="1080" />
 
 - Backup/restore database lokal
+
     <img src="./assets/backup_A_two_panel.svg" alt="Mockup Fitur Lanjutan Kasirin" width="1080" />
 
 ---
