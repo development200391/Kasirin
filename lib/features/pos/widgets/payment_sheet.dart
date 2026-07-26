@@ -5,6 +5,7 @@ import '../../../core/theme.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../data/repositories/transaction_repository.dart';
 import '../../auth/auth_provider.dart';
+import '../../printer/printer_provider.dart';
 import '../cart_provider.dart';
 import '../receipt_screen.dart';
 
@@ -31,6 +32,7 @@ class _PaymentSheetState extends State<PaymentSheet> {
   Future<void> _confirmPayment(int total) async {
     final cart = context.read<CartProvider>();
     final userId = context.read<AuthProvider>().currentUser!.id;
+    final printer = context.read<PrinterProvider>();
 
     setState(() => _isProcessing = true);
 
@@ -42,6 +44,10 @@ class _PaymentSheetState extends State<PaymentSheet> {
     );
 
     cart.clear();
+
+    if (printer.autoPrint) {
+      await printer.printReceipt(result);
+    }
 
     if (!mounted) return;
     Navigator.of(context).pop();

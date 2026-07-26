@@ -10,6 +10,7 @@ import 'features/auth/login_screen.dart';
 import 'features/pos/cart_provider.dart';
 import 'features/pos/dashboard_screen.dart';
 import 'features/pos/pos_screen.dart';
+import 'features/printer/printer_provider.dart';
 import 'features/products/products_provider.dart';
 import 'features/products/products_screen.dart';
 import 'features/reports/reports_screen.dart';
@@ -28,8 +29,11 @@ class KasirinApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => AuthProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => PrinterProvider()..init()),
+      ],
       child: MaterialApp(
         title: AppConstants.appName,
         debugShowCheckedModeBanner: false,

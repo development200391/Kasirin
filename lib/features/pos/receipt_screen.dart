@@ -1,14 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/theme.dart';
 import '../../core/utils/formatters.dart';
 import '../../data/models/transaction_result.dart';
+import '../printer/printer_provider.dart';
+import '../printer/printer_screen.dart';
 
 class ReceiptScreen extends StatelessWidget {
   const ReceiptScreen({super.key, required this.result});
 
   final TransactionResult result;
+
+  Future<void> _printReceipt(BuildContext context) async {
+    final printer = context.read<PrinterProvider>();
+    await printer.refreshStatus();
+
+    if (!printer.isConnected) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Printer belum terhubung'),
+          action: SnackBarAction(
+            label: 'Hubungkan',
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const PrinterScreen()),
+            ),
+          ),
+        ),
+      );
+      return;
+    }
+
+    final success = await printer.printReceipt(result);
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(success ? 'Struk berhasil dicetak' : 'Gagal mencetak struk')),
+    );
+  }
 
   void _showDigitalReceipt(BuildContext context) {
     final buffer = StringBuffer()
@@ -140,9 +170,7 @@ class ReceiptScreen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Cetak struk bluetooth belum tersedia')),
-                        ),
+                        onPressed: () => _printReceipt(context),
                         child: const Text('Cetak Struk'),
                       ),
                     ),

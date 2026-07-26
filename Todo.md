@@ -30,7 +30,7 @@ Urutan pengerjaan per layar/fitur, dicek satu per satu. Referensi detail: [detai
 - [x] Logika keranjang: tambah item, hitung subtotal/total, diskon
 - [x] Proses bayar (input uang bayar → hitung kembalian) + simpan ke `transactions` & `transaction_items`
 - [x] Kurangi stok otomatis saat transaksi berhasil (+ catat `stock_movements`)
-- [x] Halaman/tampilan struk (sesuai `TRANSA~2.svg`) — cetak bluetooth masih placeholder (Fase 10), struk digital sudah bisa ditampilkan
+- [x] Halaman/tampilan struk (sesuai `TRANSA~2.svg`) — cetak bluetooth (Fase 10) & struk digital sudah bisa ditampilkan
 
 ## Fase 4 — Stok
 
@@ -54,19 +54,21 @@ Urutan pengerjaan per layar/fitur, dicek satu per satu. Referensi detail: [detai
 
 ---
 
+## Fase 10 — Cetak Struk Printer Bluetooth
+
+- [x] Tambah package printer thermal bluetooth (`print_bluetooth_thermal`, ESC/POS via `PostCode` bawaan package) + izin Bluetooth Android (`BLUETOOTH_CONNECT`, `BLUETOOTH_SCAN`, dll di `AndroidManifest.xml`) + `permission_handler` untuk runtime request Android 12+
+- [x] Halaman Printer Bluetooth (UI) — status terhubung/tidak + daftar perangkat yang sudah dipasangkan (printer thermal Bluetooth Classic harus di-pair dulu lewat pengaturan Bluetooth HP; baterai tidak ditampilkan karena tidak didukung package untuk kebanyakan printer)
+- [x] Tampilkan & refresh daftar perangkat bluetooth yang sudah dipasangkan
+- [x] Connect / putuskan sambungan ke printer (+ auto-reconnect ke printer terakhir saat app dibuka)
+- [x] Pilihan ukuran kertas 58mm / 80mm + simpan preferensi (`shared_preferences`)
+- [x] Tombol "Test Print"
+- [x] Toggle "Cetak Otomatis Setelah Transaksi" + hubungkan ke flow selesai transaksi (Fase 3, `payment_sheet.dart`)
+- [x] Generate format struk ESC/POS sesuai ukuran kertas (`core/utils/receipt_formatter.dart`) — tombol "Cetak Struk" di halaman struk (Fase 3) kini fungsional
+
+
+---
+
 ## Lanjutan (setelah MVP jalan) — belum dikerjakan
-
-### Fase 10 — Cetak Struk Printer Bluetooth
-_Mockup: [bt_A_scan_list.svg](./assets/bt_A_scan_list.svg) — "Printer Bluetooth"_
-
-- [ ] Tambah package printer thermal bluetooth (mis. `esc_pos_bluetooth` / `blue_thermal_printer`) + izin Bluetooth Android
-- [ ] Halaman Printer Bluetooth (UI) — status printer aktif, baterai, daftar perangkat lain
-- [ ] Scan & tampilkan daftar perangkat bluetooth tersedia
-- [ ] Connect / putuskan sambungan ke printer
-- [ ] Pilihan ukuran kertas 58mm / 80mm + simpan preferensi
-- [ ] Tombol "Test Print"
-- [ ] Toggle "Cetak Otomatis Setelah Transaksi" + hubungkan ke flow selesai transaksi (Fase 3)
-- [ ] Generate format struk ESC/POS sesuai ukuran kertas
 
 ### Fase 11 — Laporan per Periode + Export
 _Mockup: [periode_C_sidebar.svg](./assets/periode_C_sidebar.svg) — "Rincian per Hari"_
