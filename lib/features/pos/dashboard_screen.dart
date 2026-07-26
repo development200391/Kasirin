@@ -77,13 +77,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     onTap: () => Navigator.of(context).pushNamed(AppRoutes.products),
                   ),
                   _MenuTile(
-                    icon: Icons.receipt_long_outlined,
-                    iconBg: const Color(0xFFDCFCE7),
-                    iconColor: const Color(0xFF16A34A),
-                    label: 'Transaksi & Struk',
-                    onTap: () => _showComingSoon('Transaksi & Struk'),
-                  ),
-                  _MenuTile(
                     icon: Icons.bar_chart_outlined,
                     iconBg: const Color(0xFFFCE7F3),
                     iconColor: const Color(0xFFBE185D),
