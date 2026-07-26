@@ -41,31 +41,20 @@ Urutan pengerjaan per layar/fitur, dicek satu per satu. Referensi detail: [detai
 
 - [x] Halaman Laporan Harian (total penjualan + % vs kemarin, grafik penjualan per jam, jumlah transaksi, list transaksi terbaru)
 
-## Fase 6 — Polish
+## Fase 9 — Multi-user & Role
 
-- [x] Rapikan UI: pull-to-refresh konsisten di halaman Produk & Stok, locale tanggal Indonesia (`id_ID`) untuk semua `DateFormat`
-- [ ] Cek responsif — perlu ditest langsung di device (belum diverifikasi live)
-- [ ] (Opsional) cetak struk via printer bluetooth — lihat Fase 10
+- [x] Tambah kolom `is_active` dan `permissions` di tabel `users` (migrasi `_dbVersion` 1 → 2)
+- [x] Halaman Manajemen Pengguna (UI) — list user (avatar inisial, nama, username, badge role), tap untuk buka Detail Pengguna (layar mobile penuh, bukan panel kanan)
+- [x] Tombol "+ Tambah Pengguna" — form buat user baru (nama, username, password, role, hak akses)
+- [x] Ubah role user — toggle Admin/Kasir (`SegmentedButton`)
+- [x] Checklist hak akses per user (Transaksi Penjualan, Lihat Produk, Kelola Produk, Kelola Pengguna, Lihat Laporan Harian) + tombol "Simpan Perubahan"
+- [x] Nonaktifkan/aktifkan pengguna (soft-disable via `is_active`, bukan hapus akun; login diblok jika nonaktif; tidak bisa menonaktifkan akun sendiri)
+- [x] Guard akses menu Dashboard sesuai permission user yang sedang login (menu terkunci menampilkan ikon gembok + notifikasi jika ditekan)
 
-## Fase 7-8 — Testing & Publish
-
-- [ ] Testing manual tiap flow (login → produk → transaksi → laporan)
-- [ ] Siapkan aset Play Store & publish
 
 ---
 
 ## Lanjutan (setelah MVP jalan) — belum dikerjakan
-
-### Fase 9 — Multi-user & Role
-_Mockup: [US7910~1.SVG](./assets/US7910~1.SVG) — "Manajemen Pengguna"_
-
-- [ ] Tambah kolom `is_active` di tabel `users` + tabel `permissions` (atau kolom hak akses per role)
-- [ ] Halaman Manajemen Pengguna (UI) — list user (avatar inisial, nama, email, badge role) + panel detail di kanan
-- [ ] Tombol "+ Tambah Pengguna" — form buat user baru
-- [ ] Ubah role user — toggle Admin/Kasir
-- [ ] Checklist hak akses per user (Transaksi Penjualan, Lihat Produk, Kelola Produk, Kelola Pengguna, Lihat Laporan Harian) + tombol "Simpan Perubahan"
-- [ ] Nonaktifkan pengguna (soft-disable, bukan hapus akun)
-- [ ] Guard akses menu sesuai role/permission user yang sedang login
 
 ### Fase 10 — Cetak Struk Printer Bluetooth
 _Mockup: [bt_A_scan_list.svg](./assets/bt_A_scan_list.svg) — "Printer Bluetooth"_

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/constants.dart';
+import '../../core/permissions.dart';
 import '../../core/theme.dart';
 import '../../core/utils/formatters.dart';
 import '../../data/repositories/dashboard_repository.dart';
@@ -36,9 +37,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
+  void _showAccessDenied() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Anda tidak memiliki akses ke menu ini')),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = context.watch<AuthProvider>().currentUser;
+    bool has(String permission) => user?.hasPermission(permission) ?? false;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -67,28 +75,40 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     iconBg: const Color(0xFFEEF2FF),
                     iconColor: AppColors.primary,
                     label: 'Mulai Transaksi',
-                    onTap: () => Navigator.of(context).pushNamed(AppRoutes.pos).then((_) => _loadSummary()),
+                    locked: !has(AppPermissions.posTransaction),
+                    onTap: has(AppPermissions.posTransaction)
+                        ? () => Navigator.of(context).pushNamed(AppRoutes.pos).then((_) => _loadSummary())
+                        : _showAccessDenied,
                   ),
                   _MenuTile(
                     icon: Icons.inventory_2_outlined,
                     iconBg: const Color(0xFFFEF3C7),
                     iconColor: const Color(0xFFB45309),
                     label: 'Kelola Produk',
-                    onTap: () => Navigator.of(context).pushNamed(AppRoutes.products),
+                    locked: !has(AppPermissions.productsView),
+                    onTap: has(AppPermissions.productsView)
+                        ? () => Navigator.of(context).pushNamed(AppRoutes.products)
+                        : _showAccessDenied,
                   ),
                   _MenuTile(
                     icon: Icons.bar_chart_outlined,
                     iconBg: const Color(0xFFFCE7F3),
                     iconColor: const Color(0xFFBE185D),
                     label: 'Laporan Penjualan',
-                    onTap: () => Navigator.of(context).pushNamed(AppRoutes.reports),
+                    locked: !has(AppPermissions.reportsView),
+                    onTap: has(AppPermissions.reportsView)
+                        ? () => Navigator.of(context).pushNamed(AppRoutes.reports)
+                        : _showAccessDenied,
                   ),
                   _MenuTile(
                     icon: Icons.people_outline,
                     iconBg: const Color(0xFFDBEAFE),
                     iconColor: const Color(0xFF1D4ED8),
                     label: 'Pengguna',
-                    onTap: () => _showComingSoon('Manajemen Pengguna'),
+                    locked: !has(AppPermissions.usersManage),
+                    onTap: has(AppPermissions.usersManage)
+                        ? () => Navigator.of(context).pushNamed(AppRoutes.users)
+                        : _showAccessDenied,
                   ),
                   _MenuTile(
                     icon: Icons.settings_outlined,
@@ -223,6 +243,7 @@ class _MenuTile extends StatelessWidget {
     required this.iconColor,
     required this.label,
     required this.onTap,
+    this.locked = false,
   });
 
   final IconData icon;
@@ -230,37 +251,41 @@ class _MenuTile extends StatelessWidget {
   final Color iconColor;
   final String label;
   final VoidCallback onTap;
+  final bool locked;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
-      child: Material(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(18),
-        child: InkWell(
+      child: Opacity(
+        opacity: locked ? 0.5 : 1,
+        child: Material(
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(18),
-          onTap: onTap,
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: AppColors.border),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 48,
-                  height: 48,
-                  decoration: BoxDecoration(color: iconBg, shape: BoxShape.circle),
-                  child: Icon(icon, color: iconColor, size: 22),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(label, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                ),
-                const Icon(Icons.chevron_right, color: AppColors.textSecondary),
-              ],
+          child: InkWell(
+            borderRadius: BorderRadius.circular(18),
+            onTap: onTap,
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(color: AppColors.border),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(color: locked ? AppColors.background : iconBg, shape: BoxShape.circle),
+                    child: Icon(locked ? Icons.lock_outline : icon, color: locked ? AppColors.textSecondary : iconColor, size: 22),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Text(label, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  ),
+                  const Icon(Icons.chevron_right, color: AppColors.textSecondary),
+                ],
+              ),
             ),
           ),
         ),

@@ -5,6 +5,7 @@ class AppRoutes {
   static const pos = '/pos';
   static const stock = '/stock';
   static const reports = '/reports';
+  static const users = '/users';
 }
 
 class AppConstants {

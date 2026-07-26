@@ -7,7 +7,7 @@ class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._internal();
 
   static const _dbName = 'kasirin.db';
-  static const _dbVersion = 1;
+  static const _dbVersion = 2;
 
   Database? _database;
 
@@ -22,7 +22,17 @@ class DatabaseHelper {
       '$path/$_dbName',
       version: _dbVersion,
       onCreate: _onCreate,
+      onUpgrade: _onUpgrade,
     );
+  }
+
+  Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      await db.execute('ALTER TABLE users ADD COLUMN is_active INTEGER NOT NULL DEFAULT 1');
+      await db.execute('ALTER TABLE users ADD COLUMN permissions TEXT');
+      await db.update('users', {'permissions': 'pos.transaction,products.view,products.manage,users.manage,reports.view'}, where: "role = 'admin'");
+      await db.update('users', {'permissions': 'pos.transaction,products.view'}, where: "role != 'admin'");
+    }
   }
 
   Future<void> _onCreate(Database db, int version) async {
@@ -33,6 +43,8 @@ class DatabaseHelper {
         username TEXT NOT NULL UNIQUE,
         password_hash TEXT NOT NULL,
         role TEXT NOT NULL,
+        is_active INTEGER NOT NULL DEFAULT 1,
+        permissions TEXT,
         created_at TEXT NOT NULL
       )
     ''');

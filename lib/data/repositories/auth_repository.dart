@@ -7,7 +7,7 @@ class AuthRepository {
     final db = await DatabaseHelper.instance.database;
     final rows = await db.query(
       'users',
-      where: 'username = ? AND password_hash = ?',
+      where: 'username = ? AND password_hash = ? AND is_active = 1',
       whereArgs: [username, hashPassword(password)],
       limit: 1,
     );

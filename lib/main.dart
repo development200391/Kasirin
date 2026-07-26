@@ -13,6 +13,8 @@ import 'features/pos/pos_screen.dart';
 import 'features/products/products_provider.dart';
 import 'features/products/products_screen.dart';
 import 'features/reports/reports_screen.dart';
+import 'features/users/users_provider.dart';
+import 'features/users/users_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,6 +50,10 @@ class KasirinApp extends StatelessWidget {
             child: const PosScreen(),
           ),
           AppRoutes.reports: (context) => const ReportsScreen(),
+          AppRoutes.users: (context) => ChangeNotifierProvider(
+            create: (_) => UsersProvider(),
+            child: const UsersScreen(),
+          ),
         },
       ),
     );
