@@ -94,3 +94,16 @@ Urutan pengerjaan per layar/fitur, dicek satu per satu. Referensi detail: [detai
 - [x] Pilihan lokasi penyimpanan: Lokal (default, aktif) + tombol "Bagikan" per backup (`share_plus`) untuk kirim/upload manual ke Google Drive atau layanan lain — tidak pakai Google Drive API langsung (di luar cakupan MVP offline app ini)
 
 Menu "Backup & Restore" ada di Dashboard, dijaga permission `data.backup` (khusus role yang diberi akses, default: Admin).
+
+---
+
+## Fase 13 — Multi-Bahasa (Indonesia, Inggris, Jepang)
+
+- [ ] Setup `flutter_localizations` + `intl` gen-l10n (`l10n.yaml`, folder `lib/l10n/`, file ARB per bahasa: `app_id.arb`, `app_en.arb`, `app_ja.arb`)
+- [ ] Daftarkan `supportedLocales` (id, en, ja) + `localizationsDelegates` di `MaterialApp`
+- [ ] Ekstrak semua teks UI yang masih hardcoded Bahasa Indonesia ke key ARB, lalu pakai `AppLocalizations.of(context)!.xxx` di semua layar (Login, Dashboard, POS, Produk, Stok, Laporan, Laporan Periode, Pengguna, Printer Bluetooth, Backup & Restore, Pengaturan)
+- [ ] Terjemahkan ke Inggris dan Jepang (butuh review penutur asli terutama untuk Jepang — istilah kasir/struk/stok belum tentu pas kalau diterjemahkan mesin)
+- [ ] Pilihan bahasa di halaman Pengaturan (Bahasa Indonesia / English / 日本語) + simpan preferensi (`shared_preferences`, sudah ada dependency-nya)
+- [ ] Terapkan locale pilihan user ke `MaterialApp` (bukan cuma default sistem) + tetap dipakai lagi setelah app dibuka ulang
+- [ ] Sesuaikan format angka/mata uang/tanggal ikut locale aktif (`formatCurrency`, `DateFormat` di seluruh app saat ini hardcode `id_ID`)
+- [ ] Cek ulang layout tiap layar tidak pecah saat teks lebih panjang/pendek dari Bahasa Indonesia (mis. label tombol, judul AppBar, badge status)
