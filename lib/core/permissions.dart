@@ -1,3 +1,5 @@
+import '../l10n/gen/app_localizations.dart';
+
 class AppPermissions {
   static const posTransaction = 'pos.transaction';
   static const productsView = 'products.view';
@@ -15,14 +17,17 @@ class AppPermissions {
     dataBackup,
   ];
 
-  static const labels = {
-    posTransaction: 'Transaksi Penjualan',
-    productsView: 'Lihat Produk',
-    productsManage: 'Kelola Produk',
-    usersManage: 'Kelola Pengguna',
-    reportsView: 'Lihat Laporan Harian',
-    dataBackup: 'Backup & Restore Data',
-  };
+  static String label(String permission, AppLocalizations l10n) {
+    return switch (permission) {
+      posTransaction => l10n.permissionPosTransaction,
+      productsView => l10n.permissionProductsView,
+      productsManage => l10n.permissionProductsManage,
+      usersManage => l10n.permissionUsersManage,
+      reportsView => l10n.permissionReportsView,
+      dataBackup => l10n.permissionDataBackup,
+      _ => permission,
+    };
+  }
 
   static List<String> defaultsForRole(String role) {
     if (role == 'admin') return List.of(all);

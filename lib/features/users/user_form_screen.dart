@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/permissions.dart';
+import '../../l10n/gen/app_localizations.dart';
 import 'users_provider.dart';
 
 class UserFormScreen extends StatefulWidget {
@@ -39,6 +40,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
 
+    final l10n = AppLocalizations.of(context);
     final provider = context.read<UsersProvider>();
     final username = _usernameController.text.trim();
 
@@ -48,7 +50,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
       setState(() => _isSaving = false);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Username sudah dipakai')),
+          SnackBar(content: Text(l10n.userFormUsernameTaken)),
         );
       }
       return;
@@ -67,8 +69,10 @@ class _UserFormScreenState extends State<UserFormScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Tambah Pengguna')),
+      appBar: AppBar(title: Text(l10n.userFormTitle)),
       body: Form(
         key: _formKey,
         child: ListView(
@@ -76,40 +80,40 @@ class _UserFormScreenState extends State<UserFormScreen> {
           children: [
             TextFormField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Nama Lengkap'),
-              validator: (v) => (v == null || v.trim().isEmpty) ? 'Nama wajib diisi' : null,
+              decoration: InputDecoration(labelText: l10n.userFormFullName),
+              validator: (v) => (v == null || v.trim().isEmpty) ? l10n.productFormNameRequired : null,
             ),
             const SizedBox(height: 16),
             TextFormField(
               controller: _usernameController,
-              decoration: const InputDecoration(labelText: 'Username'),
-              validator: (v) => (v == null || v.trim().isEmpty) ? 'Username wajib diisi' : null,
+              decoration: InputDecoration(labelText: l10n.loginUsername),
+              validator: (v) => (v == null || v.trim().isEmpty) ? l10n.loginUsernameRequired : null,
             ),
             const SizedBox(height: 16),
             TextFormField(
               controller: _passwordController,
               obscureText: true,
-              decoration: const InputDecoration(labelText: 'Kata Sandi'),
-              validator: (v) => (v == null || v.length < 6) ? 'Minimal 6 karakter' : null,
+              decoration: InputDecoration(labelText: l10n.loginPassword),
+              validator: (v) => (v == null || v.length < 6) ? l10n.userFormPasswordMinLength : null,
             ),
             const SizedBox(height: 24),
-            const Text('Role Pengguna', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            Text(l10n.userDetailRole, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             const SizedBox(height: 10),
             SegmentedButton<String>(
-              segments: const [
-                ButtonSegment(value: 'admin', label: Text('Admin')),
-                ButtonSegment(value: 'kasir', label: Text('Kasir')),
+              segments: [
+                ButtonSegment(value: 'admin', label: Text(l10n.commonAdmin)),
+                ButtonSegment(value: 'kasir', label: Text(l10n.commonCashier)),
               ],
               selected: {_role},
               onSelectionChanged: (selection) => _onRoleChanged(selection.first),
             ),
             const SizedBox(height: 24),
-            const Text('Hak Akses', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            Text(l10n.userDetailPermissions, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             for (final permission in AppPermissions.all)
               CheckboxListTile(
                 contentPadding: EdgeInsets.zero,
                 controlAffinity: ListTileControlAffinity.leading,
-                title: Text(AppPermissions.labels[permission]!),
+                title: Text(AppPermissions.label(permission, l10n)),
                 value: _permissions.contains(permission),
                 onChanged: (checked) => setState(() {
                   if (checked == true) {
@@ -128,7 +132,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
                       width: 20,
                       child: CircularProgressIndicator(strokeWidth: 2.5, valueColor: AlwaysStoppedAnimation(Colors.white)),
                     )
-                  : const Text('Tambah Pengguna'),
+                  : Text(l10n.usersAdd),
             ),
           ],
         ),

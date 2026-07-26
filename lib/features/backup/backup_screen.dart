@@ -8,6 +8,7 @@ import '../../core/constants.dart';
 import '../../core/theme.dart';
 import '../../data/models/backup_entry.dart';
 import '../../data/repositories/backup_repository.dart';
+import '../../l10n/gen/app_localizations.dart';
 import '../auth/auth_provider.dart';
 import 'backup_provider.dart';
 
@@ -21,15 +22,17 @@ class BackupScreen extends StatelessWidget {
   const BackupScreen({super.key});
 
   Future<void> _createBackup(BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
     final provider = context.read<BackupProvider>();
     final success = await provider.createBackup();
     if (!context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(success ? 'Backup berhasil dibuat' : 'Gagal membuat backup')),
+      SnackBar(content: Text(success ? l10n.backupCreated : l10n.backupCreateFailed)),
     );
   }
 
   Future<void> _importFile(BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
     final picked = await FilePicker.pickFile();
     if (picked?.path == null || !context.mounted) return;
 
@@ -37,25 +40,25 @@ class BackupScreen extends StatelessWidget {
     final success = await provider.importFile(picked!.path!);
     if (!context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(success ? 'File backup berhasil diimpor' : 'File bukan database backup yang valid')),
+      SnackBar(content: Text(success ? l10n.backupImported : l10n.backupImportInvalid)),
     );
   }
 
   Future<void> _restore(BuildContext context, BackupEntry entry) async {
+    final l10n = AppLocalizations.of(context);
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Pulihkan Database'),
+        title: Text(l10n.backupRestoreTitle),
         content: Text(
-          'Semua data saat ini akan ditimpa dengan backup "${entry.fileName}" '
-          '(${DateFormat('d MMM yyyy, HH:mm').format(entry.createdAt)}). Tindakan ini tidak bisa dibatalkan.',
+          l10n.backupRestoreConfirm(entry.fileName, DateFormat('d MMM yyyy, HH:mm').format(entry.createdAt)),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Batal')),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l10n.commonCancel)),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: AppColors.danger),
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Pulihkan'),
+            child: Text(l10n.commonRestore),
           ),
         ],
       ),
@@ -70,7 +73,7 @@ class BackupScreen extends StatelessWidget {
 
     if (!success) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Gagal memulihkan database')),
+        SnackBar(content: Text(l10n.backupRestoreFailed)),
       );
       return;
     }
@@ -79,8 +82,8 @@ class BackupScreen extends StatelessWidget {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: const Text('Database Dipulihkan'),
-        content: const Text('Database berhasil dipulihkan. Silakan login kembali.'),
+        title: Text(l10n.backupRestoredTitle),
+        content: Text(l10n.backupRestoredBody),
         actions: [
           TextButton(
             onPressed: () {
@@ -88,7 +91,7 @@ class BackupScreen extends StatelessWidget {
               context.read<AuthProvider>().logout();
               Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.login, (route) => false);
             },
-            child: const Text('OK'),
+            child: Text(l10n.commonOk),
           ),
         ],
       ),
@@ -96,18 +99,20 @@ class BackupScreen extends StatelessWidget {
   }
 
   Future<void> _share(BuildContext context, BackupEntry entry) async {
+    final l10n = AppLocalizations.of(context);
     final path = await BackupRepository().backupFilePath(entry);
     await SharePlus.instance.share(
-      ShareParams(files: [XFile(path)], text: 'Backup database Kasirin - ${entry.fileName}'),
+      ShareParams(files: [XFile(path)], text: '${l10n.backupScreenTitle} - ${entry.fileName}'),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final provider = context.watch<BackupProvider>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Backup & Restore Database')),
+      appBar: AppBar(title: Text(l10n.backupScreenTitle)),
       body: provider.isLoading
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
@@ -124,28 +129,27 @@ class BackupScreen extends StatelessWidget {
                             child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation(Colors.white)),
                           )
                         : const Icon(Icons.backup_outlined),
-                    label: const Text('Backup Sekarang'),
+                    label: Text(l10n.backupNow),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Menyimpan salinan database saat ini ke penyimpanan lokal perangkat. '
-                    'Gunakan tombol "Bagikan" pada tiap backup untuk mengunggah ke Google Drive atau layanan lain.',
-                    style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                  Text(
+                    l10n.backupDescription,
+                    style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
                   ),
                   const SizedBox(height: 12),
                   OutlinedButton.icon(
                     onPressed: provider.isWorking ? null : () => _importFile(context),
                     icon: const Icon(Icons.file_upload_outlined),
-                    label: const Text('Import File Backup'),
+                    label: Text(l10n.backupImportFile),
                   ),
                   const SizedBox(height: 24),
-                  const Text('Riwayat Backup', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text(l10n.backupHistory, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                   const SizedBox(height: 12),
                   if (provider.history.isEmpty)
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 24),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 24),
                       child: Center(
-                        child: Text('Belum ada backup', style: TextStyle(color: AppColors.textSecondary)),
+                        child: Text(l10n.backupEmpty, style: const TextStyle(color: AppColors.textSecondary)),
                       ),
                     )
                   else
@@ -166,6 +170,7 @@ class _BackupTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final isImported = entry.source == BackupSource.imported;
 
     return Container(
@@ -203,7 +208,7 @@ class _BackupTile extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
-                        isImported ? 'Diimpor' : 'Manual',
+                        isImported ? l10n.commonImported : l10n.commonManual,
                         style: TextStyle(
                           color: isImported ? const Color(0xFF1D4ED8) : const Color(0xFF16A34A),
                           fontSize: 10,
@@ -221,9 +226,9 @@ class _BackupTile extends StatelessWidget {
           IconButton(
             onPressed: onShare,
             icon: const Icon(Icons.ios_share_outlined, color: AppColors.textSecondary),
-            tooltip: 'Bagikan',
+            tooltip: l10n.commonShare,
           ),
-          TextButton(onPressed: onRestore, child: const Text('Restore')),
+          TextButton(onPressed: onRestore, child: Text(l10n.commonRestore)),
         ],
       ),
     );

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/theme.dart';
 import '../../../core/utils/formatters.dart';
+import '../../../l10n/gen/app_localizations.dart';
 import '../cart_provider.dart';
 import 'payment_sheet.dart';
 
@@ -11,21 +12,22 @@ class CartSheet extends StatelessWidget {
 
   Future<void> _editDiscount(BuildContext context) async {
     final cart = context.read<CartProvider>();
+    final l10n = AppLocalizations.of(context);
     final controller = TextEditingController(text: cart.discount == 0 ? '' : cart.discount.toString());
 
     final value = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Diskon'),
+        title: Text(l10n.commonDiscount),
         content: TextField(
           controller: controller,
           autofocus: true,
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(labelText: 'Jumlah diskon', prefixText: 'Rp '),
+          decoration: InputDecoration(labelText: l10n.cartDiscountLabel, prefixText: 'Rp '),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Batal')),
-          FilledButton(onPressed: () => Navigator.pop(context, controller.text), child: const Text('Simpan')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(l10n.commonCancel)),
+          FilledButton(onPressed: () => Navigator.pop(context, controller.text), child: Text(l10n.commonSave)),
         ],
       ),
     );
@@ -36,17 +38,18 @@ class CartSheet extends StatelessWidget {
   }
 
   Future<void> _confirmClear(BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Batalkan Transaksi'),
-        content: const Text('Kosongkan semua item di keranjang?'),
+        title: Text(l10n.cartCancelTransaction),
+        content: Text(l10n.cartConfirmClear),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Tidak')),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l10n.commonNo)),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: AppColors.danger),
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Ya, Batalkan'),
+            child: Text(l10n.cartConfirmCancel),
           ),
         ],
       ),
@@ -73,6 +76,7 @@ class CartSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cart = context.watch<CartProvider>();
+    final l10n = AppLocalizations.of(context);
 
     return DraggableScrollableSheet(
       initialChildSize: 0.75,
@@ -97,16 +101,16 @@ class CartSheet extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
                 child: Row(
                   children: [
-                    const Text('Pesanan Saat Ini', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text(l10n.cartCurrentOrder, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     const Spacer(),
-                    Text('${cart.itemCount} item', style: const TextStyle(color: AppColors.textSecondary)),
+                    Text(l10n.cartItemCount(cart.itemCount), style: const TextStyle(color: AppColors.textSecondary)),
                   ],
                 ),
               ),
               const Divider(height: 1),
               Expanded(
                 child: cart.isEmpty
-                    ? const Center(child: Text('Keranjang masih kosong', style: TextStyle(color: AppColors.textSecondary)))
+                    ? Center(child: Text(l10n.cartEmpty, style: const TextStyle(color: AppColors.textSecondary)))
                     : ListView.separated(
                         controller: scrollController,
                         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
@@ -134,7 +138,7 @@ class CartSheet extends StatelessWidget {
                                 onIncrement: () {
                                   if (!cart.addProduct(item.product)) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(content: Text('Stok tidak mencukupi')),
+                                      SnackBar(content: Text(l10n.posOutOfStock)),
                                     );
                                   }
                                 },
@@ -164,7 +168,7 @@ class CartSheet extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Subtotal', style: TextStyle(color: AppColors.textSecondary)),
+                        Text(l10n.commonSubtotal, style: const TextStyle(color: AppColors.textSecondary)),
                         Text(formatCurrency(cart.subtotal)),
                       ],
                     ),
@@ -172,7 +176,7 @@ class CartSheet extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Diskon', style: TextStyle(color: AppColors.textSecondary)),
+                        Text(l10n.commonDiscount, style: const TextStyle(color: AppColors.textSecondary)),
                         Text('-${formatCurrency(cart.discount)}', style: const TextStyle(color: AppColors.danger)),
                       ],
                     ),
@@ -180,7 +184,7 @@ class CartSheet extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Total', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                        Text(l10n.commonTotal, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                         Text(
                           formatCurrency(cart.total),
                           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.primary),
@@ -193,7 +197,7 @@ class CartSheet extends StatelessWidget {
                         Expanded(
                           child: OutlinedButton(
                             onPressed: cart.isEmpty ? null : () => _editDiscount(context),
-                            child: const Text('Diskon'),
+                            child: Text(l10n.commonDiscount),
                           ),
                         ),
                         const SizedBox(width: 12),
@@ -204,7 +208,7 @@ class CartSheet extends StatelessWidget {
                               side: const BorderSide(color: AppColors.danger),
                             ),
                             onPressed: cart.isEmpty ? null : () => _confirmClear(context),
-                            child: const Text('Batalkan'),
+                            child: Text(l10n.cartCancelButton),
                           ),
                         ),
                       ],
@@ -212,7 +216,7 @@ class CartSheet extends StatelessWidget {
                     const SizedBox(height: 12),
                     ElevatedButton(
                       onPressed: cart.isEmpty ? null : () => _openPayment(context),
-                      child: Text('Bayar ${formatCurrency(cart.total)}'),
+                      child: Text(l10n.cartPay(formatCurrency(cart.total))),
                     ),
                   ],
                 ),

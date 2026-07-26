@@ -6,6 +6,7 @@ import '../../core/theme.dart';
 import '../../data/models/product.dart';
 import '../../data/models/stock_movement.dart';
 import '../../data/repositories/stock_repository.dart';
+import '../../l10n/gen/app_localizations.dart';
 import '../products/products_provider.dart';
 
 class StockDetailScreen extends StatefulWidget {
@@ -35,6 +36,7 @@ class _StockDetailScreenState extends State<StockDetailScreen> {
   }
 
   Future<void> _showMovementDialog({required String type}) async {
+    final l10n = AppLocalizations.of(context);
     final controller = TextEditingController();
     final noteController = TextEditingController();
     final isAdd = type == 'in';
@@ -42,7 +44,7 @@ class _StockDetailScreenState extends State<StockDetailScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(isAdd ? 'Tambah Stok' : 'Kurangi Stok'),
+        title: Text(isAdd ? l10n.stockAdd : l10n.stockReduce),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -50,18 +52,18 @@ class _StockDetailScreenState extends State<StockDetailScreen> {
               controller: controller,
               autofocus: true,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Jumlah'),
+              decoration: InputDecoration(labelText: l10n.stockQtyLabel),
             ),
             const SizedBox(height: 12),
             TextField(
               controller: noteController,
-              decoration: const InputDecoration(labelText: 'Catatan (opsional)'),
+              decoration: InputDecoration(labelText: l10n.stockNoteLabel),
             ),
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Batal')),
-          FilledButton(onPressed: () => Navigator.pop(context, true), child: const Text('Simpan')),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l10n.commonCancel)),
+          FilledButton(onPressed: () => Navigator.pop(context, true), child: Text(l10n.commonSave)),
         ],
       ),
     );
@@ -86,6 +88,7 @@ class _StockDetailScreenState extends State<StockDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final isLowStock = _currentStock < 10;
 
     return Scaffold(
@@ -103,7 +106,7 @@ class _StockDetailScreenState extends State<StockDetailScreen> {
             ),
             child: Column(
               children: [
-                const Text('Stok Saat Ini', style: TextStyle(color: AppColors.textSecondary)),
+                Text(l10n.stockCurrentLabel, style: const TextStyle(color: AppColors.textSecondary)),
                 const SizedBox(height: 6),
                 Text(
                   '$_currentStock ${widget.product.unit ?? 'pcs'}',
@@ -120,7 +123,7 @@ class _StockDetailScreenState extends State<StockDetailScreen> {
                       child: OutlinedButton.icon(
                         onPressed: () => _showMovementDialog(type: 'in'),
                         icon: const Icon(Icons.add),
-                        label: const Text('Tambah Stok'),
+                        label: Text(l10n.stockAdd),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -132,7 +135,7 @@ class _StockDetailScreenState extends State<StockDetailScreen> {
                         ),
                         onPressed: () => _showMovementDialog(type: 'adjustment'),
                         icon: const Icon(Icons.remove),
-                        label: const Text('Kurangi Stok'),
+                        label: Text(l10n.stockReduce),
                       ),
                     ),
                   ],
@@ -143,8 +146,8 @@ class _StockDetailScreenState extends State<StockDetailScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
-              children: const [
-                Text('Riwayat Pergerakan Stok', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              children: [
+                Text(l10n.stockHistoryTitle, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               ],
             ),
           ),
@@ -153,7 +156,7 @@ class _StockDetailScreenState extends State<StockDetailScreen> {
             child: _movements == null
                 ? const Center(child: CircularProgressIndicator())
                 : _movements!.isEmpty
-                    ? const Center(child: Text('Belum ada pergerakan stok', style: TextStyle(color: AppColors.textSecondary)))
+                    ? Center(child: Text(l10n.stockHistoryEmpty, style: const TextStyle(color: AppColors.textSecondary)))
                     : ListView.separated(
                         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                         itemCount: _movements!.length,
@@ -174,11 +177,12 @@ class _MovementTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final isIn = movement.type == 'in';
     final label = switch (movement.type) {
-      'in' => 'Masuk',
-      'out' => 'Keluar (Transaksi)',
-      _ => 'Penyesuaian',
+      'in' => l10n.stockMovementIn,
+      'out' => l10n.stockMovementOut,
+      _ => l10n.stockMovementAdjustment,
     };
     final color = isIn ? AppColors.success : AppColors.danger;
 

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../core/theme.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../data/repositories/transaction_repository.dart';
+import '../../../l10n/gen/app_localizations.dart';
 import '../../auth/auth_provider.dart';
 import '../../printer/printer_provider.dart';
 import '../cart_provider.dart';
@@ -58,6 +59,7 @@ class _PaymentSheetState extends State<PaymentSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final total = context.watch<CartProvider>().total;
     final change = _paidAmount - total;
     final canConfirm = _paidAmount >= total && !_isProcessing;
@@ -81,12 +83,12 @@ class _PaymentSheetState extends State<PaymentSheet> {
             ),
           ),
           const SizedBox(height: 20),
-          const Text('Pembayaran', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          Text(l10n.paymentTitle, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Total Belanja', style: TextStyle(color: AppColors.textSecondary)),
+              Text(l10n.paymentTotalBelanja, style: const TextStyle(color: AppColors.textSecondary)),
               Text(formatCurrency(total), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             ],
           ),
@@ -96,13 +98,13 @@ class _PaymentSheetState extends State<PaymentSheet> {
             keyboardType: TextInputType.number,
             autofocus: true,
             onChanged: (_) => setState(() {}),
-            decoration: const InputDecoration(labelText: 'Uang Bayar', prefixText: 'Rp '),
+            decoration: InputDecoration(labelText: l10n.paymentAmountPaid, prefixText: 'Rp '),
           ),
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Kembalian', style: TextStyle(color: AppColors.textSecondary)),
+              Text(l10n.paymentChange, style: const TextStyle(color: AppColors.textSecondary)),
               Text(
                 formatCurrency(change < 0 ? 0 : change),
                 style: TextStyle(
@@ -122,7 +124,7 @@ class _PaymentSheetState extends State<PaymentSheet> {
                     width: 20,
                     child: CircularProgressIndicator(strokeWidth: 2.5, valueColor: AlwaysStoppedAnimation(Colors.white)),
                   )
-                : const Text('Konfirmasi Bayar'),
+                : Text(l10n.paymentConfirm),
           ),
         ],
       ),

@@ -15,19 +15,19 @@ class AuthProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  String? _errorMessage;
-  String? get errorMessage => _errorMessage;
+  bool _hasError = false;
+  bool get hasError => _hasError;
 
   Future<bool> login(String username, String password) async {
     _isLoading = true;
-    _errorMessage = null;
+    _hasError = false;
     notifyListeners();
 
     final user = await _repository.login(username.trim(), password);
 
     _isLoading = false;
     if (user == null) {
-      _errorMessage = 'Username atau kata sandi salah';
+      _hasError = true;
       notifyListeners();
       return false;
     }

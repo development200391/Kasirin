@@ -6,21 +6,23 @@ import '../../core/theme.dart';
 import '../../core/utils/formatters.dart';
 import '../../core/utils/report_exporter.dart';
 import '../../data/models/period_report.dart';
+import '../../l10n/gen/app_localizations.dart';
 import 'period_report_provider.dart';
 
 class PeriodReportScreen extends StatelessWidget {
   const PeriodReportScreen({super.key});
 
-  Future<void> _export(BuildContext context, Future<void> Function(PeriodReport) exportFn) async {
+  Future<void> _export(BuildContext context, Future<void> Function(PeriodReport, AppLocalizations) exportFn) async {
     final report = context.read<PeriodReportProvider>().report;
     if (report == null) return;
+    final l10n = AppLocalizations.of(context);
 
     try {
-      await exportFn(report);
+      await exportFn(report, l10n);
     } catch (_) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Gagal membuat file laporan')),
+          SnackBar(content: Text(AppLocalizations.of(context).periodExportFailed)),
         );
       }
     }
@@ -28,11 +30,12 @@ class PeriodReportScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final provider = context.watch<PeriodReportProvider>();
     final report = provider.report;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Laporan Periode')),
+      appBar: AppBar(title: Text(l10n.periodTitle)),
       body: provider.isLoading && report == null
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
@@ -41,9 +44,9 @@ class PeriodReportScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 children: [
                   SegmentedButton<ReportPeriodType>(
-                    segments: const [
-                      ButtonSegment(value: ReportPeriodType.weekly, label: Text('Mingguan')),
-                      ButtonSegment(value: ReportPeriodType.monthly, label: Text('Bulanan')),
+                    segments: [
+                      ButtonSegment(value: ReportPeriodType.weekly, label: Text(l10n.periodWeekly)),
+                      ButtonSegment(value: ReportPeriodType.monthly, label: Text(l10n.periodMonthly)),
                     ],
                     selected: {provider.type},
                     onSelectionChanged: (selection) => provider.setType(selection.first),
@@ -78,7 +81,7 @@ class PeriodReportScreen extends StatelessWidget {
                           child: OutlinedButton.icon(
                             onPressed: () => _export(context, exportPeriodReportToExcel),
                             icon: const Icon(Icons.table_chart_outlined),
-                            label: const Text('Export ke Excel'),
+                            label: Text(l10n.periodExportExcel),
                           ),
                         ),
                         const SizedBox(width: 12),
@@ -86,13 +89,13 @@ class PeriodReportScreen extends StatelessWidget {
                           child: OutlinedButton.icon(
                             onPressed: () => _export(context, exportPeriodReportToPdf),
                             icon: const Icon(Icons.picture_as_pdf_outlined),
-                            label: const Text('Export ke PDF'),
+                            label: Text(l10n.periodExportPdf),
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 24),
-                    const Text('Rincian per Hari', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    Text(l10n.periodDailyBreakdown, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                     const SizedBox(height: 12),
                     _DailyTable(dailySales: report.dailySales),
                   ],
@@ -103,9 +106,9 @@ class PeriodReportScreen extends StatelessWidget {
   }
 
   String _periodLabel(PeriodReport report) {
-    final formatter = DateFormat('d MMM yyyy', 'id_ID');
+    final formatter = DateFormat('d MMM yyyy');
     if (report.type == ReportPeriodType.monthly) {
-      return DateFormat('MMMM yyyy', 'id_ID').format(report.startDate);
+      return DateFormat('MMMM yyyy').format(report.startDate);
     }
     return '${formatter.format(report.startDate)} - ${formatter.format(report.endDate)}';
   }
@@ -118,6 +121,7 @@ class _SummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final percent = report.salesChangePercent;
     final bestDay = report.bestDay;
 
@@ -135,7 +139,7 @@ class _SummaryCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('TOTAL PENJUALAN', style: TextStyle(color: Color(0xFFE0E7FF), fontSize: 12, fontWeight: FontWeight.bold)),
+          Text(l10n.periodTotalSales, style: const TextStyle(color: Color(0xFFE0E7FF), fontSize: 12, fontWeight: FontWeight.bold)),
           const SizedBox(height: 6),
           Text(
             formatCurrency(report.totalSales),
@@ -152,7 +156,7 @@ class _SummaryCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 4),
                 Text(
-                  '${percent.abs().toStringAsFixed(0)}% dari periode lalu',
+                  l10n.periodChangeVsPrevious(percent.abs().toStringAsFixed(0)),
                   style: const TextStyle(color: Color(0xFFBBF7D0), fontWeight: FontWeight.bold, fontSize: 12),
                 ),
               ],
@@ -161,18 +165,18 @@ class _SummaryCard extends StatelessWidget {
           const SizedBox(height: 16),
           Divider(color: Colors.white.withValues(alpha: 0.2)),
           const SizedBox(height: 12),
-          const Text('JUMLAH TRANSAKSI', style: TextStyle(color: Color(0xFFE0E7FF), fontSize: 12, fontWeight: FontWeight.bold)),
+          Text(l10n.periodTransactionCount, style: const TextStyle(color: Color(0xFFE0E7FF), fontSize: 12, fontWeight: FontWeight.bold)),
           const SizedBox(height: 6),
           Text('${report.transactionCount}', style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
           const SizedBox(height: 16),
           Divider(color: Colors.white.withValues(alpha: 0.2)),
           const SizedBox(height: 12),
-          const Text('HARI TERBAIK', style: TextStyle(color: Color(0xFFE0E7FF), fontSize: 12, fontWeight: FontWeight.bold)),
+          Text(l10n.periodBestDay, style: const TextStyle(color: Color(0xFFE0E7FF), fontSize: 12, fontWeight: FontWeight.bold)),
           const SizedBox(height: 6),
           Text(
             bestDay == null || bestDay.totalSales == 0
                 ? '-'
-                : '${DateFormat('EEEE, d MMM', 'id_ID').format(bestDay.date)} · ${formatCurrency(bestDay.totalSales)}',
+                : '${DateFormat('EEEE, d MMM').format(bestDay.date)} · ${formatCurrency(bestDay.totalSales)}',
             style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
           ),
         ],
@@ -188,6 +192,8 @@ class _DailyTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.border),
@@ -199,16 +205,16 @@ class _DailyTable extends StatelessWidget {
           Container(
             color: AppColors.background,
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-            child: const Row(
+            child: Row(
               children: [
-                Expanded(flex: 3, child: Text('HARI / TANGGAL', style: TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.bold))),
-                Expanded(flex: 2, child: Text('TRANSAKSI', style: TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.bold))),
+                Expanded(flex: 3, child: Text(l10n.periodColDate, style: const TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.bold))),
+                Expanded(flex: 2, child: Text(l10n.periodColTransactions, style: const TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.bold))),
                 Expanded(
                   flex: 3,
                   child: Text(
-                    'PENJUALAN',
+                    l10n.periodColSales,
                     textAlign: TextAlign.end,
-                    style: TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.bold),
+                    style: const TextStyle(color: AppColors.textSecondary, fontSize: 11, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -223,13 +229,13 @@ class _DailyTable extends StatelessWidget {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      DateFormat('EEEE, d MMM', 'id_ID').format(dailySales[i].date),
+                      DateFormat('EEEE, d MMM').format(dailySales[i].date),
                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
                     ),
                   ),
                   Expanded(
                     flex: 2,
-                    child: Text('${dailySales[i].transactionCount} trx', style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                    child: Text(l10n.periodTrxSuffix(dailySales[i].transactionCount), style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                   ),
                   Expanded(
                     flex: 3,

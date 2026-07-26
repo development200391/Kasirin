@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../core/theme.dart';
 import '../../core/utils/formatters.dart';
 import '../../data/models/product.dart';
+import '../../l10n/gen/app_localizations.dart';
 import '../stock/stock_screen.dart';
 import 'categories_screen.dart';
 import 'product_form_screen.dart';
@@ -16,13 +17,15 @@ class ProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Manajemen Produk'),
+        title: Text(l10n.productsTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.inventory_2_outlined),
-            tooltip: 'Manajemen Stok',
+            tooltip: l10n.productsStockTooltip,
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (_) => ChangeNotifierProvider.value(
@@ -34,7 +37,7 @@ class ProductsScreen extends StatelessWidget {
           ),
           IconButton(
             icon: const Icon(Icons.category_outlined),
-            tooltip: 'Kelola Kategori',
+            tooltip: l10n.productsCategoryTooltip,
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (_) => ChangeNotifierProvider.value(
@@ -67,7 +70,7 @@ class ProductsScreen extends StatelessWidget {
           ),
         ),
         icon: const Icon(Icons.add),
-        label: const Text('Tambah Produk'),
+        label: Text(l10n.productsAdd),
       ),
     );
   }
@@ -81,7 +84,7 @@ class _SearchField extends StatelessWidget {
     return TextField(
       onChanged: (value) => context.read<ProductsProvider>().setQuery(value),
       decoration: InputDecoration(
-        hintText: 'Cari nama produk atau SKU...',
+        hintText: AppLocalizations.of(context).productsSearchHint,
         prefixIcon: const Icon(Icons.search),
         filled: true,
         fillColor: AppColors.background,
@@ -108,7 +111,7 @@ class _CategoryFilterChips extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         children: [
           _CategoryChip(
-            label: 'Semua',
+            label: AppLocalizations.of(context).commonAll,
             selected: provider.selectedCategoryId == null,
             onTap: () => provider.setCategory(null),
           ),
@@ -157,22 +160,21 @@ class _ProductList extends StatelessWidget {
   const _ProductList();
 
   Future<void> _confirmDelete(BuildContext context, Product product) async {
+    final l10n = AppLocalizations.of(context);
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Hapus Produk'),
-        content: Text(
-          'Hapus "${product.name}"? Tindakan ini tidak bisa dibatalkan.',
-        ),
+        title: Text(l10n.productsDeleteTitle),
+        content: Text(l10n.productsDeleteConfirm(product.name)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Batal'),
+            child: Text(l10n.commonCancel),
           ),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: AppColors.danger),
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Hapus'),
+            child: Text(l10n.commonDelete),
           ),
         ],
       ),
@@ -196,13 +198,13 @@ class _ProductList extends StatelessWidget {
       child: provider.products.isEmpty
           ? ListView(
               physics: const AlwaysScrollableScrollPhysics(),
-              children: const [
+              children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 80),
+                  padding: const EdgeInsets.symmetric(vertical: 80),
                   child: Center(
                     child: Text(
-                      'Belum ada produk',
-                      style: TextStyle(color: AppColors.textSecondary),
+                      AppLocalizations.of(context).productsEmpty,
+                      style: const TextStyle(color: AppColors.textSecondary),
                     ),
                   ),
                 ),

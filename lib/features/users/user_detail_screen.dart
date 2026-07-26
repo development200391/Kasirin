@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../core/permissions.dart';
 import '../../core/theme.dart';
 import '../../data/models/user.dart';
+import '../../l10n/gen/app_localizations.dart';
 import '../auth/auth_provider.dart';
 import 'users_provider.dart';
 
@@ -29,19 +30,21 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
   }
 
   Future<void> _save() async {
+    final l10n = AppLocalizations.of(context);
     setState(() => _isSaving = true);
     await context.read<UsersProvider>().updateRoleAndPermissions(widget.user.id, _role, _permissions.toList());
     setState(() => _isSaving = false);
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Perubahan disimpan')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.userDetailSaved)));
     }
   }
 
   Future<void> _toggleActive() async {
+    final l10n = AppLocalizations.of(context);
     final isSelf = context.read<AuthProvider>().currentUser?.id == widget.user.id;
     if (isSelf && widget.user.isActive) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Anda tidak bisa menonaktifkan akun sendiri')),
+        SnackBar(content: Text(l10n.userDetailCantDisableSelf)),
       );
       return;
     }
@@ -50,18 +53,18 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(activate ? 'Aktifkan Pengguna' : 'Nonaktifkan Pengguna'),
+        title: Text(activate ? l10n.userDetailActivateTitle : l10n.userDetailDeactivateTitle),
         content: Text(
           activate
-              ? '${widget.user.name} akan bisa login kembali.'
-              : '${widget.user.name} tidak akan bisa login sampai diaktifkan kembali.',
+              ? l10n.userDetailActivateBody(widget.user.name)
+              : l10n.userDetailDeactivateBody(widget.user.name),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Batal')),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l10n.commonCancel)),
           FilledButton(
             style: activate ? null : FilledButton.styleFrom(backgroundColor: AppColors.danger),
             onPressed: () => Navigator.pop(context, true),
-            child: Text(activate ? 'Aktifkan' : 'Nonaktifkan'),
+            child: Text(activate ? l10n.userDetailActivate : l10n.userDetailDeactivate),
           ),
         ],
       ),
@@ -75,10 +78,11 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final user = widget.user;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Detail Pengguna')),
+      appBar: AppBar(title: Text(l10n.userDetailTitle)),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
@@ -112,7 +116,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          user.isActive ? 'Aktif' : 'Nonaktif',
+                          user.isActive ? l10n.commonActive : l10n.commonInactive,
                           style: TextStyle(
                             color: user.isActive ? AppColors.success : AppColors.textSecondary,
                             fontWeight: FontWeight.bold,
@@ -129,23 +133,23 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
           const SizedBox(height: 24),
           const Divider(),
           const SizedBox(height: 16),
-          const Text('Role Pengguna', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+          Text(l10n.userDetailRole, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
           const SizedBox(height: 10),
           SegmentedButton<String>(
-            segments: const [
-              ButtonSegment(value: 'admin', label: Text('Admin')),
-              ButtonSegment(value: 'kasir', label: Text('Kasir')),
+            segments: [
+              ButtonSegment(value: 'admin', label: Text(l10n.commonAdmin)),
+              ButtonSegment(value: 'kasir', label: Text(l10n.commonCashier)),
             ],
             selected: {_role},
             onSelectionChanged: (selection) => setState(() => _role = selection.first),
           ),
           const SizedBox(height: 24),
-          const Text('Hak Akses', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+          Text(l10n.userDetailPermissions, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
           for (final permission in AppPermissions.all)
             CheckboxListTile(
               contentPadding: EdgeInsets.zero,
               controlAffinity: ListTileControlAffinity.leading,
-              title: Text(AppPermissions.labels[permission]!),
+              title: Text(AppPermissions.label(permission, l10n)),
               value: _permissions.contains(permission),
               onChanged: (checked) => setState(() {
                 if (checked == true) {
@@ -164,7 +168,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                     width: 20,
                     child: CircularProgressIndicator(strokeWidth: 2.5, valueColor: AlwaysStoppedAnimation(Colors.white)),
                   )
-                : const Text('Simpan Perubahan'),
+                : Text(l10n.userDetailSaveChanges),
           ),
           const SizedBox(height: 12),
           OutlinedButton(
@@ -173,7 +177,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
               side: const BorderSide(color: AppColors.danger),
             ),
             onPressed: _toggleActive,
-            child: Text(user.isActive ? 'Nonaktifkan Pengguna' : 'Aktifkan Pengguna'),
+            child: Text(user.isActive ? l10n.userDetailDeactivateTitle : l10n.userDetailActivateTitle),
           ),
         ],
       ),

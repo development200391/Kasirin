@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../core/theme.dart';
 import '../../core/utils/formatters.dart';
 import '../../data/models/transaction_result.dart';
+import '../../l10n/gen/app_localizations.dart';
 import '../printer/printer_provider.dart';
 import '../printer/printer_screen.dart';
 
@@ -14,6 +15,7 @@ class ReceiptScreen extends StatelessWidget {
   final TransactionResult result;
 
   Future<void> _printReceipt(BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
     final printer = context.read<PrinterProvider>();
     await printer.refreshStatus();
 
@@ -21,9 +23,9 @@ class ReceiptScreen extends StatelessWidget {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Printer belum terhubung'),
+          content: Text(l10n.receiptPrinterNotConnected),
           action: SnackBarAction(
-            label: 'Hubungkan',
+            label: l10n.commonConnect,
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(builder: (_) => const PrinterScreen()),
             ),
@@ -36,11 +38,12 @@ class ReceiptScreen extends StatelessWidget {
     final success = await printer.printReceipt(result);
     if (!context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(success ? 'Struk berhasil dicetak' : 'Gagal mencetak struk')),
+      SnackBar(content: Text(success ? l10n.receiptPrintSuccess : l10n.receiptPrintFailed)),
     );
   }
 
   void _showDigitalReceipt(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final buffer = StringBuffer()
       ..writeln('KASIRIN')
       ..writeln(result.invoiceNo)
@@ -56,21 +59,21 @@ class ReceiptScreen extends StatelessWidget {
 
     buffer
       ..writeln('--------------------------------')
-      ..writeln('${'Subtotal'.padRight(18)}${formatCurrency(result.subtotal)}')
-      ..writeln('${'Diskon'.padRight(18)}-${formatCurrency(result.discount)}')
-      ..writeln('${'Total'.padRight(18)}${formatCurrency(result.totalAmount)}')
-      ..writeln('${'Uang Bayar'.padRight(18)}${formatCurrency(result.paidAmount)}')
-      ..writeln('${'Kembalian'.padRight(18)}${formatCurrency(result.changeAmount)}');
+      ..writeln('${l10n.commonSubtotal.padRight(18)}${formatCurrency(result.subtotal)}')
+      ..writeln('${l10n.commonDiscount.padRight(18)}-${formatCurrency(result.discount)}')
+      ..writeln('${l10n.commonTotal.padRight(18)}${formatCurrency(result.totalAmount)}')
+      ..writeln('${l10n.paymentAmountPaid.padRight(18)}${formatCurrency(result.paidAmount)}')
+      ..writeln('${l10n.paymentChange.padRight(18)}${formatCurrency(result.changeAmount)}');
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Struk Digital'),
+        title: Text(l10n.receiptDigitalTitle),
         content: SingleChildScrollView(
           child: Text(buffer.toString(), style: const TextStyle(fontFamily: 'monospace', fontSize: 13)),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Tutup')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(l10n.commonClose)),
         ],
       ),
     );
@@ -78,6 +81,8 @@ class ReceiptScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
       body: SafeArea(
@@ -102,9 +107,9 @@ class ReceiptScreen extends StatelessWidget {
                       child: const Icon(Icons.check, color: AppColors.success, size: 36),
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'Pembayaran Berhasil!',
-                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    Text(
+                      l10n.receiptSuccess,
+                      style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 6),
                     Text(
@@ -121,9 +126,9 @@ class ReceiptScreen extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          const Text(
-                            'KEMBALIAN',
-                            style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 13),
+                          Text(
+                            l10n.receiptChangeLabel,
+                            style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 13),
                           ),
                           const SizedBox(height: 6),
                           Text(
@@ -158,20 +163,20 @@ class ReceiptScreen extends StatelessWidget {
                       ),
                     const Divider(),
                     const SizedBox(height: 4),
-                    _SummaryRow(label: 'Subtotal', value: formatCurrency(result.subtotal)),
-                    _SummaryRow(label: 'Diskon', value: '-${formatCurrency(result.discount)}'),
+                    _SummaryRow(label: l10n.commonSubtotal, value: formatCurrency(result.subtotal)),
+                    _SummaryRow(label: l10n.commonDiscount, value: '-${formatCurrency(result.discount)}'),
                     _SummaryRow(
-                      label: 'Total',
+                      label: l10n.commonTotal,
                       value: formatCurrency(result.totalAmount),
                       bold: true,
                     ),
-                    _SummaryRow(label: 'Uang Bayar', value: formatCurrency(result.paidAmount)),
+                    _SummaryRow(label: l10n.paymentAmountPaid, value: formatCurrency(result.paidAmount)),
                     const SizedBox(height: 20),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () => _printReceipt(context),
-                        child: const Text('Cetak Struk'),
+                        child: Text(l10n.receiptPrint),
                       ),
                     ),
                     const SizedBox(height: 12),
@@ -179,13 +184,13 @@ class ReceiptScreen extends StatelessWidget {
                       width: double.infinity,
                       child: OutlinedButton(
                         onPressed: () => _showDigitalReceipt(context),
-                        child: const Text('Tampilkan Struk Digital'),
+                        child: Text(l10n.receiptShowDigital),
                       ),
                     ),
                     const SizedBox(height: 16),
                     TextButton(
                       onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
-                      child: const Text('Transaksi Baru'),
+                      child: Text(l10n.receiptNewTransaction),
                     ),
                   ],
                 ),

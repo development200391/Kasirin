@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../core/theme.dart';
 import '../../core/utils/formatters.dart';
 import '../../data/models/product.dart';
+import '../../l10n/gen/app_localizations.dart';
 import '../products/products_provider.dart';
 import 'cart_provider.dart';
 import 'widgets/cart_sheet.dart';
@@ -28,7 +29,7 @@ class PosScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Transaksi Kasir')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).posTitle)),
       body: Column(
         children: [
           const Padding(
@@ -54,7 +55,7 @@ class _SearchField extends StatelessWidget {
     return TextField(
       onChanged: (value) => context.read<ProductsProvider>().setQuery(value),
       decoration: InputDecoration(
-        hintText: 'Cari produk atau SKU...',
+        hintText: AppLocalizations.of(context).posSearchHint,
         prefixIcon: const Icon(Icons.search),
         filled: true,
         fillColor: AppColors.background,
@@ -81,7 +82,7 @@ class _CategoryFilterChips extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         children: [
           _CategoryChip(
-            label: 'Semua',
+            label: AppLocalizations.of(context).commonAll,
             selected: provider.selectedCategoryId == null,
             onTap: () => provider.setCategory(null),
           ),
@@ -132,8 +133,8 @@ class _ProductGrid extends StatelessWidget {
     }
 
     if (productsProvider.products.isEmpty) {
-      return const Center(
-        child: Text('Produk tidak ditemukan', style: TextStyle(color: AppColors.textSecondary)),
+      return Center(
+        child: Text(AppLocalizations.of(context).posProductNotFound, style: const TextStyle(color: AppColors.textSecondary)),
       );
     }
 
@@ -188,7 +189,7 @@ class _ProductCard extends StatelessWidget {
                       border: Border.all(color: isLowStock ? AppColors.danger : AppColors.success),
                     ),
                     child: Text(
-                      'Stok ${product.stockQty}',
+                      AppLocalizations.of(context).posStockBadge(product.stockQty),
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
@@ -223,7 +224,7 @@ class _ProductCard extends StatelessWidget {
                     : () {
                         if (!cart.addProduct(product)) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Stok tidak mencukupi')),
+                            SnackBar(content: Text(AppLocalizations.of(context).posOutOfStock)),
                           );
                         }
                       },
@@ -318,7 +319,7 @@ class _CartBar extends StatelessWidget {
                     child: Text('${cart.itemCount}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                   ),
                   const SizedBox(width: 12),
-                  const Text('Lihat Pesanan', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                  Text(AppLocalizations.of(context).posViewOrder, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
                   const Spacer(),
                   Text(
                     formatCurrency(cart.total),

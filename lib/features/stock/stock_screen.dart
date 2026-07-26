@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/theme.dart';
+import '../../l10n/gen/app_localizations.dart';
 import '../products/products_provider.dart';
 import 'stock_detail_screen.dart';
 
@@ -10,10 +11,11 @@ class StockScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final provider = context.watch<ProductsProvider>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Manajemen Stok')),
+      appBar: AppBar(title: Text(l10n.stockTitle)),
       body: provider.isLoading
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
@@ -21,13 +23,13 @@ class StockScreen extends StatelessWidget {
               child: provider.products.isEmpty
                   ? ListView(
                       physics: const AlwaysScrollableScrollPhysics(),
-                      children: const [
+                      children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(vertical: 80),
+                          padding: const EdgeInsets.symmetric(vertical: 80),
                           child: Center(
                             child: Text(
-                              'Belum ada produk',
-                              style: TextStyle(color: AppColors.textSecondary),
+                              l10n.productsEmpty,
+                              style: const TextStyle(color: AppColors.textSecondary),
                             ),
                           ),
                         ),

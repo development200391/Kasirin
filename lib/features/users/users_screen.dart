@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/theme.dart';
 import '../../data/models/user.dart';
+import '../../l10n/gen/app_localizations.dart';
 import 'user_detail_screen.dart';
 import 'user_form_screen.dart';
 import 'users_provider.dart';
@@ -12,15 +13,16 @@ class UsersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final provider = context.watch<UsersProvider>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Manajemen Pengguna')),
+      appBar: AppBar(title: Text(l10n.usersTitle)),
       body: provider.isLoading
           ? const Center(child: CircularProgressIndicator())
           : provider.users.isEmpty
-              ? const Center(
-                  child: Text('Belum ada pengguna', style: TextStyle(color: AppColors.textSecondary)),
+              ? Center(
+                  child: Text(l10n.usersEmpty, style: const TextStyle(color: AppColors.textSecondary)),
                 )
               : ListView.separated(
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 96),
@@ -38,7 +40,7 @@ class UsersScreen extends StatelessWidget {
           ),
         ),
         icon: const Icon(Icons.add),
-        label: const Text('Tambah Pengguna'),
+        label: Text(l10n.usersAdd),
       ),
     );
   }
@@ -51,6 +53,7 @@ class _UserTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final isAdmin = user.role == 'admin';
 
     return Opacity(
@@ -91,7 +94,7 @@ class _UserTile extends StatelessWidget {
                     children: [
                       Text(user.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                       Text(
-                        user.isActive ? '@${user.username}' : '@${user.username} · Nonaktif',
+                        user.isActive ? '@${user.username}' : '@${user.username} ${l10n.usersInactiveSuffix}',
                         style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
                       ),
                     ],
@@ -104,7 +107,7 @@ class _UserTile extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
-                    isAdmin ? 'Admin' : 'Kasir',
+                    isAdmin ? l10n.commonAdmin : l10n.commonCashier,
                     style: TextStyle(
                       color: isAdmin ? const Color(0xFF6D28D9) : const Color(0xFF047857),
                       fontSize: 12,

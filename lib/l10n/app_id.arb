@@ -1,0 +1,278 @@
+{
+  "@@locale": "id",
+
+  "commonCancel": "Batal",
+  "commonSave": "Simpan",
+  "commonAdd": "Tambah",
+  "commonDelete": "Hapus",
+  "commonYes": "Ya",
+  "commonNo": "Tidak",
+  "commonOk": "OK",
+  "commonClose": "Tutup",
+  "commonSubtotal": "Subtotal",
+  "commonDiscount": "Diskon",
+  "commonTotal": "Total",
+  "commonAll": "Semua",
+  "commonAdmin": "Admin",
+  "commonCashier": "Kasir",
+  "commonActive": "Aktif",
+  "commonInactive": "Nonaktif",
+  "commonConnect": "Hubungkan",
+  "commonDisconnect": "Putuskan",
+  "commonRestore": "Pulihkan",
+  "commonManual": "Manual",
+  "commonImported": "Diimpor",
+  "commonShare": "Bagikan",
+  "commonPaidCash": "Tunai",
+  "commonPaidQris": "QRIS",
+  "commonPaidDebit": "Kartu Debit",
+
+  "loginUsername": "Username",
+  "loginUsernameRequired": "Username wajib diisi",
+  "loginPassword": "Kata Sandi",
+  "loginPasswordRequired": "Kata sandi wajib diisi",
+  "loginSubmit": "Masuk",
+  "loginWelcome": "Selamat Datang",
+  "loginSubtitle": "Masuk untuk melanjutkan",
+  "authInvalidCredentials": "Username atau kata sandi salah",
+
+  "dashboardMenuTitle": "Menu Utama",
+  "dashboardGreeting": "Selamat datang,",
+  "dashboardSalesToday": "Penjualan Hari Ini",
+  "dashboardTransactions": "Transaksi",
+  "dashboardMenuPos": "Mulai Transaksi",
+  "dashboardMenuProducts": "Kelola Produk",
+  "dashboardMenuReports": "Laporan Penjualan",
+  "dashboardMenuPeriodReports": "Laporan Periode",
+  "dashboardMenuUsers": "Pengguna",
+  "dashboardMenuPrinter": "Printer Bluetooth",
+  "dashboardMenuBackup": "Backup & Restore",
+  "dashboardMenuSettings": "Pengaturan",
+  "dashboardNotifications": "Notifikasi",
+  "dashboardFeatureUnavailable": "{feature} belum tersedia",
+  "@dashboardFeatureUnavailable": {
+    "placeholders": { "feature": { "type": "String" } }
+  },
+  "dashboardAccessDenied": "Anda tidak memiliki akses ke menu ini",
+
+  "posTitle": "Transaksi Kasir",
+  "posSearchHint": "Cari produk atau SKU...",
+  "posProductNotFound": "Produk tidak ditemukan",
+  "posOutOfStock": "Stok tidak mencukupi",
+  "posStockBadge": "Stok {qty}",
+  "@posStockBadge": {
+    "placeholders": { "qty": { "type": "int" } }
+  },
+  "posViewOrder": "Lihat Pesanan",
+
+  "cartCurrentOrder": "Pesanan Saat Ini",
+  "cartItemCount": "{count} item",
+  "@cartItemCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "cartEmpty": "Keranjang masih kosong",
+  "cartDiscountLabel": "Jumlah diskon",
+  "cartCancelTransaction": "Batalkan Transaksi",
+  "cartConfirmClear": "Kosongkan semua item di keranjang?",
+  "cartConfirmCancel": "Ya, Batalkan",
+  "cartCancelButton": "Batalkan",
+  "cartPay": "Bayar {amount}",
+  "@cartPay": {
+    "placeholders": { "amount": { "type": "String" } }
+  },
+
+  "paymentTitle": "Pembayaran",
+  "paymentTotalBelanja": "Total Belanja",
+  "paymentAmountPaid": "Uang Bayar",
+  "paymentChange": "Kembalian",
+  "paymentConfirm": "Konfirmasi Bayar",
+
+  "receiptDigitalTitle": "Struk Digital",
+  "receiptSuccess": "Pembayaran Berhasil!",
+  "receiptChangeLabel": "KEMBALIAN",
+  "receiptPrint": "Cetak Struk",
+  "receiptPrinterNotConnected": "Printer belum terhubung",
+  "receiptPrintSuccess": "Struk berhasil dicetak",
+  "receiptPrintFailed": "Gagal mencetak struk",
+  "receiptShowDigital": "Tampilkan Struk Digital",
+  "receiptNewTransaction": "Transaksi Baru",
+
+  "categoryNewTitle": "Kategori Baru",
+  "categoryEditTitle": "Ubah Kategori",
+  "categoryNameLabel": "Nama kategori",
+  "categoryDeleteTitle": "Hapus Kategori",
+  "categoryDeleteConfirm": "Hapus \"{name}\"? Produk yang memakai kategori ini akan menjadi tanpa kategori.",
+  "@categoryDeleteConfirm": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "categoriesTitle": "Kelola Kategori",
+  "categoriesEmpty": "Belum ada kategori",
+  "categoryAdd": "Tambah Kategori",
+
+  "productFormEditTitle": "Edit Produk",
+  "productFormAddTitle": "Tambah Produk",
+  "productFormName": "Nama Produk",
+  "productFormNameRequired": "Nama wajib diisi",
+  "productFormSku": "SKU (opsional)",
+  "productFormCategory": "Kategori",
+  "productFormNoCategory": "Tanpa kategori",
+  "productFormNewCategory": "Kategori baru",
+  "productFormPrice": "Harga Jual",
+  "productFormRequired": "Wajib diisi",
+  "productFormMustBeNumber": "Harus angka",
+  "productFormCostPrice": "Harga Modal",
+  "productFormStock": "Stok",
+  "productFormUnit": "Satuan (mis. pcs)",
+  "productFormSaveChanges": "Simpan Perubahan",
+  "productFormCropTitle": "Sesuaikan Foto",
+
+  "productsTitle": "Manajemen Produk",
+  "productsStockTooltip": "Manajemen Stok",
+  "productsCategoryTooltip": "Kelola Kategori",
+  "productsSearchHint": "Cari nama produk atau SKU...",
+  "productsEmpty": "Belum ada produk",
+  "productsDeleteTitle": "Hapus Produk",
+  "productsDeleteConfirm": "Hapus \"{name}\"? Tindakan ini tidak bisa dibatalkan.",
+  "@productsDeleteConfirm": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "productsAdd": "Tambah Produk",
+
+  "stockTitle": "Manajemen Stok",
+  "stockCurrentLabel": "Stok Saat Ini",
+  "stockAdd": "Tambah Stok",
+  "stockReduce": "Kurangi Stok",
+  "stockHistoryTitle": "Riwayat Pergerakan Stok",
+  "stockHistoryEmpty": "Belum ada pergerakan stok",
+  "stockQtyLabel": "Jumlah",
+  "stockNoteLabel": "Catatan (opsional)",
+  "stockMovementIn": "Masuk",
+  "stockMovementOut": "Keluar (Transaksi)",
+  "stockMovementAdjustment": "Penyesuaian",
+
+  "reportsTitle": "Laporan Harian",
+  "reportsTotalSalesToday": "Total Penjualan Hari Ini",
+  "reportsChangeVsYesterday": "{percent}% dari kemarin",
+  "@reportsChangeVsYesterday": {
+    "placeholders": { "percent": { "type": "String" } }
+  },
+  "reportsSalesPerHour": "Penjualan per Jam",
+  "reportsNoSalesToday": "Belum ada penjualan hari ini",
+  "reportsTransactionCount": "Jumlah Transaksi",
+  "reportsTransactionDelta": "{delta} transaksi",
+  "@reportsTransactionDelta": {
+    "placeholders": { "delta": { "type": "String" } }
+  },
+  "reportsRecentTransactions": "Transaksi Terbaru",
+  "reportsNoTransactions": "Belum ada transaksi",
+  "reportsTransactionSummary": "{time} · {count} item · {method}",
+  "@reportsTransactionSummary": {
+    "placeholders": {
+      "time": { "type": "String" },
+      "count": { "type": "int" },
+      "method": { "type": "String" }
+    }
+  },
+
+  "periodTitle": "Laporan Periode",
+  "periodWeekly": "Mingguan",
+  "periodMonthly": "Bulanan",
+  "periodExportExcel": "Export ke Excel",
+  "periodExportPdf": "Export ke PDF",
+  "periodDailyBreakdown": "Rincian per Hari",
+  "periodTotalSales": "TOTAL PENJUALAN",
+  "periodChangeVsPrevious": "{percent}% dari periode lalu",
+  "@periodChangeVsPrevious": {
+    "placeholders": { "percent": { "type": "String" } }
+  },
+  "periodTransactionCount": "JUMLAH TRANSAKSI",
+  "periodBestDay": "HARI TERBAIK",
+  "periodColDate": "HARI / TANGGAL",
+  "periodColTransactions": "TRANSAKSI",
+  "periodColSales": "PENJUALAN",
+  "periodTrxSuffix": "{count} trx",
+  "@periodTrxSuffix": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "periodExportFailed": "Gagal membuat file laporan",
+  "periodReportHeading": "Laporan Periode Kasirin",
+
+  "usersTitle": "Manajemen Pengguna",
+  "usersEmpty": "Belum ada pengguna",
+  "usersAdd": "Tambah Pengguna",
+  "usersInactiveSuffix": "· Nonaktif",
+
+  "userDetailTitle": "Detail Pengguna",
+  "userDetailSaved": "Perubahan disimpan",
+  "userDetailCantDisableSelf": "Anda tidak bisa menonaktifkan akun sendiri",
+  "userDetailActivateTitle": "Aktifkan Pengguna",
+  "userDetailDeactivateTitle": "Nonaktifkan Pengguna",
+  "userDetailActivateBody": "{name} akan bisa login kembali.",
+  "@userDetailActivateBody": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "userDetailDeactivateBody": "{name} tidak akan bisa login sampai diaktifkan kembali.",
+  "@userDetailDeactivateBody": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "userDetailActivate": "Aktifkan",
+  "userDetailDeactivate": "Nonaktifkan",
+  "userDetailRole": "Role Pengguna",
+  "userDetailPermissions": "Hak Akses",
+  "userDetailSaveChanges": "Simpan Perubahan",
+
+  "userFormTitle": "Tambah Pengguna",
+  "userFormFullName": "Nama Lengkap",
+  "userFormUsernameTaken": "Username sudah dipakai",
+  "userFormPasswordMinLength": "Minimal 6 karakter",
+
+  "permissionPosTransaction": "Transaksi Penjualan",
+  "permissionProductsView": "Lihat Produk",
+  "permissionProductsManage": "Kelola Produk",
+  "permissionUsersManage": "Kelola Pengguna",
+  "permissionReportsView": "Lihat Laporan Harian",
+  "permissionDataBackup": "Backup & Restore Data",
+
+  "printerTitle": "Printer Bluetooth",
+  "printerPairedDevices": "Perangkat Berpasangan",
+  "printerNoPairedDevices": "Belum ada printer yang dipasangkan. Pasangkan printer melalui pengaturan Bluetooth HP terlebih dahulu, lalu tekan refresh.",
+  "printerPaperSize": "Ukuran Kertas",
+  "printerAutoPrint": "Cetak Otomatis Setelah Transaksi",
+  "printerAutoPrintSubtitle": "Struk langsung dicetak setiap pembayaran berhasil",
+  "printerTestPrintSuccess": "Test print terkirim",
+  "printerTestPrintFailed": "Gagal mencetak, cek koneksi printer",
+  "printerTestPrint": "Test Print",
+  "printerConnected": "Terhubung",
+  "printerNotConnected": "Tidak ada printer terhubung",
+  "printerUnnamedDevice": "(Tanpa nama)",
+  "printerConnectFailed": "Gagal terhubung ke printer",
+
+  "backupCreated": "Backup berhasil dibuat",
+  "backupCreateFailed": "Gagal membuat backup",
+  "backupImported": "File backup berhasil diimpor",
+  "backupImportInvalid": "File bukan database backup yang valid",
+  "backupRestoreTitle": "Pulihkan Database",
+  "backupRestoreConfirm": "Semua data saat ini akan ditimpa dengan backup \"{fileName}\" ({date}). Tindakan ini tidak bisa dibatalkan.",
+  "@backupRestoreConfirm": {
+    "placeholders": {
+      "fileName": { "type": "String" },
+      "date": { "type": "String" }
+    }
+  },
+  "backupRestoreFailed": "Gagal memulihkan database",
+  "backupRestoredTitle": "Database Dipulihkan",
+  "backupRestoredBody": "Database berhasil dipulihkan. Silakan login kembali.",
+  "backupScreenTitle": "Backup & Restore Database",
+  "backupNow": "Backup Sekarang",
+  "backupDescription": "Menyimpan salinan database saat ini ke penyimpanan lokal perangkat. Gunakan tombol \"Bagikan\" pada tiap backup untuk mengunggah ke Google Drive atau layanan lain.",
+  "backupImportFile": "Import File Backup",
+  "backupHistory": "Riwayat Backup",
+  "backupEmpty": "Belum ada backup",
+
+  "settingsTitle": "Pengaturan",
+  "settingsLogout": "Keluar",
+  "settingsLanguage": "Bahasa",
+  "languageIndonesian": "Bahasa Indonesia",
+  "languageEnglish": "English",
+  "languageJapanese": "日本語"
+}

@@ -1,0 +1,278 @@
+{
+  "@@locale": "ja",
+
+  "commonCancel": "キャンセル",
+  "commonSave": "保存",
+  "commonAdd": "追加",
+  "commonDelete": "削除",
+  "commonYes": "はい",
+  "commonNo": "いいえ",
+  "commonOk": "OK",
+  "commonClose": "閉じる",
+  "commonSubtotal": "小計",
+  "commonDiscount": "割引",
+  "commonTotal": "合計",
+  "commonAll": "すべて",
+  "commonAdmin": "管理者",
+  "commonCashier": "レジ係",
+  "commonActive": "有効",
+  "commonInactive": "無効",
+  "commonConnect": "接続",
+  "commonDisconnect": "切断",
+  "commonRestore": "復元",
+  "commonManual": "手動",
+  "commonImported": "インポート済み",
+  "commonShare": "共有",
+  "commonPaidCash": "現金",
+  "commonPaidQris": "QRIS",
+  "commonPaidDebit": "デビットカード",
+
+  "loginUsername": "ユーザー名",
+  "loginUsernameRequired": "ユーザー名を入力してください",
+  "loginPassword": "パスワード",
+  "loginPasswordRequired": "パスワードを入力してください",
+  "loginSubmit": "ログイン",
+  "loginWelcome": "ようこそ",
+  "loginSubtitle": "続けるにはログインしてください",
+  "authInvalidCredentials": "ユーザー名またはパスワードが正しくありません",
+
+  "dashboardMenuTitle": "メインメニュー",
+  "dashboardGreeting": "ようこそ、",
+  "dashboardSalesToday": "本日の売上",
+  "dashboardTransactions": "取引数",
+  "dashboardMenuPos": "取引を開始",
+  "dashboardMenuProducts": "商品管理",
+  "dashboardMenuReports": "売上レポート",
+  "dashboardMenuPeriodReports": "期間レポート",
+  "dashboardMenuUsers": "ユーザー",
+  "dashboardMenuPrinter": "Bluetoothプリンター",
+  "dashboardMenuBackup": "バックアップと復元",
+  "dashboardMenuSettings": "設定",
+  "dashboardNotifications": "通知",
+  "dashboardFeatureUnavailable": "{feature}はまだ利用できません",
+  "@dashboardFeatureUnavailable": {
+    "placeholders": { "feature": { "type": "String" } }
+  },
+  "dashboardAccessDenied": "このメニューへのアクセス権がありません",
+
+  "posTitle": "レジ取引",
+  "posSearchHint": "商品名またはSKUで検索...",
+  "posProductNotFound": "商品が見つかりません",
+  "posOutOfStock": "在庫が不足しています",
+  "posStockBadge": "在庫 {qty}",
+  "@posStockBadge": {
+    "placeholders": { "qty": { "type": "int" } }
+  },
+  "posViewOrder": "注文を見る",
+
+  "cartCurrentOrder": "現在の注文",
+  "cartItemCount": "{count}点",
+  "@cartItemCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "cartEmpty": "カートはまだ空です",
+  "cartDiscountLabel": "割引額",
+  "cartCancelTransaction": "取引をキャンセル",
+  "cartConfirmClear": "カート内のすべての商品を削除しますか?",
+  "cartConfirmCancel": "はい、キャンセルします",
+  "cartCancelButton": "キャンセル",
+  "cartPay": "{amount}を支払う",
+  "@cartPay": {
+    "placeholders": { "amount": { "type": "String" } }
+  },
+
+  "paymentTitle": "支払い",
+  "paymentTotalBelanja": "購入合計",
+  "paymentAmountPaid": "支払金額",
+  "paymentChange": "お釣り",
+  "paymentConfirm": "支払いを確定",
+
+  "receiptDigitalTitle": "デジタルレシート",
+  "receiptSuccess": "支払いが完了しました!",
+  "receiptChangeLabel": "お釣り",
+  "receiptPrint": "レシートを印刷",
+  "receiptPrinterNotConnected": "プリンターが接続されていません",
+  "receiptPrintSuccess": "レシートの印刷に成功しました",
+  "receiptPrintFailed": "レシートの印刷に失敗しました",
+  "receiptShowDigital": "デジタルレシートを表示",
+  "receiptNewTransaction": "新しい取引",
+
+  "categoryNewTitle": "新しいカテゴリ",
+  "categoryEditTitle": "カテゴリを編集",
+  "categoryNameLabel": "カテゴリ名",
+  "categoryDeleteTitle": "カテゴリを削除",
+  "categoryDeleteConfirm": "「{name}」を削除しますか?このカテゴリを使用している商品はカテゴリなしになります。",
+  "@categoryDeleteConfirm": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "categoriesTitle": "カテゴリ管理",
+  "categoriesEmpty": "まだカテゴリがありません",
+  "categoryAdd": "カテゴリを追加",
+
+  "productFormEditTitle": "商品を編集",
+  "productFormAddTitle": "商品を追加",
+  "productFormName": "商品名",
+  "productFormNameRequired": "名前を入力してください",
+  "productFormSku": "SKU（任意）",
+  "productFormCategory": "カテゴリ",
+  "productFormNoCategory": "カテゴリなし",
+  "productFormNewCategory": "新しいカテゴリ",
+  "productFormPrice": "販売価格",
+  "productFormRequired": "必須項目です",
+  "productFormMustBeNumber": "数値を入力してください",
+  "productFormCostPrice": "原価",
+  "productFormStock": "在庫",
+  "productFormUnit": "単位（例：個）",
+  "productFormSaveChanges": "変更を保存",
+  "productFormCropTitle": "写真を調整",
+
+  "productsTitle": "商品管理",
+  "productsStockTooltip": "在庫管理",
+  "productsCategoryTooltip": "カテゴリ管理",
+  "productsSearchHint": "商品名またはSKUで検索...",
+  "productsEmpty": "まだ商品がありません",
+  "productsDeleteTitle": "商品を削除",
+  "productsDeleteConfirm": "「{name}」を削除しますか?この操作は取り消せません。",
+  "@productsDeleteConfirm": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "productsAdd": "商品を追加",
+
+  "stockTitle": "在庫管理",
+  "stockCurrentLabel": "現在の在庫",
+  "stockAdd": "在庫を追加",
+  "stockReduce": "在庫を減らす",
+  "stockHistoryTitle": "在庫移動履歴",
+  "stockHistoryEmpty": "まだ在庫移動がありません",
+  "stockQtyLabel": "数量",
+  "stockNoteLabel": "メモ（任意）",
+  "stockMovementIn": "入庫",
+  "stockMovementOut": "出庫（取引）",
+  "stockMovementAdjustment": "調整",
+
+  "reportsTitle": "日次レポート",
+  "reportsTotalSalesToday": "本日の売上合計",
+  "reportsChangeVsYesterday": "昨日から{percent}%",
+  "@reportsChangeVsYesterday": {
+    "placeholders": { "percent": { "type": "String" } }
+  },
+  "reportsSalesPerHour": "時間別売上",
+  "reportsNoSalesToday": "本日はまだ売上がありません",
+  "reportsTransactionCount": "取引件数",
+  "reportsTransactionDelta": "{delta}件",
+  "@reportsTransactionDelta": {
+    "placeholders": { "delta": { "type": "String" } }
+  },
+  "reportsRecentTransactions": "最近の取引",
+  "reportsNoTransactions": "まだ取引がありません",
+  "reportsTransactionSummary": "{time}・{count}点・{method}",
+  "@reportsTransactionSummary": {
+    "placeholders": {
+      "time": { "type": "String" },
+      "count": { "type": "int" },
+      "method": { "type": "String" }
+    }
+  },
+
+  "periodTitle": "期間レポート",
+  "periodWeekly": "週次",
+  "periodMonthly": "月次",
+  "periodExportExcel": "Excelにエクスポート",
+  "periodExportPdf": "PDFにエクスポート",
+  "periodDailyBreakdown": "日別内訳",
+  "periodTotalSales": "売上合計",
+  "periodChangeVsPrevious": "前期間から{percent}%",
+  "@periodChangeVsPrevious": {
+    "placeholders": { "percent": { "type": "String" } }
+  },
+  "periodTransactionCount": "取引件数",
+  "periodBestDay": "ベストデー",
+  "periodColDate": "曜日・日付",
+  "periodColTransactions": "取引",
+  "periodColSales": "売上",
+  "periodTrxSuffix": "{count}件",
+  "@periodTrxSuffix": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "periodExportFailed": "レポートファイルの作成に失敗しました",
+  "periodReportHeading": "Kasirin期間レポート",
+
+  "usersTitle": "ユーザー管理",
+  "usersEmpty": "まだユーザーがいません",
+  "usersAdd": "ユーザーを追加",
+  "usersInactiveSuffix": "・無効",
+
+  "userDetailTitle": "ユーザー詳細",
+  "userDetailSaved": "変更が保存されました",
+  "userDetailCantDisableSelf": "自分のアカウントを無効にすることはできません",
+  "userDetailActivateTitle": "ユーザーを有効化",
+  "userDetailDeactivateTitle": "ユーザーを無効化",
+  "userDetailActivateBody": "{name}は再びログインできるようになります。",
+  "@userDetailActivateBody": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "userDetailDeactivateBody": "{name}は再度有効化されるまでログインできません。",
+  "@userDetailDeactivateBody": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "userDetailActivate": "有効化",
+  "userDetailDeactivate": "無効化",
+  "userDetailRole": "ユーザーロール",
+  "userDetailPermissions": "権限",
+  "userDetailSaveChanges": "変更を保存",
+
+  "userFormTitle": "ユーザーを追加",
+  "userFormFullName": "氏名",
+  "userFormUsernameTaken": "このユーザー名は既に使用されています",
+  "userFormPasswordMinLength": "6文字以上で入力してください",
+
+  "permissionPosTransaction": "販売取引",
+  "permissionProductsView": "商品を見る",
+  "permissionProductsManage": "商品管理",
+  "permissionUsersManage": "ユーザー管理",
+  "permissionReportsView": "日次レポートを見る",
+  "permissionDataBackup": "データのバックアップと復元",
+
+  "printerTitle": "Bluetoothプリンター",
+  "printerPairedDevices": "ペアリング済みデバイス",
+  "printerNoPairedDevices": "ペアリング済みのプリンターがありません。先に端末のBluetooth設定でプリンターとペアリングしてから、更新ボタンを押してください。",
+  "printerPaperSize": "用紙サイズ",
+  "printerAutoPrint": "取引後に自動印刷",
+  "printerAutoPrintSubtitle": "支払い成功時にレシートを自動的に印刷します",
+  "printerTestPrintSuccess": "テスト印刷を送信しました",
+  "printerTestPrintFailed": "印刷に失敗しました。プリンターの接続を確認してください",
+  "printerTestPrint": "テスト印刷",
+  "printerConnected": "接続済み",
+  "printerNotConnected": "接続されているプリンターがありません",
+  "printerUnnamedDevice": "（名前なし）",
+  "printerConnectFailed": "プリンターへの接続に失敗しました",
+
+  "backupCreated": "バックアップの作成に成功しました",
+  "backupCreateFailed": "バックアップの作成に失敗しました",
+  "backupImported": "バックアップファイルのインポートに成功しました",
+  "backupImportInvalid": "有効なバックアップデータベースファイルではありません",
+  "backupRestoreTitle": "データベースを復元",
+  "backupRestoreConfirm": "現在のすべてのデータがバックアップ「{fileName}」（{date}）で上書きされます。この操作は取り消せません。",
+  "@backupRestoreConfirm": {
+    "placeholders": {
+      "fileName": { "type": "String" },
+      "date": { "type": "String" }
+    }
+  },
+  "backupRestoreFailed": "データベースの復元に失敗しました",
+  "backupRestoredTitle": "データベースが復元されました",
+  "backupRestoredBody": "データベースの復元が完了しました。再度ログインしてください。",
+  "backupScreenTitle": "バックアップと復元",
+  "backupNow": "今すぐバックアップ",
+  "backupDescription": "現在のデータベースのコピーを端末のローカルストレージに保存します。各バックアップの「共有」ボタンを使ってGoogle Driveなど他のサービスにアップロードできます。",
+  "backupImportFile": "バックアップファイルをインポート",
+  "backupHistory": "バックアップ履歴",
+  "backupEmpty": "まだバックアップがありません",
+
+  "settingsTitle": "設定",
+  "settingsLogout": "ログアウト",
+  "settingsLanguage": "言語",
+  "languageIndonesian": "Bahasa Indonesia",
+  "languageEnglish": "English",
+  "languageJapanese": "日本語"
+}

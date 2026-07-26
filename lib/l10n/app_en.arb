@@ -1,0 +1,278 @@
+{
+  "@@locale": "en",
+
+  "commonCancel": "Cancel",
+  "commonSave": "Save",
+  "commonAdd": "Add",
+  "commonDelete": "Delete",
+  "commonYes": "Yes",
+  "commonNo": "No",
+  "commonOk": "OK",
+  "commonClose": "Close",
+  "commonSubtotal": "Subtotal",
+  "commonDiscount": "Discount",
+  "commonTotal": "Total",
+  "commonAll": "All",
+  "commonAdmin": "Admin",
+  "commonCashier": "Cashier",
+  "commonActive": "Active",
+  "commonInactive": "Inactive",
+  "commonConnect": "Connect",
+  "commonDisconnect": "Disconnect",
+  "commonRestore": "Restore",
+  "commonManual": "Manual",
+  "commonImported": "Imported",
+  "commonShare": "Share",
+  "commonPaidCash": "Cash",
+  "commonPaidQris": "QRIS",
+  "commonPaidDebit": "Debit Card",
+
+  "loginUsername": "Username",
+  "loginUsernameRequired": "Username is required",
+  "loginPassword": "Password",
+  "loginPasswordRequired": "Password is required",
+  "loginSubmit": "Sign In",
+  "loginWelcome": "Welcome",
+  "loginSubtitle": "Sign in to continue",
+  "authInvalidCredentials": "Incorrect username or password",
+
+  "dashboardMenuTitle": "Main Menu",
+  "dashboardGreeting": "Welcome,",
+  "dashboardSalesToday": "Today's Sales",
+  "dashboardTransactions": "Transactions",
+  "dashboardMenuPos": "Start Transaction",
+  "dashboardMenuProducts": "Manage Products",
+  "dashboardMenuReports": "Sales Report",
+  "dashboardMenuPeriodReports": "Period Report",
+  "dashboardMenuUsers": "Users",
+  "dashboardMenuPrinter": "Bluetooth Printer",
+  "dashboardMenuBackup": "Backup & Restore",
+  "dashboardMenuSettings": "Settings",
+  "dashboardNotifications": "Notifications",
+  "dashboardFeatureUnavailable": "{feature} is not available yet",
+  "@dashboardFeatureUnavailable": {
+    "placeholders": { "feature": { "type": "String" } }
+  },
+  "dashboardAccessDenied": "You don't have access to this menu",
+
+  "posTitle": "Cashier Transaction",
+  "posSearchHint": "Search product or SKU...",
+  "posProductNotFound": "No products found",
+  "posOutOfStock": "Insufficient stock",
+  "posStockBadge": "Stock {qty}",
+  "@posStockBadge": {
+    "placeholders": { "qty": { "type": "int" } }
+  },
+  "posViewOrder": "View Order",
+
+  "cartCurrentOrder": "Current Order",
+  "cartItemCount": "{count} item",
+  "@cartItemCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "cartEmpty": "Cart is still empty",
+  "cartDiscountLabel": "Discount amount",
+  "cartCancelTransaction": "Cancel Transaction",
+  "cartConfirmClear": "Clear all items in the cart?",
+  "cartConfirmCancel": "Yes, Cancel",
+  "cartCancelButton": "Cancel",
+  "cartPay": "Pay {amount}",
+  "@cartPay": {
+    "placeholders": { "amount": { "type": "String" } }
+  },
+
+  "paymentTitle": "Payment",
+  "paymentTotalBelanja": "Total Purchase",
+  "paymentAmountPaid": "Amount Paid",
+  "paymentChange": "Change",
+  "paymentConfirm": "Confirm Payment",
+
+  "receiptDigitalTitle": "Digital Receipt",
+  "receiptSuccess": "Payment Successful!",
+  "receiptChangeLabel": "CHANGE",
+  "receiptPrint": "Print Receipt",
+  "receiptPrinterNotConnected": "Printer not connected",
+  "receiptPrintSuccess": "Receipt printed successfully",
+  "receiptPrintFailed": "Failed to print receipt",
+  "receiptShowDigital": "Show Digital Receipt",
+  "receiptNewTransaction": "New Transaction",
+
+  "categoryNewTitle": "New Category",
+  "categoryEditTitle": "Edit Category",
+  "categoryNameLabel": "Category name",
+  "categoryDeleteTitle": "Delete Category",
+  "categoryDeleteConfirm": "Delete \"{name}\"? Products using this category will become uncategorized.",
+  "@categoryDeleteConfirm": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "categoriesTitle": "Manage Categories",
+  "categoriesEmpty": "No categories yet",
+  "categoryAdd": "Add Category",
+
+  "productFormEditTitle": "Edit Product",
+  "productFormAddTitle": "Add Product",
+  "productFormName": "Product Name",
+  "productFormNameRequired": "Name is required",
+  "productFormSku": "SKU (optional)",
+  "productFormCategory": "Category",
+  "productFormNoCategory": "No category",
+  "productFormNewCategory": "New category",
+  "productFormPrice": "Selling Price",
+  "productFormRequired": "Required",
+  "productFormMustBeNumber": "Must be a number",
+  "productFormCostPrice": "Cost Price",
+  "productFormStock": "Stock",
+  "productFormUnit": "Unit (e.g. pcs)",
+  "productFormSaveChanges": "Save Changes",
+  "productFormCropTitle": "Adjust Photo",
+
+  "productsTitle": "Product Management",
+  "productsStockTooltip": "Manage Stock",
+  "productsCategoryTooltip": "Manage Categories",
+  "productsSearchHint": "Search product name or SKU...",
+  "productsEmpty": "No products yet",
+  "productsDeleteTitle": "Delete Product",
+  "productsDeleteConfirm": "Delete \"{name}\"? This action cannot be undone.",
+  "@productsDeleteConfirm": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "productsAdd": "Add Product",
+
+  "stockTitle": "Manage Stock",
+  "stockCurrentLabel": "Current Stock",
+  "stockAdd": "Add Stock",
+  "stockReduce": "Reduce Stock",
+  "stockHistoryTitle": "Stock Movement History",
+  "stockHistoryEmpty": "No stock movements yet",
+  "stockQtyLabel": "Quantity",
+  "stockNoteLabel": "Note (optional)",
+  "stockMovementIn": "Stock In",
+  "stockMovementOut": "Stock Out (Sale)",
+  "stockMovementAdjustment": "Adjustment",
+
+  "reportsTitle": "Daily Report",
+  "reportsTotalSalesToday": "Total Sales Today",
+  "reportsChangeVsYesterday": "{percent}% from yesterday",
+  "@reportsChangeVsYesterday": {
+    "placeholders": { "percent": { "type": "String" } }
+  },
+  "reportsSalesPerHour": "Sales per Hour",
+  "reportsNoSalesToday": "No sales yet today",
+  "reportsTransactionCount": "Transaction Count",
+  "reportsTransactionDelta": "{delta} transactions",
+  "@reportsTransactionDelta": {
+    "placeholders": { "delta": { "type": "String" } }
+  },
+  "reportsRecentTransactions": "Recent Transactions",
+  "reportsNoTransactions": "No transactions yet",
+  "reportsTransactionSummary": "{time} · {count} item · {method}",
+  "@reportsTransactionSummary": {
+    "placeholders": {
+      "time": { "type": "String" },
+      "count": { "type": "int" },
+      "method": { "type": "String" }
+    }
+  },
+
+  "periodTitle": "Period Report",
+  "periodWeekly": "Weekly",
+  "periodMonthly": "Monthly",
+  "periodExportExcel": "Export to Excel",
+  "periodExportPdf": "Export to PDF",
+  "periodDailyBreakdown": "Daily Breakdown",
+  "periodTotalSales": "TOTAL SALES",
+  "periodChangeVsPrevious": "{percent}% from last period",
+  "@periodChangeVsPrevious": {
+    "placeholders": { "percent": { "type": "String" } }
+  },
+  "periodTransactionCount": "TRANSACTION COUNT",
+  "periodBestDay": "BEST DAY",
+  "periodColDate": "DAY / DATE",
+  "periodColTransactions": "TRANSACTIONS",
+  "periodColSales": "SALES",
+  "periodTrxSuffix": "{count} trx",
+  "@periodTrxSuffix": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "periodExportFailed": "Failed to generate report file",
+  "periodReportHeading": "Kasirin Period Report",
+
+  "usersTitle": "User Management",
+  "usersEmpty": "No users yet",
+  "usersAdd": "Add User",
+  "usersInactiveSuffix": "· Inactive",
+
+  "userDetailTitle": "User Detail",
+  "userDetailSaved": "Changes saved",
+  "userDetailCantDisableSelf": "You can't deactivate your own account",
+  "userDetailActivateTitle": "Activate User",
+  "userDetailDeactivateTitle": "Deactivate User",
+  "userDetailActivateBody": "{name} will be able to log in again.",
+  "@userDetailActivateBody": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "userDetailDeactivateBody": "{name} won't be able to log in until reactivated.",
+  "@userDetailDeactivateBody": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "userDetailActivate": "Activate",
+  "userDetailDeactivate": "Deactivate",
+  "userDetailRole": "User Role",
+  "userDetailPermissions": "Permissions",
+  "userDetailSaveChanges": "Save Changes",
+
+  "userFormTitle": "Add User",
+  "userFormFullName": "Full Name",
+  "userFormUsernameTaken": "Username is already taken",
+  "userFormPasswordMinLength": "At least 6 characters",
+
+  "permissionPosTransaction": "Sales Transactions",
+  "permissionProductsView": "View Products",
+  "permissionProductsManage": "Manage Products",
+  "permissionUsersManage": "Manage Users",
+  "permissionReportsView": "View Daily Report",
+  "permissionDataBackup": "Backup & Restore Data",
+
+  "printerTitle": "Bluetooth Printer",
+  "printerPairedDevices": "Paired Devices",
+  "printerNoPairedDevices": "No printer paired yet. Pair a printer through your phone's Bluetooth settings first, then tap refresh.",
+  "printerPaperSize": "Paper Size",
+  "printerAutoPrint": "Auto Print After Transaction",
+  "printerAutoPrintSubtitle": "Receipt prints automatically after every successful payment",
+  "printerTestPrintSuccess": "Test print sent",
+  "printerTestPrintFailed": "Failed to print, check printer connection",
+  "printerTestPrint": "Test Print",
+  "printerConnected": "Connected",
+  "printerNotConnected": "No printer connected",
+  "printerUnnamedDevice": "(Unnamed)",
+  "printerConnectFailed": "Failed to connect to printer",
+
+  "backupCreated": "Backup created successfully",
+  "backupCreateFailed": "Failed to create backup",
+  "backupImported": "Backup file imported successfully",
+  "backupImportInvalid": "File is not a valid backup database",
+  "backupRestoreTitle": "Restore Database",
+  "backupRestoreConfirm": "All current data will be overwritten with the backup \"{fileName}\" ({date}). This action cannot be undone.",
+  "@backupRestoreConfirm": {
+    "placeholders": {
+      "fileName": { "type": "String" },
+      "date": { "type": "String" }
+    }
+  },
+  "backupRestoreFailed": "Failed to restore database",
+  "backupRestoredTitle": "Database Restored",
+  "backupRestoredBody": "Database restored successfully. Please log in again.",
+  "backupScreenTitle": "Backup & Restore Database",
+  "backupNow": "Backup Now",
+  "backupDescription": "Saves a copy of the current database to the device's local storage. Use the \"Share\" button on each backup to upload it to Google Drive or another service.",
+  "backupImportFile": "Import Backup File",
+  "backupHistory": "Backup History",
+  "backupEmpty": "No backups yet",
+
+  "settingsTitle": "Settings",
+  "settingsLogout": "Log Out",
+  "settingsLanguage": "Language",
+  "languageIndonesian": "Bahasa Indonesia",
+  "languageEnglish": "English",
+  "languageJapanese": "日本語"
+}

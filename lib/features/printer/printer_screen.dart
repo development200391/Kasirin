@@ -3,6 +3,7 @@ import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/theme.dart';
+import '../../l10n/gen/app_localizations.dart';
 import 'printer_provider.dart';
 
 class PrinterScreen extends StatelessWidget {
@@ -10,10 +11,11 @@ class PrinterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final provider = context.watch<PrinterProvider>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Printer Bluetooth')),
+      appBar: AppBar(title: Text(l10n.printerTitle)),
       body: RefreshIndicator(
         onRefresh: provider.loadDevices,
         child: ListView(
@@ -24,7 +26,7 @@ class PrinterScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Perangkat Berpasangan', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                Text(l10n.printerPairedDevices, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                 IconButton(
                   icon: provider.isLoadingDevices
                       ? const SizedBox(
@@ -38,17 +40,17 @@ class PrinterScreen extends StatelessWidget {
               ],
             ),
             if (provider.devices.isEmpty && !provider.isLoadingDevices)
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 24),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 24),
                 child: Text(
-                  'Belum ada printer yang dipasangkan. Pasangkan printer melalui pengaturan Bluetooth HP terlebih dahulu, lalu tekan refresh.',
-                  style: TextStyle(color: AppColors.textSecondary),
+                  l10n.printerNoPairedDevices,
+                  style: const TextStyle(color: AppColors.textSecondary),
                 ),
               )
             else
               for (final device in provider.devices) _DeviceTile(device: device, provider: provider),
             const SizedBox(height: 24),
-            const Text('Ukuran Kertas', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            Text(l10n.printerPaperSize, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             const SizedBox(height: 10),
             Row(
               children: [
@@ -68,8 +70,8 @@ class PrinterScreen extends StatelessWidget {
             const SizedBox(height: 24),
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              title: const Text('Cetak Otomatis Setelah Transaksi', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-              subtitle: const Text('Struk langsung dicetak setiap pembayaran berhasil', style: TextStyle(fontSize: 12)),
+              title: Text(l10n.printerAutoPrint, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+              subtitle: Text(l10n.printerAutoPrintSubtitle, style: const TextStyle(fontSize: 12)),
               value: provider.autoPrint,
               onChanged: provider.setAutoPrint,
             ),
@@ -80,13 +82,13 @@ class PrinterScreen extends StatelessWidget {
                       final success = await provider.testPrint();
                       if (context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(success ? 'Test print terkirim' : 'Gagal mencetak, cek koneksi printer')),
+                          SnackBar(content: Text(success ? l10n.printerTestPrintSuccess : l10n.printerTestPrintFailed)),
                         );
                       }
                     }
                   : null,
               icon: const Icon(Icons.print_outlined),
-              label: const Text('Test Print'),
+              label: Text(l10n.printerTestPrint),
             ),
           ],
         ),
@@ -102,6 +104,7 @@ class _StatusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final connected = provider.isConnected;
 
     return Container(
@@ -125,7 +128,7 @@ class _StatusCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  connected ? 'Terhubung' : 'Tidak ada printer terhubung',
+                  connected ? l10n.printerConnected : l10n.printerNotConnected,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: connected ? AppColors.success : AppColors.textPrimary,
@@ -139,7 +142,7 @@ class _StatusCard extends StatelessWidget {
           if (connected)
             TextButton(
               onPressed: provider.disconnectPrinter,
-              child: const Text('Putuskan', style: TextStyle(color: AppColors.danger)),
+              child: Text(l10n.commonDisconnect, style: const TextStyle(color: AppColors.danger)),
             ),
         ],
       ),
@@ -155,6 +158,7 @@ class _DeviceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final isConnected = provider.isConnected && provider.connectedAddress == device.macAdress;
     final isConnecting = provider.connectingAddress == device.macAdress;
 
@@ -174,7 +178,7 @@ class _DeviceTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(device.name.isEmpty ? '(Tanpa nama)' : device.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                Text(device.name.isEmpty ? l10n.printerUnnamedDevice : device.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                 Text(device.macAdress, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
               ],
             ),
@@ -182,18 +186,18 @@ class _DeviceTile extends StatelessWidget {
           if (isConnecting)
             const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
           else if (isConnected)
-            const Text('Terhubung', style: TextStyle(color: AppColors.success, fontWeight: FontWeight.bold, fontSize: 12))
+            Text(l10n.printerConnected, style: const TextStyle(color: AppColors.success, fontWeight: FontWeight.bold, fontSize: 12))
           else
             TextButton(
               onPressed: () async {
                 final success = await provider.connect(device);
                 if (context.mounted && !success) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Gagal terhubung ke printer')),
+                    SnackBar(content: Text(l10n.printerConnectFailed)),
                   );
                 }
               },
-              child: const Text('Hubungkan'),
+              child: Text(l10n.commonConnect),
             ),
         ],
       ),

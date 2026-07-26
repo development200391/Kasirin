@@ -99,11 +99,11 @@ Menu "Backup & Restore" ada di Dashboard, dijaga permission `data.backup` (khusu
 
 ## Fase 13 — Multi-Bahasa (Indonesia, Inggris, Jepang)
 
-- [ ] Setup `flutter_localizations` + `intl` gen-l10n (`l10n.yaml`, folder `lib/l10n/`, file ARB per bahasa: `app_id.arb`, `app_en.arb`, `app_ja.arb`)
-- [ ] Daftarkan `supportedLocales` (id, en, ja) + `localizationsDelegates` di `MaterialApp`
-- [ ] Ekstrak semua teks UI yang masih hardcoded Bahasa Indonesia ke key ARB, lalu pakai `AppLocalizations.of(context)!.xxx` di semua layar (Login, Dashboard, POS, Produk, Stok, Laporan, Laporan Periode, Pengguna, Printer Bluetooth, Backup & Restore, Pengaturan)
-- [ ] Terjemahkan ke Inggris dan Jepang (butuh review penutur asli terutama untuk Jepang — istilah kasir/struk/stok belum tentu pas kalau diterjemahkan mesin)
-- [ ] Pilihan bahasa di halaman Pengaturan (Bahasa Indonesia / English / 日本語) + simpan preferensi (`shared_preferences`, sudah ada dependency-nya)
-- [ ] Terapkan locale pilihan user ke `MaterialApp` (bukan cuma default sistem) + tetap dipakai lagi setelah app dibuka ulang
-- [ ] Sesuaikan format angka/mata uang/tanggal ikut locale aktif (`formatCurrency`, `DateFormat` di seluruh app saat ini hardcode `id_ID`)
-- [ ] Cek ulang layout tiap layar tidak pecah saat teks lebih panjang/pendek dari Bahasa Indonesia (mis. label tombol, judul AppBar, badge status)
+- [x] Setup `flutter_localizations` + `intl` gen-l10n (`l10n.yaml`, folder `lib/l10n/`, file ARB per bahasa: `app_id.arb`, `app_en.arb`, `app_ja.arb`) — `intl` diturunkan ke `^0.20.2` karena dipin oleh `flutter_localizations`
+- [x] Daftarkan `supportedLocales` (id, en, ja) + `localizationsDelegates` di `MaterialApp` (`main.dart`, dibungkus `Consumer<LocaleProvider>` biar ganti bahasa langsung rebuild)
+- [x] Ekstrak semua teks UI yang tadinya hardcode Bahasa Indonesia ke ~180 key ARB, dipakai lewat `AppLocalizations.of(context)` di seluruh layar (Login, Dashboard, POS, Keranjang, Pembayaran, Struk, Produk, Kategori, Stok, Laporan Harian, Laporan Periode, Pengguna, Printer Bluetooth, Backup & Restore, Pengaturan) — termasuk label hak akses (`core/permissions.dart`) dan pesan error login (`AuthProvider` sekarang simpan flag `hasError`, bukan string, biar UI yang render pesannya sesuai bahasa aktif)
+- [x] Terjemahkan ke Inggris dan Jepang — draft awal oleh Claude, **belum direview penutur asli**, terutama istilah Jepang untuk kasir/struk/stok
+- [x] Pilihan bahasa di halaman Pengaturan (Bahasa Indonesia / English / 日本語) + simpan preferensi (`shared_preferences`) — `LocaleProvider`
+- [x] Terapkan locale pilihan user ke `MaterialApp` + tetap dipakai lagi setelah app dibuka ulang
+- [x] Format tanggal (nama hari/bulan) ikut locale aktif — `Intl.defaultLocale` di-update tiap ganti bahasa, semua `DateFormat(...)` di app sudah tidak hardcode `id_ID` lagi. Format mata uang (`formatCurrency`) **sengaja tetap Rupiah/format Indonesia** di bahasa apa pun karena itu representasi uang sungguhan (Rupiah), bukan preferensi tampilan — ganti bahasa UI tidak boleh terlihat seperti konversi mata uang
+- [ ] Cek ulang layout tiap layar tidak pecah saat teks lebih panjang/pendek dari Bahasa Indonesia (mis. label tombol, judul AppBar, badge status) — belum dicek visual di device/emulator

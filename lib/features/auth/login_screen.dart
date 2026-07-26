@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/constants.dart';
 import '../../core/theme.dart';
+import '../../l10n/gen/app_localizations.dart';
 import 'auth_provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -41,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthProvider>();
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       body: Container(
@@ -91,31 +93,31 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             const SizedBox(height: 12),
-                            const Text(
-                              'Selamat Datang',
+                            Text(
+                              l10n.loginWelcome,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: AppColors.textPrimary,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 26,
                               ),
                             ),
                             const SizedBox(height: 6),
-                            const Text(
-                              'Masuk untuk melanjutkan',
+                            Text(
+                              l10n.loginSubtitle,
                               textAlign: TextAlign.center,
-                              style: TextStyle(color: AppColors.textSecondary, fontSize: 15),
+                              style: const TextStyle(color: AppColors.textSecondary, fontSize: 15),
                             ),
                             const SizedBox(height: 28),
                             TextFormField(
                               controller: _usernameController,
                               textInputAction: TextInputAction.next,
-                              decoration: const InputDecoration(
-                                labelText: 'Username',
-                                prefixIcon: Icon(Icons.person_outline),
+                              decoration: InputDecoration(
+                                labelText: l10n.loginUsername,
+                                prefixIcon: const Icon(Icons.person_outline),
                               ),
                               validator: (value) =>
-                                  (value == null || value.trim().isEmpty) ? 'Username wajib diisi' : null,
+                                  (value == null || value.trim().isEmpty) ? l10n.loginUsernameRequired : null,
                             ),
                             const SizedBox(height: 16),
                             TextFormField(
@@ -123,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               obscureText: _obscurePassword,
                               textInputAction: TextInputAction.done,
                               decoration: InputDecoration(
-                                labelText: 'Kata Sandi',
+                                labelText: l10n.loginPassword,
                                 prefixIcon: const Icon(Icons.lock_outline),
                                 suffixIcon: IconButton(
                                   icon: Icon(_obscurePassword
@@ -133,13 +135,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               validator: (value) =>
-                                  (value == null || value.isEmpty) ? 'Kata sandi wajib diisi' : null,
+                                  (value == null || value.isEmpty) ? l10n.loginPasswordRequired : null,
                               onFieldSubmitted: (_) => _submit(auth),
                             ),
-                            if (auth.errorMessage != null) ...[
+                            if (auth.hasError) ...[
                               const SizedBox(height: 12),
                               Text(
-                                auth.errorMessage!,
+                                l10n.authInvalidCredentials,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(color: AppColors.danger, fontSize: 13),
                               ),
@@ -156,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         valueColor: AlwaysStoppedAnimation(Colors.white),
                                       ),
                                     )
-                                  : const Text('Masuk', style: TextStyle(fontSize: 16)),
+                                  : Text(l10n.loginSubmit, style: const TextStyle(fontSize: 16)),
                             ),
                           ],
                         ),

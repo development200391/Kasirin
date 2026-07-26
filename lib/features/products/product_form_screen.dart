@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/theme.dart';
 import '../../data/models/product.dart';
+import '../../l10n/gen/app_localizations.dart';
 import 'products_provider.dart';
 
 class ProductFormScreen extends StatefulWidget {
@@ -63,11 +64,12 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
     final picked = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 80);
     if (picked == null) return;
 
+    if (!mounted) return;
     final cropped = await ImageCropper().cropImage(
       sourcePath: picked.path,
       uiSettings: [
         AndroidUiSettings(
-          toolbarTitle: 'Sesuaikan Foto',
+          toolbarTitle: AppLocalizations.of(context).productFormCropTitle,
           toolbarColor: AppColors.primary,
           toolbarWidgetColor: Colors.white,
           activeControlsWidgetColor: AppColors.primary,
@@ -90,21 +92,22 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
   }
 
   Future<void> _addCategoryDialog() async {
+    final l10n = AppLocalizations.of(context);
     final controller = TextEditingController();
     final name = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Kategori Baru'),
+        title: Text(l10n.categoryNewTitle),
         content: TextField(
           controller: controller,
           autofocus: true,
-          decoration: const InputDecoration(labelText: 'Nama kategori'),
+          decoration: InputDecoration(labelText: l10n.categoryNameLabel),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Batal')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(l10n.commonCancel)),
           FilledButton(
             onPressed: () => Navigator.pop(context, controller.text.trim()),
-            child: const Text('Tambah'),
+            child: Text(l10n.commonAdd),
           ),
         ],
       ),
@@ -142,10 +145,11 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final categories = context.watch<ProductsProvider>().categories;
 
     return Scaffold(
-      appBar: AppBar(title: Text(_isEditing ? 'Edit Produk' : 'Tambah Produk')),
+      appBar: AppBar(title: Text(_isEditing ? l10n.productFormEditTitle : l10n.productFormAddTitle)),
       body: Form(
         key: _formKey,
         child: ListView(
@@ -174,20 +178,20 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
             const SizedBox(height: 24),
             TextFormField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Nama Produk'),
-              validator: (v) => (v == null || v.trim().isEmpty) ? 'Nama wajib diisi' : null,
+              decoration: InputDecoration(labelText: l10n.productFormName),
+              validator: (v) => (v == null || v.trim().isEmpty) ? l10n.productFormNameRequired : null,
             ),
             const SizedBox(height: 16),
             TextFormField(
               controller: _skuController,
-              decoration: const InputDecoration(labelText: 'SKU (opsional)'),
+              decoration: InputDecoration(labelText: l10n.productFormSku),
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<int?>(
               initialValue: _categoryId,
-              decoration: const InputDecoration(labelText: 'Kategori'),
+              decoration: InputDecoration(labelText: l10n.productFormCategory),
               items: [
-                const DropdownMenuItem(value: null, child: Text('Tanpa kategori')),
+                DropdownMenuItem(value: null, child: Text(l10n.productFormNoCategory)),
                 ...categories.map((c) => DropdownMenuItem(value: c.id, child: Text(c.name))),
               ],
               onChanged: (value) => setState(() => _categoryId = value),
@@ -197,7 +201,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
               child: TextButton.icon(
                 onPressed: _addCategoryDialog,
                 icon: const Icon(Icons.add, size: 18),
-                label: const Text('Kategori baru'),
+                label: Text(l10n.productFormNewCategory),
               ),
             ),
             const SizedBox(height: 8),
@@ -207,10 +211,10 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                   child: TextFormField(
                     controller: _priceController,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(labelText: 'Harga Jual'),
+                    decoration: InputDecoration(labelText: l10n.productFormPrice),
                     validator: (v) {
-                      if (v == null || v.trim().isEmpty) return 'Wajib diisi';
-                      if (int.tryParse(v) == null) return 'Harus angka';
+                      if (v == null || v.trim().isEmpty) return l10n.productFormRequired;
+                      if (int.tryParse(v) == null) return l10n.productFormMustBeNumber;
                       return null;
                     },
                   ),
@@ -220,7 +224,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                   child: TextFormField(
                     controller: _costPriceController,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(labelText: 'Harga Modal'),
+                    decoration: InputDecoration(labelText: l10n.productFormCostPrice),
                   ),
                 ),
               ],
@@ -232,14 +236,14 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                   child: TextFormField(
                     controller: _stockController,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(labelText: 'Stok'),
+                    decoration: InputDecoration(labelText: l10n.productFormStock),
                   ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: TextFormField(
                     controller: _unitController,
-                    decoration: const InputDecoration(labelText: 'Satuan (mis. pcs)'),
+                    decoration: InputDecoration(labelText: l10n.productFormUnit),
                   ),
                 ),
               ],
@@ -253,7 +257,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                       width: 20,
                       child: CircularProgressIndicator(strokeWidth: 2.5, valueColor: AlwaysStoppedAnimation(Colors.white)),
                     )
-                  : Text(_isEditing ? 'Simpan Perubahan' : 'Tambah Produk'),
+                  : Text(_isEditing ? l10n.productFormSaveChanges : l10n.productsAdd),
             ),
           ],
         ),
