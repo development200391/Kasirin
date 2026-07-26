@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../core/constants.dart';
 import '../../core/theme.dart';
 import '../auth/auth_provider.dart';
-import '../printer/printer_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -28,23 +27,6 @@ class SettingsScreen extends StatelessWidget {
             subtitle: Text(user?.role ?? '-'),
           ),
           const SizedBox(height: 24),
-          Material(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(14),
-            child: ListTile(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14),
-                side: const BorderSide(color: AppColors.border),
-              ),
-              leading: const Icon(Icons.print_outlined, color: AppColors.primary),
-              title: const Text('Printer Bluetooth'),
-              trailing: const Icon(Icons.chevron_right, color: AppColors.textSecondary),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const PrinterScreen()),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
           OutlinedButton.icon(
             onPressed: () {
               context.read<AuthProvider>().logout();

@@ -7,7 +7,7 @@ class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._internal();
 
   static const _dbName = 'kasirin.db';
-  static const _dbVersion = 2;
+  static const _dbVersion = 3;
 
   Database? _database;
 
@@ -16,10 +16,23 @@ class DatabaseHelper {
     return _database!;
   }
 
-  Future<Database> _initDatabase() async {
+  Future<String> get databasePath async {
     final path = await getDatabasesPath();
+    return '$path/$_dbName';
+  }
+
+  /// Closes the current connection so the underlying file can be safely
+  /// overwritten (e.g. when restoring a backup). The next call to
+  /// [database] transparently reopens it.
+  Future<void> close() async {
+    await _database?.close();
+    _database = null;
+  }
+
+  Future<Database> _initDatabase() async {
+    final path = await databasePath;
     return openDatabase(
-      '$path/$_dbName',
+      path,
       version: _dbVersion,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
@@ -32,6 +45,12 @@ class DatabaseHelper {
       await db.execute('ALTER TABLE users ADD COLUMN permissions TEXT');
       await db.update('users', {'permissions': 'pos.transaction,products.view,products.manage,users.manage,reports.view'}, where: "role = 'admin'");
       await db.update('users', {'permissions': 'pos.transaction,products.view'}, where: "role != 'admin'");
+    }
+    if (oldVersion < 3) {
+      await db.rawUpdate(
+        "UPDATE users SET permissions = COALESCE(permissions, '') || ',data.backup' "
+        "WHERE role = 'admin' AND (permissions IS NULL OR permissions NOT LIKE '%data.backup%')",
+      );
     }
   }
 

@@ -68,28 +68,29 @@ Urutan pengerjaan per layar/fitur, dicek satu per satu. Referensi detail: [detai
 
 ---
 
-## Lanjutan (setelah MVP jalan) — belum dikerjakan
+## Fase 11 — Laporan per Periode + Export
 
-### Fase 11 — Laporan per Periode + Export
-_Mockup: [periode_C_sidebar.svg](./assets/periode_C_sidebar.svg) — "Rincian per Hari"_
+- [x] Query agregat transaksi per rentang tanggal (mingguan Senin-Minggu / bulanan kalender) — `report_repository.dart#getPeriodReport`
+- [x] Halaman Laporan Periode (UI) — kartu ringkasan gradient + tabel rincian per hari (diadaptasi jadi layar mobile satu kolom, bukan sidebar seperti mockup awal); ada juga sebagai menu tersendiri di Dashboard ("Laporan Periode")
+- [x] Toggle periode Mingguan/Bulanan (`SegmentedButton`) + navigasi periode sebelumnya/berikutnya (tombol berikutnya nonaktif kalau sudah di periode berjalan)
+- [x] Hitung % perubahan penjualan vs periode sebelumnya
+- [x] Hitung & tampilkan "hari terbaik" (penjualan tertinggi) dalam periode
+- [x] Tabel rincian penjualan per hari (tanggal, jumlah transaksi, total)
+- [x] Export laporan ke Excel (`excel` package, lalu dibagikan via share sheet)
+- [x] Export laporan ke PDF (`pdf` package, tabel rincian per hari, lalu dibagikan via share sheet)
 
-- [ ] Query agregat transaksi per rentang tanggal (mingguan/bulanan)
-- [ ] Halaman Laporan Periode (UI) — sidebar ringkasan + tabel rincian per hari
-- [ ] Toggle periode Mingguan/Bulanan + navigasi periode sebelumnya/berikutnya
-- [ ] Hitung % perubahan penjualan vs periode sebelumnya
-- [ ] Hitung & tampilkan "hari terbaik" (penjualan tertinggi) dalam periode
-- [ ] Tabel rincian penjualan per hari (tanggal, jumlah transaksi, total)
-- [ ] Export laporan ke Excel
-- [ ] Export laporan ke PDF
 
-### Fase 12 — Backup / Restore Database
-_Mockup: [backup_A_two_panel.svg](./assets/backup_A_two_panel.svg) — "Backup & Restore Database"_
+---
 
-- [ ] Fungsi backup: copy file database SQLite ke folder backup + simpan metadata (waktu, ukuran, tipe manual/otomatis)
-- [ ] Halaman Backup & Restore (UI) — panel kiri backup, panel kanan riwayat & restore
-- [ ] Tombol "Backup Sekarang" (manual)
-- [ ] Backup otomatis terjadwal (mis. tiap hari jam 23:00)
-- [ ] List riwayat backup (tanggal, ukuran, badge Otomatis/Manual)
-- [ ] Fitur restore dari salah satu backup di riwayat + konfirmasi (menimpa data saat ini)
-- [ ] Import file backup dari luar (file picker) — "+ Import File Backup"
-- [ ] Pilihan lokasi penyimpanan: Lokal / Google Drive (opsional, cloud)
+## Fase 12 — Backup / Restore Database
+
+- [x] Fungsi backup: copy file database SQLite ke folder backup (`ApplicationDocumentsDirectory/backups`) + simpan metadata (waktu, ukuran, sumber Manual/Diimpor) di `history.json` terpisah dari `kasirin.db` (biar histori tidak ikut ketimpa saat restore)
+- [x] Halaman Backup & Restore (UI) — diadaptasi jadi layar mobile satu kolom (bukan panel kiri-kanan seperti mockup awal): tombol backup di atas, riwayat + restore di bawah
+- [x] Tombol "Backup Sekarang" (manual)
+- [x] ~~Backup otomatis terjadwal~~ — dihilangkan sesuai keputusan: Flutter tidak bisa jalan saat app tertutup tanpa kode native Android (WorkManager/AlarmManager) yang tidak bisa diuji tanpa run di device, jadi backup dibuat manual saja (klik tombol)
+- [x] List riwayat backup (tanggal, ukuran, badge Manual/Diimpor)
+- [x] Fitur restore dari salah satu backup di riwayat + konfirmasi (menimpa data saat ini) — setelah restore, user otomatis logout & diarahkan ke Login supaya state aplikasi tidak nyangkut data lama
+- [x] Import file backup dari luar (`file_picker`) — tombol "Import File Backup", divalidasi header SQLite dulu sebelum diterima
+- [x] Pilihan lokasi penyimpanan: Lokal (default, aktif) + tombol "Bagikan" per backup (`share_plus`) untuk kirim/upload manual ke Google Drive atau layanan lain — tidak pakai Google Drive API langsung (di luar cakupan MVP offline app ini)
+
+Menu "Backup & Restore" ada di Dashboard, dijaga permission `data.backup` (khusus role yang diberi akses, default: Admin).

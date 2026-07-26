@@ -1,5 +1,6 @@
 import '../db/database_helper.dart';
 import '../models/daily_report.dart';
+import '../models/period_report.dart';
 
 class ReportRepository {
   Future<DailyReport> getDailyReport() async {
@@ -58,4 +59,81 @@ class ReportRepository {
           .toList(),
     );
   }
+
+  Future<PeriodReport> getPeriodReport({
+    required ReportPeriodType type,
+    required DateTime anchor,
+  }) async {
+    final db = await DatabaseHelper.instance.database;
+
+    final (start, end) = periodBoundsFor(type, anchor);
+    final (prevStart, prevEnd) = previousPeriodBoundsFor(type, start);
+
+    final dailyRows = await db.rawQuery(
+      '''
+      SELECT date(created_at) AS day, COUNT(*) AS cnt, COALESCE(SUM(total_amount), 0) AS total
+      FROM transactions
+      WHERE status = 'paid' AND date(created_at) BETWEEN date(?) AND date(?)
+      GROUP BY day
+      ''',
+      [_isoDate(start), _isoDate(end)],
+    );
+
+    final dailyMap = <String, ({int count, int total})>{
+      for (final row in dailyRows) row['day'] as String: (count: row['cnt'] as int, total: row['total'] as int),
+    };
+
+    final dailySales = <DailySales>[];
+    for (var day = start; !day.isAfter(end); day = day.add(const Duration(days: 1))) {
+      final entry = dailyMap[_isoDate(day)];
+      dailySales.add(DailySales(date: day, transactionCount: entry?.count ?? 0, totalSales: entry?.total ?? 0));
+    }
+
+    final totalSales = dailySales.fold<int>(0, (sum, d) => sum + d.totalSales);
+    final transactionCount = dailySales.fold<int>(0, (sum, d) => sum + d.transactionCount);
+
+    final prevRow = (await db.rawQuery(
+      '''
+      SELECT COALESCE(SUM(total_amount), 0) AS total
+      FROM transactions
+      WHERE status = 'paid' AND date(created_at) BETWEEN date(?) AND date(?)
+      ''',
+      [_isoDate(prevStart), _isoDate(prevEnd)],
+    )).first;
+
+    return PeriodReport(
+      type: type,
+      startDate: start,
+      endDate: end,
+      totalSales: totalSales,
+      transactionCount: transactionCount,
+      previousTotalSales: prevRow['total'] as int,
+      dailySales: dailySales,
+    );
+  }
+
+  String _isoDate(DateTime date) =>
+      '${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+}
+
+/// Returns (start, end) date-only bounds of the period containing [anchor].
+/// Weekly periods run Monday-Sunday; monthly periods run the full calendar month.
+(DateTime, DateTime) periodBoundsFor(ReportPeriodType type, DateTime anchor) {
+  final day = DateTime(anchor.year, anchor.month, anchor.day);
+  if (type == ReportPeriodType.weekly) {
+    final start = day.subtract(Duration(days: day.weekday - 1));
+    return (start, start.add(const Duration(days: 6)));
+  }
+  final start = DateTime(day.year, day.month, 1);
+  final end = DateTime(day.year, day.month + 1, 1).subtract(const Duration(days: 1));
+  return (start, end);
+}
+
+/// Returns (start, end) bounds of the period immediately before the one starting at [periodStart].
+(DateTime, DateTime) previousPeriodBoundsFor(ReportPeriodType type, DateTime periodStart) {
+  final prevEnd = periodStart.subtract(const Duration(days: 1));
+  if (type == ReportPeriodType.weekly) {
+    return (prevEnd.subtract(const Duration(days: 6)), prevEnd);
+  }
+  return (DateTime(prevEnd.year, prevEnd.month, 1), prevEnd);
 }

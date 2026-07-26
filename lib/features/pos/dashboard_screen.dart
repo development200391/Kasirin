@@ -7,6 +7,7 @@ import '../../core/theme.dart';
 import '../../core/utils/formatters.dart';
 import '../../data/repositories/dashboard_repository.dart';
 import '../auth/auth_provider.dart';
+import '../printer/printer_screen.dart';
 import '../settings/settings_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -101,6 +102,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         : _showAccessDenied,
                   ),
                   _MenuTile(
+                    icon: Icons.calendar_month_outlined,
+                    iconBg: const Color(0xFFEDE9FE),
+                    iconColor: const Color(0xFF6D28D9),
+                    label: 'Laporan Periode',
+                    locked: !has(AppPermissions.reportsView),
+                    onTap: has(AppPermissions.reportsView)
+                        ? () => Navigator.of(context).pushNamed(AppRoutes.periodReports)
+                        : _showAccessDenied,
+                  ),
+                  _MenuTile(
                     icon: Icons.people_outline,
                     iconBg: const Color(0xFFDBEAFE),
                     iconColor: const Color(0xFF1D4ED8),
@@ -108,6 +119,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     locked: !has(AppPermissions.usersManage),
                     onTap: has(AppPermissions.usersManage)
                         ? () => Navigator.of(context).pushNamed(AppRoutes.users)
+                        : _showAccessDenied,
+                  ),
+                  _MenuTile(
+                    icon: Icons.print_outlined,
+                    iconBg: const Color(0xFFE0F2FE),
+                    iconColor: const Color(0xFF0369A1),
+                    label: 'Printer Bluetooth',
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const PrinterScreen()),
+                    ),
+                  ),
+                  _MenuTile(
+                    icon: Icons.backup_outlined,
+                    iconBg: const Color(0xFFF3E8FF),
+                    iconColor: const Color(0xFF7E22CE),
+                    label: 'Backup & Restore',
+                    locked: !has(AppPermissions.dataBackup),
+                    onTap: has(AppPermissions.dataBackup)
+                        ? () => Navigator.of(context).pushNamed(AppRoutes.backup)
                         : _showAccessDenied,
                   ),
                   _MenuTile(

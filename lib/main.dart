@@ -7,12 +7,16 @@ import 'core/constants.dart';
 import 'core/theme.dart';
 import 'features/auth/auth_provider.dart';
 import 'features/auth/login_screen.dart';
+import 'features/backup/backup_provider.dart';
+import 'features/backup/backup_screen.dart';
 import 'features/pos/cart_provider.dart';
 import 'features/pos/dashboard_screen.dart';
 import 'features/pos/pos_screen.dart';
 import 'features/printer/printer_provider.dart';
 import 'features/products/products_provider.dart';
 import 'features/products/products_screen.dart';
+import 'features/reports/period_report_provider.dart';
+import 'features/reports/period_report_screen.dart';
 import 'features/reports/reports_screen.dart';
 import 'features/users/users_provider.dart';
 import 'features/users/users_screen.dart';
@@ -54,9 +58,17 @@ class KasirinApp extends StatelessWidget {
             child: const PosScreen(),
           ),
           AppRoutes.reports: (context) => const ReportsScreen(),
+          AppRoutes.periodReports: (context) => ChangeNotifierProvider(
+            create: (_) => PeriodReportProvider(),
+            child: const PeriodReportScreen(),
+          ),
           AppRoutes.users: (context) => ChangeNotifierProvider(
             create: (_) => UsersProvider(),
             child: const UsersScreen(),
+          ),
+          AppRoutes.backup: (context) => ChangeNotifierProvider(
+            create: (_) => BackupProvider(),
+            child: const BackupScreen(),
           ),
         },
       ),

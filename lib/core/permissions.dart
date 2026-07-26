@@ -4,6 +4,7 @@ class AppPermissions {
   static const productsManage = 'products.manage';
   static const usersManage = 'users.manage';
   static const reportsView = 'reports.view';
+  static const dataBackup = 'data.backup';
 
   static const all = [
     posTransaction,
@@ -11,6 +12,7 @@ class AppPermissions {
     productsManage,
     usersManage,
     reportsView,
+    dataBackup,
   ];
 
   static const labels = {
@@ -19,6 +21,7 @@ class AppPermissions {
     productsManage: 'Kelola Produk',
     usersManage: 'Kelola Pengguna',
     reportsView: 'Lihat Laporan Harian',
+    dataBackup: 'Backup & Restore Data',
   };
 
   static List<String> defaultsForRole(String role) {
