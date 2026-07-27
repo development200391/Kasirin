@@ -107,3 +107,39 @@ Menu "Backup & Restore" ada di Dashboard, dijaga permission `data.backup` (khusu
 - [x] Terapkan locale pilihan user ke `MaterialApp` + tetap dipakai lagi setelah app dibuka ulang
 - [x] Format tanggal (nama hari/bulan) ikut locale aktif — `Intl.defaultLocale` di-update tiap ganti bahasa, semua `DateFormat(...)` di app sudah tidak hardcode `id_ID` lagi. Format mata uang (`formatCurrency`) **sengaja tetap Rupiah/format Indonesia** di bahasa apa pun karena itu representasi uang sungguhan (Rupiah), bukan preferensi tampilan — ganti bahasa UI tidak boleh terlihat seperti konversi mata uang
 - [ ] Cek ulang layout tiap layar tidak pecah saat teks lebih panjang/pendek dari Bahasa Indonesia (mis. label tombol, judul AppBar, badge status) — belum dicek visual di device/emulator
+
+---
+
+## Fase 14 — Publish ke Google Play Store
+
+_Checklist syarat store sudah ada juga di [detail-pembuatan-pos-app.md §5](./detail-pembuatan-pos-app.md#5-syarat-publish-ke-google-play-store); bagian di bawah fokus ke langkah teknis + akun._
+
+- [ ] Buat akun Google Play Console (bayar sekali, ~$25) — akun & pembayaran harus dilakukan user, bukan Claude
+- [ ] Setup **release signing config** — saat ini `android/app/build.gradle.kts` masih pakai `signingConfigs.getByName("debug")` (lihat baris 32), belum siap rilis. Perlu: generate keystore `.jks`, simpan `key.properties` (di luar git), update `build.gradle.kts` buat pakai signing release. **Keystore ini wajib disimpan aman — hilang keystore = tidak bisa update app yang sama lagi.**
+- [ ] Tentukan `applicationId` final (`com.kasirin.kasirin`) — tidak bisa diganti setelah publish pertama, pastikan sudah yakin
+- [ ] Set `version:` di `pubspec.yaml` buat rilis pertama (format `x.y.z+build`)
+- [ ] Privacy Policy (URL publik) — wajib meski app offline, karena app minta izin storage/kamera/Bluetooth
+- [ ] Data Safety Form di Play Console — deklarasi data yang diakses/disimpan (foto produk, database transaksi lokal, koneksi Bluetooth printer)
+- [ ] App icon 512×512 px, Feature graphic 1024×500 px, screenshot minimal 2 (disarankan 4-8)
+- [ ] Deskripsi singkat & lengkap aplikasi buat listing
+- [ ] Kategori aplikasi: Business / Productivity
+- [ ] Build App Bundle rilis: `flutter build appbundle --release`
+- [ ] Target API level sesuai kebijakan terbaru Google Play (cek `flutter.compileSdkVersion`/`targetSdkVersion` masih dalam batas yang diwajibkan Play saat submit)
+- [ ] Closed testing: minimal 12 tester aktif selama 14 hari berturut-turut (wajib untuk akun developer baru sebelum rilis production)
+- [ ] Submit ke production setelah closed testing selesai
+
+## Fase 15 — Publish ke Apple App Store
+
+- [ ] **Catatan penting**: project ini belum punya folder `ios/` (`flutter create` sebelumnya khusus Android) — perlu `flutter create . --platforms=ios` dulu buat nambahin platform iOS
+- [ ] **Build & submit iOS wajib pakai macOS + Xcode** — tidak bisa dari Windows (environment kerja saat ini). Tahap ini butuh Mac fisik/virtual terpisah
+- [ ] Daftar Apple Developer Program (~$99/tahun) — akun & pembayaran dilakukan user
+- [ ] Setup Bundle Identifier, signing certificate & provisioning profile via Xcode / App Store Connect
+- [ ] Uji semua fitur yang sensitif-platform di iOS (belum pernah dites di iOS sama sekali): printer Bluetooth (`print_bluetooth_thermal` support iOS terbatas, perlu dicek), image picker/cropper, file picker, share sheet, local notification-style permission prompts
+- [ ] Sesuaikan `Info.plist`: usage description buat kamera, photo library, Bluetooth (`NSCameraUsageDescription`, `NSPhotoLibraryUsageDescription`, `NSBluetoothAlwaysUsageDescription`, dll) sesuai fitur yang sudah ada
+- [ ] App icon set iOS (semua resolusi) + launch screen
+- [ ] Privacy Policy URL + isi "App Privacy" / Privacy Nutrition Label di App Store Connect
+- [ ] Screenshot untuk berbagai ukuran layar iPhone/iPad yang disyaratkan
+- [ ] Deskripsi, kategori, keywords listing di App Store Connect
+- [ ] Archive & upload build rilis lewat Xcode Organizer / Transporter
+- [ ] TestFlight testing (disarankan) sebelum submit
+- [ ] Submit for App Review
